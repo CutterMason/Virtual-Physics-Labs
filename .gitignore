@@ -1,32 +1,74 @@
-# Unity generated folders
+# --- Unity generated folders ---
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild*/
+[Bb]uilds/
 [Ll]ogs/
 UserSettings/
 MemoryCaptures/
 sysinfo.txt
+[Aa]sset[Bb]undles/
 
-# IDE and OS files
+# --- Firebase & External Dependency Manager ---
+# These folders can add hundreds of MB of binaries and are regenerated locally
+Assets/Firebase/
+Assets/ExternalDependencyManager/
+Assets/Plugins/Android/
+Assets/Plugins/iOS/
+Assets/StreamingAssets/GoogleService-Info.plist.meta
+Assets/StreamingAssets/google-services.json.meta
+# (Keep the actual config files, not their .meta)
+!Assets/StreamingAssets/google-services.json
+!Assets/StreamingAssets/GoogleService-Info.plist
+
+# --- Addressables & Generated data ---
+[Aa]sset[Bb]undles/
+[Bb]uilds/
+Library/ScriptAssemblies/
+Library/PackageCache/
+
+# --- IDE / OS files ---
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+*.code-workspace
 
-# Visual Studio files
+# --- Visual Studio / Rider project files ---
 *.csproj
 *.unityproj
 *.sln
 *.user
 *.pidb
 *.booproj
+*.suo
+*.tmp
+*.userprefs
 
-# Crash and report files
+# --- Crash / Debug dumps ---
 *.stacktrace
 *.crash
 *.dmp
 
-# Exclude addressables build data
-[Aa]sset[Bb]undles/
-[Bb]uilds/
+# --- Misc cache / logs ---
+Logs/
+obj/
+Temp/
+*.bak
+*.backup
+*.tmp
+
+# --- Ignore platform build outputs ---
+/Build/
+/Builds/
+/BuildArtifacts/
+/DerivedDataCache/
+
+# --- Ignore Package Manager cache ---
+Packages/com.google.*.unitypackage
+Packages/packages-lock.json
+
+# --- Local environment overrides ---
+*.env
+*.env.local
