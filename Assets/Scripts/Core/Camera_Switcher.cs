@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Camera_Switcher : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Camera_Switcher : MonoBehaviour
     public float sideViewZ = -10f; // Camera z for side view
     public float topDownHeight = 10f; // Camera height for top-down
     public float orthoSize = 5f;
+    public float sideViewYRotation = 0f;
 
     private bool isTopDown = false;
     private Camera cam;
@@ -18,11 +20,22 @@ public class Camera_Switcher : MonoBehaviour
         SetSideViewInstant();
     }
 
+    void UpdateTransparencySorting()
+    {
+        GraphicsSettings.transparencySortMode = TransparencySortMode.CustomAxis;
+
+        if (isTopDown)
+            GraphicsSettings.transparencySortAxis = new Vector3(0f, 1f, 0f);
+        else
+            GraphicsSettings.transparencySortAxis = new Vector3(1f, 0f, 0f);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             isTopDown = !isTopDown;
+            UpdateTransparencySorting();
         }
     }
 
@@ -41,7 +54,7 @@ public class Camera_Switcher : MonoBehaviour
         Vector3 targetPos = new Vector3(player.position.x, player.position.y, sideViewZ);
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
 
-        Quaternion targetRot = Quaternion.Euler(0f, 0f, 0f);
+        Quaternion targetRot = Quaternion.Euler(0f, sideViewYRotation, 0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * smoothSpeed);
 
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, orthoSize, Time.deltaTime * smoothSpeed);
@@ -52,7 +65,7 @@ public class Camera_Switcher : MonoBehaviour
         Vector3 targetPos = new Vector3(player.position.x, player.position.y + topDownHeight, player.position.z);
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
 
-        Quaternion targetRot = Quaternion.Euler(90f, 0f, 0f);
+        Quaternion targetRot = Quaternion.Euler(90f, sideViewYRotation, 0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * smoothSpeed);
 
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, orthoSize, Time.deltaTime * smoothSpeed);
@@ -65,3 +78,4 @@ public class Camera_Switcher : MonoBehaviour
         cam.orthographicSize = orthoSize;
     }
 }
+
