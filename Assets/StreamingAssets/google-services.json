@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "679124689249",
+    "project_id": "virtual-physics-labs",
+    "storage_bucket": "virtual-physics-labs.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679124689249:android:83cf6d9e236e503623e520",
+        "android_client_info": {
+          "package_name": "com.vp1l"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV7PYs8sr9sdzRPhEWNnMtLD99lCE72YA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
