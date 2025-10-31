@@ -2673,6 +2673,7 @@ MonoBehaviour:
   sideViewZ: -10
   topDownHeight: 10
   orthoSize: 5
+  sideViewYRotation: 0
 --- !u!114 &1153528227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,6 +2691,7 @@ MonoBehaviour:
   - {fileID: 576540723}
   - {fileID: 120280412}
   - {fileID: 905534094}
+  - {fileID: 1591264996}
   switchKey: 99
 --- !u!114 &1153528228
 MonoBehaviour:
@@ -3317,6 +3319,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4011417403294553267, guid: 756b0c57412ea53489ba33d0d2771b1d, type: 3}
   m_PrefabInstance: {fileID: 554412397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1591264996 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4597214116981667886, guid: c3c7eda603e9e704997e2dcfba233287, type: 3}
+  m_PrefabInstance: {fileID: 1876903363}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1623089136 stripped
 Transform:
