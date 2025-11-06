@@ -5,6 +5,7 @@ using Firebase.Firestore;
 using Firebase.Extensions;
 using TMPro;  
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoginAuth : MonoBehaviour
 {
@@ -35,7 +36,18 @@ public class LoginAuth : MonoBehaviour
         }
     }
 
-    public void OnRegisterButton()
+    bool IsValidEmailForRole(string email, string role)
+    {
+        if (role == "Student" && email.EndsWith("@buffs.wtamu.edu"))
+            return true;
+
+        if (role == "Teacher" && email.EndsWith("@wtamu.edu"))
+            return true;
+
+        return false;
+    }
+
+    public void OnCreateAccountButton()
     {
         string email = emailInput.text.Trim();
         string password = passwordInput.text;
@@ -86,6 +98,7 @@ public class LoginAuth : MonoBehaviour
     {
         string email = emailInput.text.Trim();
         string password = passwordInput.text;
+        string role = GetSelectedRole();  
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
@@ -93,27 +106,53 @@ public class LoginAuth : MonoBehaviour
             return;
         }
 
+       
+        if (!IsValidEmailForRole(email, role))
+        {
+            messageText.text = $"Invalid email for {role}.";
+            return;
+        }
+
+        messageText.text = "Checking credentials...";
+
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted || task.IsCanceled)
             {
-                messageText.text = "Login failed: " + task.Exception?.Message;
+                messageText.text = "Login failed: Invalid email or password.";
                 Debug.LogError(task.Exception);
                 return;
             }
 
             FirebaseUser user = task.Result.User;
-            messageText.text = "Logged in as " + user.Email;
+            messageText.text = "Login successful! Loading profile...";
 
-  
             db.Collection("users").Document(user.UserId).GetSnapshotAsync().ContinueWithOnMainThread(docTask =>
             {
-                if (docTask.IsCompleted && docTask.Result.Exists)
+                if (docTask.IsFaulted || docTask.IsCanceled)
+                {
+                    messageText.text = "Error fetching user role.";
+                    Debug.LogError(docTask.Exception);
+                    return;
+                }
+
+                if (docTask.Result.Exists)
                 {
                     string role = docTask.Result.GetValue<string>("role");
-                    Debug.Log($"Role: {role}");
                     messageText.text = $"Welcome, {role}!";
-                  
+
+                    if (role == "Teacher")
+                    {
+                        SceneManager.LoadScene("TeacherHomePage");
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene("MainMenuUI"); 
+                    }
+                }
+                else
+                {
+                    messageText.text = "User profile missing in database.";
                 }
             });
         });
