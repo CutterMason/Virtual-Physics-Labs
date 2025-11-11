@@ -1,73 +1,39 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class PhysicsObject : MonoBehaviour
 {
-    [Header("Player Properties")]
-    public float speed = 50f;
-    public float size = 1f;
-    public float mass = 1f;
-
-    [Header("UI Sliders")]
-    public Slider speedSlider;
-    public Slider massSlider;
-    public Slider sizeSlider;
-    public Button ResProp;
     private Rigidbody rb;
+    private Vector3 originalScale;
+    private float originalMass;
+    private float originalSpeed = 5f;
 
-    void Start()
+    [Header("Editable Properties")]
+    public float mass = 1f;
+    public float speed = 5f;
+    public Vector3 size = Vector3.one;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
-        // Initialize sliders to current values
-        if (speedSlider != null)
-            speedSlider.value = speed;
-
-        if (massSlider != null)
-            massSlider.value = mass;
-
-        // Add listeners to sliders & buttons
-        if (speedSlider != null)
-            speedSlider.onValueChanged.AddListener(UpdateSpeed);
-
-        if (massSlider != null)
-            massSlider.onValueChanged.AddListener(UpdateMass);
-
-        if (sizeSlider != null)
-            sizeSlider.onValueChanged.AddListener(UpdateSize);    
-
-        if (ResProp != null)
-            ResProp.onClick.AddListener(ResetProperties);    
+        originalScale = transform.localScale;
+        originalMass = rb.mass;
     }
 
-    void UpdateSpeed(float newSpeed)
+    public void ApplyChanges(float newMass, Vector3 newSize, float newSpeed)
     {
-        speed = newSpeed;
-    }
-
-    void UpdateMass(float newMass)
-    {
+        // persist the current values
         mass = newMass;
-        transform.localScale = new Vector3(newMass, newMass, 1f);
-    }
-
-    void UpdateSize(float newSize)
-    {
         size = newSize;
-        transform.localScale = new Vector3(newSize, newSize, 1f);
+        speed = newSpeed;
+
+        // Apply to runtime state
+        transform.localScale = size;
+        if (rb != null) rb.mass = mass;
     }
 
-    void ResetProperties()
+    public void ResetToOriginal()
     {
-        speed = 50f;
-        mass = 1f;
-        size = 1f;
-    }
-
-    void FixedUpdate()
-    {
-        // Example movement (optional)
-        rb.linearVelocity = transform.right * speed * Time.fixedDeltaTime;
+        ApplyChanges(originalMass, originalScale, originalSpeed);
     }
 }
-
