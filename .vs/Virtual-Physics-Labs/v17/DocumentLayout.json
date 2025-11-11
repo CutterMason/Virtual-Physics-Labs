@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\",
+  "WorkspaceRootPath": "C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\",
   "Documents": [
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\LoginAuth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\LoginAuth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -29,6 +30,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\UI\\SceneLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\SceneLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Change_properties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\Change_properties.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> Stashed changes
     }
   ],
   "DocumentGroupContainers": [
@@ -38,6 +43,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< Updated upstream
           "SelectedChildIndex": 4,
           "Children": [
             {
@@ -73,8 +79,27 @@
               "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Camera_Switcher.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\Camera_Switcher.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAcAAAAAAAAAA==",
+=======
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Change_properties.cs",
+              "DocumentMoniker": "C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Change_properties.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\Change_properties.cs",
+              "ToolTip": "C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Change_properties.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Core\\Change_properties.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+>>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
+              "WhenOpened": "2025-10-31T00:02:51.865Z",
+              "EditorCaption": ""
+<<<<<<< Updated upstream
+=======
               "WhenOpened": "2025-10-30T01:18:57.683Z"
+>>>>>>> 0e7b4fd764b54cfd0fd01bb2eb2939306fd0939d
             },
             {
               "$type": "Document",
@@ -122,6 +147,8 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-22T22:41:30.418Z"
+=======
+>>>>>>> Stashed changes
             }
           ]
         }
