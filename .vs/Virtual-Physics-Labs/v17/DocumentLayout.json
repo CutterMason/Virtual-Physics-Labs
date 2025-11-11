@@ -93,9 +93,13 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
 >>>>>>> Stashed changes
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+<<<<<<< HEAD
               "WhenOpened": "2025-10-31T00:02:51.865Z",
               "EditorCaption": ""
 <<<<<<< Updated upstream
+=======
+              "WhenOpened": "2025-10-30T01:18:57.683Z"
+>>>>>>> 0e7b4fd764b54cfd0fd01bb2eb2939306fd0939d
             },
             {
               "$type": "Document",
@@ -116,7 +120,7 @@
               "RelativeDocumentMoniker": "Assets\\LoginAuth.cs",
               "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\LoginAuth.cs",
               "RelativeToolTip": "Assets\\LoginAuth.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHoAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-29T22:19:32.074Z",
               "EditorCaption": ""
