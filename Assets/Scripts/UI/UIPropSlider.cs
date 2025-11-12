@@ -1,8 +1,4 @@
-using System.Runtime.CompilerServices;
-using TMPro.EditorUtilities;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PropertyPanel : MonoBehaviour
