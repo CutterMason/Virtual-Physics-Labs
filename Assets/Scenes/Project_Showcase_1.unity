@@ -149,11 +149,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2029135849}
-  - {fileID: 404460492}
-  - {fileID: 624653336}
   - {fileID: 40857564}
-  - {fileID: 1198045924}
   - {fileID: 1608171942}
   m_Father: {fileID: 346118176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -305,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car3D_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3667929815156504641, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
+      propertyPath: m_TagString
+      value: Car
+      objectReference: {fileID: 0}
     - target: {fileID: 3954681735347337397, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
       propertyPath: m_Mass
       value: 300
@@ -331,11 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7723730781068040999, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.375
+      value: -3.68
       objectReference: {fileID: 0}
     - target: {fileID: 7723730781068040999, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.213
+      value: 9.84
       objectReference: {fileID: 0}
     - target: {fileID: 7723730781068040999, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 852117906}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameControls, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
@@ -792,7 +792,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2029135849}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1052,6 +1052,16 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4011417403294553267, guid: 756b0c57412ea53489ba33d0d2771b1d, type: 3}
   m_PrefabInstance: {fileID: 1705858356}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &246129621 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5784515888046404432, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+  m_PrefabInstance: {fileID: 6984916713801180779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &254156217 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3429743004764597976, guid: d897d438eb2b85743b8dc8b59670abab, type: 3}
+  m_PrefabInstance: {fileID: 291162376}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &279710788
 PrefabInstance:
@@ -3250,6 +3260,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893262117}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &893262117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893262116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932484792 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3667929815156504641, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
@@ -3270,6 +3305,18 @@ MonoBehaviour:
   mass: 1
   speed: 5
   size: {x: 1, y: 1, z: 1}
+--- !u!114 &932484797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932484792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41781af4b8be24c4cacfceebfc3da7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &967590969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3373,7 +3420,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 624653336}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3552,26 +3599,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 756b0c57412ea53489ba33d0d2771b1d, type: 3}
---- !u!1 &1015563484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3667929815156504641, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
-  m_PrefabInstance: {fileID: 2410136672958675186}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1015563486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015563484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05ccf64ee81dbf41b3e01401619637a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mass: 1
-  speed: 5
-  size: {x: 1, y: 1, z: 1}
 --- !u!4 &1026881428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4011417403294553267, guid: 756b0c57412ea53489ba33d0d2771b1d, type: 3}
@@ -3606,8 +3633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b9d893c5cbdfc48ad0edbb8f6475ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 893262118}
-  propertyPanelPrefab: {fileID: 787006963}
+  canvas: {fileID: 0}
+  propertyPanelPrefab: {fileID: 0}
   selectedObject: {fileID: 0}
 --- !u!4 &1029978189
 Transform:
@@ -4166,8 +4193,8 @@ MonoBehaviour:
   - {fileID: 120280412}
   - {fileID: 576540723}
   - {fileID: 1591264996}
-  - {fileID: 841232041}
-  - {fileID: 1204565720}
+  - {fileID: 0}
+  - {fileID: 0}
   switchKey: 99
 --- !u!114 &1153528228
 MonoBehaviour:
@@ -4508,7 +4535,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 857035005}
-  - {fileID: 96704325}
+  - {fileID: 246129621}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4615,7 +4642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 2003265579}
-  propertyPanelPrefab: {fileID: 115488042}
+  propertyPanelPrefab: {fileID: 0}
   selectedObject: {fileID: 0}
 --- !u!4 &1277295905
 Transform:
@@ -4644,7 +4671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137c39d6a3dd8d4591a26409dedb9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashboardPanel: {fileID: 96704325}
+  dashboardPanel: {fileID: 0}
   assetButtons:
   - button: {fileID: 1384542892}
     prefab: {fileID: 6241170162967357450, guid: 620e66fa1113a1c408f597e37004ab6d, type: 3}
@@ -5036,8 +5063,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2000094733}
+  m_Children: []
   m_Father: {fileID: 1608171942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5460,7 +5486,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1198045924}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5602,7 +5628,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 615858574}
   - {fileID: 1803369865}
   - {fileID: 1410719791}
   m_Father: {fileID: 3536543}
@@ -5652,9 +5677,9 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2000094734}
+  m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 667548609}
-  m_HandleRect: {fileID: 2000094733}
+  m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 3
@@ -5663,7 +5688,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 852117908}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SpeedControl, Assembly-CSharp
         m_MethodName: UpdateSpeed
         m_Mode: 0
@@ -5710,7 +5735,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 404460492}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7124,7 +7149,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 115488046}
+  - {fileID: 254156217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7598,6 +7623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car3D_2
       objectReference: {fileID: 0}
+    - target: {fileID: 3667929815156504641, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
+      propertyPath: m_TagString
+      value: Car
+      objectReference: {fileID: 0}
     - target: {fileID: 5061624756262230308, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -7657,6 +7686,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3667929815156504641, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 932484794}
+    - targetCorrespondingSourceObject: {fileID: 3667929815156504641, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932484797}
   m_SourcePrefab: {fileID: 100100000, guid: ef8618ef8e665ee4fafa97c5e5298e7c, type: 3}
 --- !u!1001 &6984916713801180779
 PrefabInstance:
@@ -8099,6 +8131,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 893262117}
   - {fileID: 1153528224}
   - {fileID: 1254847764}
   - {fileID: 2003265578}
@@ -8134,5 +8167,9 @@ SceneRoots:
   - {fileID: 1238004773}
   - {fileID: 1495785978}
   - {fileID: 346118176}
-  - {fileID: 1350386663}
-  - {fileID: 852117907}
+  - {fileID: 110588130}
+  - {fileID: 1002748620}
+  - {fileID: 1029978189}
+  - {fileID: 1060815634}
+  - {fileID: 1579456591}
+  - {fileID: 1643329946}
