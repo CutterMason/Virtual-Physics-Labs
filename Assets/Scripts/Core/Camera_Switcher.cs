@@ -9,6 +9,8 @@ public class Camera_Switcher : MonoBehaviour
     public float topDownHeight = 10f; // Camera height for top-down
     public float orthoSize = 5f;
     public float sideViewYRotation = 0f;
+    public float sideViewXOffset = -10f;  // Negative pushes camera left, positive pushes right
+    public float topDownXOffset = 0f;     // Optional if you want top-down shift too
 
     private bool isTopDown = false;
     private Camera cam;
@@ -51,7 +53,12 @@ public class Camera_Switcher : MonoBehaviour
 
     void MoveToSideView()
     {
-        Vector3 targetPos = new Vector3(player.position.x, player.position.y, sideViewZ);
+        Vector3 targetPos = new Vector3(
+        player.position.x + sideViewXOffset,
+        player.position.y,
+        sideViewZ
+        );
+
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
 
         Quaternion targetRot = Quaternion.Euler(0f, sideViewYRotation, 0f);
@@ -62,7 +69,12 @@ public class Camera_Switcher : MonoBehaviour
 
     void MoveToTopDown()
     {
-        Vector3 targetPos = new Vector3(player.position.x, player.position.y + topDownHeight, player.position.z);
+        Vector3 targetPos = new Vector3(
+        player.position.x + topDownXOffset,
+        player.position.y + topDownHeight,
+        player.position.z
+        );
+
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
 
         Quaternion targetRot = Quaternion.Euler(90f, sideViewYRotation, 0f);
@@ -73,9 +85,13 @@ public class Camera_Switcher : MonoBehaviour
 
     void SetSideViewInstant()
     {
-        transform.position = new Vector3(player.position.x, player.position.y, sideViewZ);
+        transform.position = new Vector3(
+            player.position.x + sideViewXOffset,
+            player.position.y,
+            sideViewZ
+        );
+
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         cam.orthographicSize = orthoSize;
     }
 }
-
