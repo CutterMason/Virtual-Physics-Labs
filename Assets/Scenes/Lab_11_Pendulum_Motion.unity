@@ -13599,7 +13599,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSwitcher: {fileID: 0}
   targets:
-  - {fileID: 0}
+  - {fileID: 590709780}
+  - {fileID: 175241544}
+  - {fileID: 1440826355}
   switchKey: 99
 --- !u!114 &1586216347
 MonoBehaviour:
@@ -13616,11 +13618,12 @@ MonoBehaviour:
   player: {fileID: 1586216351}
   smoothSpeed: 5
   sideViewZ: -10
-  topDownHeight: 10
+  topDownHeight: 0
   orthoSize: 5
   sideViewYRotation: -90
-  sideViewXOffset: -10
+  sideViewXOffset: 0
   topDownXOffset: 0
+  sideViewHeight: 0
 --- !u!114 &1586216348
 MonoBehaviour:
   m_ObjectHideFlags: 0
