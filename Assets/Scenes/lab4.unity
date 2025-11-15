@@ -598,12 +598,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1586216351}
   smoothSpeed: 5
-  sideViewZ: -10
+  sideViewZ: 0
   topDownHeight: 10
   orthoSize: 5
   sideViewYRotation: -90
-  sideViewXOffset: 8
+  sideViewXOffset: 0
   topDownXOffset: 0
+  sideViewHeight: 2
 --- !u!114 &1586216348
 MonoBehaviour:
   m_ObjectHideFlags: 0

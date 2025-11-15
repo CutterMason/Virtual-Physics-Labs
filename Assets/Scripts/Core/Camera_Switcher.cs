@@ -11,6 +11,7 @@ public class Camera_Switcher : MonoBehaviour
     public float sideViewYRotation = 0f;
     public float sideViewXOffset = -10f;  // Negative pushes camera left, positive pushes right
     public float topDownXOffset = 0f;     // Optional if you want top-down shift too
+    public float sideViewHeight = 2f;
 
     private bool isTopDown = false;
     private Camera cam;
@@ -53,18 +54,26 @@ public class Camera_Switcher : MonoBehaviour
 
     void MoveToSideView()
     {
-        Vector3 targetPos = new Vector3(
-        player.position.x + sideViewXOffset,
-        player.position.y,
-        sideViewZ
+        // calculate a forward-facing offset based on camera rotation
+        Vector3 offset =
+            (-transform.forward * Mathf.Abs(sideViewZ)) +   // move back from camera's forward
+            (Vector3.up * sideViewHeight) +                 // lift camera up
+            (transform.right * sideViewXOffset);            // optional left/right shift
+
+        Vector3 targetPos = player.position + offset;
+
+        transform.position = Vector3.Lerp(
+            transform.position,
+            targetPos,
+            Time.deltaTime * smoothSpeed
         );
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
-
         Quaternion targetRot = Quaternion.Euler(0f, sideViewYRotation, 0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * smoothSpeed);
-
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, orthoSize, Time.deltaTime * smoothSpeed);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRot,
+            Time.deltaTime * smoothSpeed
+        );
     }
 
     void MoveToTopDown()
@@ -85,13 +94,14 @@ public class Camera_Switcher : MonoBehaviour
 
     void SetSideViewInstant()
     {
-        transform.position = new Vector3(
-            player.position.x + sideViewXOffset,
-            player.position.y,
-            sideViewZ
-        );
+        Vector3 offset =
+            (-transform.forward * Mathf.Abs(sideViewZ)) +
+            (Vector3.up * sideViewHeight) +
+            (transform.right * sideViewXOffset);
 
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        transform.position = player.position + offset;
+
+        transform.rotation = Quaternion.Euler(0f, sideViewYRotation, 0f);
         cam.orthographicSize = orthoSize;
     }
 }
