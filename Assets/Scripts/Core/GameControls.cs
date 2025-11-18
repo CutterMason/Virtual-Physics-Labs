@@ -9,6 +9,11 @@ public class GameControls : MonoBehaviour
     private Dictionary<Rigidbody, Vector3> storedVelocities = new();
     private Dictionary<Rigidbody, Vector3> storedAngularVelocities = new();
 
+    private void Start()
+    {
+        PauseGame();   // Scene always starts paused
+    }
+
     public void PauseGame()
     {
         if (isPaused) return;

@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SavedLabsUI.unity
     guid: 975286ba70bcfab429a70dc2f92ae7bb
+  - enabled: 1
+    path: Assets/Scenes/StudentGradeUI.unity
+    guid: cff7e0730a9a2d649a168f80315718f4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
