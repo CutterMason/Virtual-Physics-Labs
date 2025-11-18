@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
+using System.Threading.Tasks;
 using Firebase.Firestore;
 using Firebase.Auth;
+using UnityEngine.SceneManagement;
 
 public class LoadManager : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class LoadManager : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
     }
 
+    // Load all save documents for UI debugging
     public async Task<List<LabSave>> LoadAllSaves()
     {
         if (auth.CurrentUser == null)
@@ -45,20 +48,66 @@ public class LoadManager : MonoBehaviour
     public async void TestLoad()
     {
         var saves = await LoadAllSaves();
-
-        if (saves == null) return;
-
-        foreach (var save in saves)
+        if (saves == null || saves.Count == 0)
         {
-            Debug.Log($"Save: {save.saveName}, Timestamp:{save.timestamp}, JSON: {save.jsonData}");
+            Debug.Log("No saves found.");
+            return;
+        }
+
+        // Load the first save for testing
+        string json = saves[0].jsonData;
+        StartCoroutine(LoadSceneFromJson(json));
+    }
+
+    // ------------------------------
+    // Load Scene State
+    // ------------------------------
+    public IEnumerator LoadSceneFromJson(string jsonData)
+    {
+        SceneSaveData save = JsonUtility.FromJson<SceneSaveData>(jsonData);
+
+        // 1. Load saved scene
+        AsyncOperation op = SceneManager.LoadSceneAsync(save.sceneName);
+        yield return op;
+
+        // 2. Restore objects after scene is loaded
+        yield return new WaitForEndOfFrame();
+
+        RestoreObjects(save);
+        RestoreExperiment(save);
+
+        Debug.Log("Scene loaded and state restored.");
+    }
+
+    private void RestoreObjects(SceneSaveData save)
+    {
+        foreach (var objData in save.objects)
+        {
+            // find object with this unique ID
+            foreach (var so in FindObjectsOfType<SavableObject>())
+            {
+                if (so.uniqueId == objData.id)
+                {
+                    Transform t = so.transform;
+
+                    t.position = new Vector3(objData.px, objData.py, objData.pz);
+                    t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
+                    so.gameObject.SetActive(objData.active);
+
+                    break;
+                }
+            }
         }
     }
-}
 
-[FirestoreData]
-public class LabSave
-{
-    [FirestoreProperty] public string saveName { get; set; }
-    [FirestoreProperty] public Timestamp timestamp { get; set; }
-    [FirestoreProperty] public string jsonData { get; set; }
+    private void RestoreExperiment(SceneSaveData save)
+    {
+        // You can populate this later when you have real UI / experiment values.
+    }
+
+    public void StartLoadFromSave(LabSave save)
+    {
+        StartCoroutine(LoadSceneFromJson(save.jsonData));
+    }
+
 }

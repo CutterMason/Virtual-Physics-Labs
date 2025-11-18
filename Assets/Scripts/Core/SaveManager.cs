@@ -58,4 +58,41 @@ public class SaveManager : MonoBehaviour
 
         await SaveLab(randomName, jsonData);
     }
+
+    public string SerializeScene()
+    {
+        SceneSaveData save = new SceneSaveData();
+        save.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        // Save all objects tagged "Savable"
+        foreach (var obj in GameObject.FindGameObjectsWithTag("Savable"))
+        {
+            var so = obj.GetComponent<SavableObject>();
+            if (so == null) continue;
+
+            save.objects.Add(new ObjectSaveData
+            {
+                id = so.uniqueId,
+                px = obj.transform.position.x,
+                py = obj.transform.position.y,
+                pz = obj.transform.position.z,
+                rx = obj.transform.eulerAngles.x,
+                ry = obj.transform.eulerAngles.y,
+                rz = obj.transform.eulerAngles.z,
+                active = obj.activeSelf
+            });
+        }
+
+        // save UI + experiment stuff
+        save.experimentData = new ExperimentData
+        {
+            //sliderValue = UIController.Instance.weightSlider.value,
+            //toggleValue = UIController.Instance.powerToggle.isOn,
+            //timerValue = LabTimer.currentTime
+        };
+
+        return JsonUtility.ToJson(save);
+    }
+
+
 }

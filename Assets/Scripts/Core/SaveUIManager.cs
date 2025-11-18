@@ -21,15 +21,9 @@ public class SaveUIManager : MonoBehaviour
     public async void ConfirmSave()
     {
         string saveName = saveNameInput.text;
+        if (string.IsNullOrEmpty(saveName)) return;
 
-        if (string.IsNullOrEmpty(saveName))
-        {
-            Debug.LogWarning("Save name is empty!");
-            return;
-        }
-
-        string jsonData = "{ \"placeholder\": true }";
-
+        string jsonData = saveManager.SerializeScene();
         await saveManager.SaveLab(saveName, jsonData);
 
         CloseSavePanel();
