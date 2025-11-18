@@ -2,6 +2,7 @@ using UnityEngine;
 using Firebase.Auth;
 using Firebase.Firestore;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -62,36 +63,55 @@ public class SaveManager : MonoBehaviour
     public string SerializeScene()
     {
         SceneSaveData save = new SceneSaveData();
-        save.sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        save.sceneName = SceneManager.GetActiveScene().name;
 
-        // Save all objects tagged "Savable"
-        foreach (var obj in GameObject.FindGameObjectsWithTag("Savable"))
+        SavableObject[] savables = Resources.FindObjectsOfTypeAll<SavableObject>();
+
+        Debug.Log($"[SaveManager] Found {savables.Length} SavableObject(s) to save.");
+
+        foreach (var so in savables)
         {
-            var so = obj.GetComponent<SavableObject>();
-            if (so == null) continue;
+            if (!so.gameObject.scene.IsValid())
+                continue;
 
-            save.objects.Add(new ObjectSaveData
+            Transform t = so.transform;
+
+            ObjectSaveData data = new ObjectSaveData();
+            data.id = so.uniqueId;
+
+            string rawName = so.gameObject.name.Replace("(Clone)", "");
+            int parenIndex = rawName.IndexOf(" (");
+            if (parenIndex >= 0)
             {
-                id = so.uniqueId,
-                px = obj.transform.position.x,
-                py = obj.transform.position.y,
-                pz = obj.transform.position.z,
-                rx = obj.transform.eulerAngles.x,
-                ry = obj.transform.eulerAngles.y,
-                rz = obj.transform.eulerAngles.z,
-                active = obj.activeSelf
-            });
+                rawName = rawName.Substring(0, parenIndex);
+            }
+            data.prefabName = rawName.Trim();   // final key used for registry lookup
+
+            data.px = t.position.x;
+            data.py = t.position.y;
+            data.pz = t.position.z;
+
+            data.rx = t.eulerAngles.x;
+            data.ry = t.eulerAngles.y;
+            data.rz = t.eulerAngles.z;
+
+            data.active = so.gameObject.activeSelf;
+
+            save.objects.Add(data);
         }
 
-        // save UI + experiment stuff
+        Debug.Log($"[SaveManager] Saving {save.objects.Count} object(s).");
+
         save.experimentData = new ExperimentData
         {
-            //sliderValue = UIController.Instance.weightSlider.value,
-            //toggleValue = UIController.Instance.powerToggle.isOn,
-            //timerValue = LabTimer.currentTime
+            sliderValue = 0f,
+            toggleValue = false,
+            timerValue = 0f
         };
 
-        return JsonUtility.ToJson(save);
+        string json = JsonUtility.ToJson(save);
+        Debug.Log($"[SaveManager] JSON:\n{json}");
+        return json;
     }
 
 

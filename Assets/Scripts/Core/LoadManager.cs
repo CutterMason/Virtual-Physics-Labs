@@ -81,23 +81,54 @@ public class LoadManager : MonoBehaviour
 
     private void RestoreObjects(SceneSaveData save)
     {
+     
+        SavableObject[] existing = FindObjectsOfType<SavableObject>();
+        var lookup = new Dictionary<string, SavableObject>();
+
+        foreach (var so in existing)
+            lookup[so.uniqueId] = so;
+
+        Debug.Log($"[LoadManager] Existing SavableObjects in scene: {existing.Length}");
+
         foreach (var objData in save.objects)
         {
-            // find object with this unique ID
-            foreach (var so in FindObjectsOfType<SavableObject>())
+            SavableObject so;
+
+         
+            if (!lookup.TryGetValue(objData.id, out so))
             {
-                if (so.uniqueId == objData.id)
+               
+                GameObject prefab = PrefabRegistry.Instance.GetPrefab(objData.prefabName);
+                if (prefab == null)
                 {
-                    Transform t = so.transform;
-
-                    t.position = new Vector3(objData.px, objData.py, objData.pz);
-                    t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
-                    so.gameObject.SetActive(objData.active);
-
-                    break;
+                    Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
+                    continue;
                 }
+
+                GameObject spawned = Instantiate(prefab);
+                so = spawned.GetComponent<SavableObject>();
+                if (so == null)
+                {
+                    Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
+                    continue;
+                }
+
+                so.uniqueId = objData.id;
+                Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
             }
+            else
+            {
+                Debug.Log($"[LoadManager] Restoring existing object {objData.prefabName} with ID {objData.id}");
+            }
+
+            
+            Transform t = so.transform;
+            t.position = new Vector3(objData.px, objData.py, objData.pz);
+            t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
+            so.gameObject.SetActive(objData.active);
         }
+
+        Debug.Log("[LoadManager] RestoreObjects complete for " + save.objects.Count + " object(s).");
     }
 
     private void RestoreExperiment(SceneSaveData save)
