@@ -65,6 +65,19 @@ public class DashboardManager : MonoBehaviour
         else
             spawnPos = Vector3.zero;
 
-        Instantiate(prefab, spawnPos, Quaternion.identity);
+       
+        GameObject obj = Instantiate(prefab, spawnPos, Quaternion.identity);
+
+        
+        SavableObject so = obj.GetComponent<SavableObject>();
+        if (so != null)
+        {
+            so.prefab = prefab;          // Assign original prefab
+            so.prefabName = prefab.name; // Ensure correct lookup name
+        }
+        else
+        {
+            Debug.LogError($"Spawned object {prefab.name} is missing SavableObject component!");
+        }
     }
 }
