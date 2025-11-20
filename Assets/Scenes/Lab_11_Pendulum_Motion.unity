@@ -15694,6 +15694,18 @@ PrefabInstance:
       value: Pendulum_Ball_Short
       objectReference: {fileID: 0}
     - target: {fileID: 3247832885793652192, guid: acae108315116dc4292fd2182031df70, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247832885793652192, guid: acae108315116dc4292fd2182031df70, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247832885793652192, guid: acae108315116dc4292fd2182031df70, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247832885793652192, guid: acae108315116dc4292fd2182031df70, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.025399923
       objectReference: {fileID: 0}

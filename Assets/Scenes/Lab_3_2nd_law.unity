@@ -2322,8 +2322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSwitcher: {fileID: 0}
   targets:
-  - {fileID: 1064992258}
   - {fileID: 735154690}
+  - {fileID: 1064992258}
   switchKey: 99
 --- !u!114 &2006026708
 MonoBehaviour:
@@ -2343,8 +2343,9 @@ MonoBehaviour:
   topDownHeight: 8
   orthoSize: 5
   sideViewYRotation: -90
-  sideViewXOffset: 8
+  sideViewXOffset: 0
   topDownXOffset: 0
+  sideViewHeight: 2
 --- !u!114 &2006026709
 MonoBehaviour:
   m_ObjectHideFlags: 0
