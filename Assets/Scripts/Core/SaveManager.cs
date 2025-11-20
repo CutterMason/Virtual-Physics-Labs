@@ -71,6 +71,10 @@ public class SaveManager : MonoBehaviour
 
         foreach (var so in savables)
         {
+            // NEW — skip preset scene objects
+            if (so.isPresetObject)
+                continue;
+
             if (!so.gameObject.scene.IsValid())
                 continue;
 

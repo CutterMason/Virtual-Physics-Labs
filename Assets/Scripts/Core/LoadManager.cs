@@ -81,7 +81,6 @@ public class LoadManager : MonoBehaviour
 
     private void RestoreObjects(SceneSaveData save)
     {
-     
         SavableObject[] existing = FindObjectsOfType<SavableObject>();
         var lookup = new Dictionary<string, SavableObject>();
 
@@ -94,10 +93,8 @@ public class LoadManager : MonoBehaviour
         {
             SavableObject so;
 
-         
             if (!lookup.TryGetValue(objData.id, out so))
             {
-               
                 GameObject prefab = PrefabRegistry.Instance.GetPrefab(objData.prefabName);
                 if (prefab == null)
                 {
@@ -107,6 +104,7 @@ public class LoadManager : MonoBehaviour
 
                 GameObject spawned = Instantiate(prefab);
                 so = spawned.GetComponent<SavableObject>();
+
                 if (so == null)
                 {
                     Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
@@ -118,10 +116,15 @@ public class LoadManager : MonoBehaviour
             }
             else
             {
+                // Case 2: Exists in scene (ONLY spawned objects)
+                // Skip preset built-in scene objects
+                if (so.isPresetObject)
+                    continue;
+
                 Debug.Log($"[LoadManager] Restoring existing object {objData.prefabName} with ID {objData.id}");
             }
 
-            
+            // Apply transform and active state
             Transform t = so.transform;
             t.position = new Vector3(objData.px, objData.py, objData.pz);
             t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
