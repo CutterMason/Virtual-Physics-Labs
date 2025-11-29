@@ -5,7 +5,7 @@ public class StickyCar : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Only stick to other toy cars
-        if (!collision.gameObject.CompareTag("Car")) return;
+        if (!collision.gameObject.CompareTag("Savable")) return;
 
         Rigidbody rb1 = GetComponent<Rigidbody>();
         Rigidbody rb2 = collision.rigidbody;
