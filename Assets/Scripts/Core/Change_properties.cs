@@ -9,31 +9,53 @@ public class PhysicsObject : MonoBehaviour
     private float originalSpeed = 5f;
 
     [Header("Editable Properties")]
+    [Range(0.05f, 1f)]
     public float mass = 1f;
+
     public float speed = 5f;
     public Vector3 size = Vector3.one;
+
+    private const float MIN_MASS = 0.05f;
+    private const float MAX_MASS = 1f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         originalScale = transform.localScale;
         originalMass = rb.mass;
+
+        // Ensure Inspector matches actual
+        size = originalScale;
+        mass = Mathf.Clamp(mass, MIN_MASS, MAX_MASS);
     }
 
     public void ApplyChanges(float newMass, Vector3 newSize, float newSpeed)
     {
-        // persist the current values
+        // Clamp mass to valid range ALWAYS
+        newMass = Mathf.Clamp(newMass, MIN_MASS, MAX_MASS);
+
+        // Save the clamped mass + speed
         mass = newMass;
-        size = newSize;
         speed = newSpeed;
 
-        // Apply to runtime state
-        transform.localScale = size;
-        if (rb != null) rb.mass = mass;
+        // Only update size if user changed it
+        if (newSize != size)
+        {
+            size = newSize;
+            transform.localScale = size;
+        }
+
+        if (rb != null)
+            rb.mass = mass;
     }
 
     public void ResetToOriginal()
     {
-        ApplyChanges(originalMass, originalScale, originalSpeed);
+        size = originalScale;
+        mass = originalMass;
+        speed = originalSpeed;
+
+        transform.localScale = originalScale;
+        rb.mass = originalMass;
     }
 }
