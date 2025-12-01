@@ -5,13 +5,15 @@ public class CarControllerSimple : MonoBehaviour
     public enum MoveAxis { X, Z }
 
     [Header("Movement Axis")]
-    public MoveAxis moveAxis = MoveAxis.Z;  // which axis is left/right
+    public MoveAxis moveAxis = MoveAxis.Z;   // which axis is forward
     public bool invertDirection = false;
 
-    [Header("Acceleration Mode")]
-    public float acceleration = 10f;         // how fast we speed up
-    public float maxSpeed = 5f;              // top speed
-    public bool useConstantSpeed = false;    // if true: ignore acceleration
+    [Header("Acceleration Settings")]
+    public float acceleration = 10f;         // how fast we speed up (accel mode)
+    public float maxSpeed = 5f;              // target speed (const-speed mode too)
+
+    [Header("Mode")]
+    public bool useConstantSpeed = false;    // toggled by UI
 
     private Rigidbody rb;
 
@@ -22,43 +24,39 @@ public class CarControllerSimple : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Read input every frame
         float input = 0f;
-
-        // A = left, D = right
-        if (Input.GetKey(KeyCode.A)) input = -1f;
-        if (Input.GetKey(KeyCode.D)) input = 1f;
+        if (Input.GetKey(KeyCode.A)) input -= 1f;
+        if (Input.GetKey(KeyCode.D)) input += 1f;
 
         if (invertDirection)
-            input *= -1;
+            input = -input;
 
+        // Choose movement model
         if (useConstantSpeed)
-        {
             ApplyConstantSpeed(input);
-        }
         else
-        {
             ApplyAcceleration(input);
-        }
     }
 
     void ApplyAcceleration(float input)
     {
         Vector3 v = rb.linearVelocity;
 
-        // Compute current speed along our axis
+        // current speed along our chosen axis
         float current = (moveAxis == MoveAxis.X) ? v.x : v.z;
 
-        // Increase speed based on input + acceleration
-        float target = current + input * acceleration * Time.fixedDeltaTime;
+        // accelerate based on input
+        current += input * acceleration * Time.fixedDeltaTime;
 
-        // Clamp speed
-        target = Mathf.Clamp(target, -maxSpeed, maxSpeed);
+        // clamp to maxSpeed
+        current = Mathf.Clamp(current, -maxSpeed, maxSpeed);
 
-        // Apply back to velocity
+        // write back to velocity
         if (moveAxis == MoveAxis.X)
-            v.x = target;
+            v.x = current;
         else
-            v.z = target;
+            v.z = current;
 
         rb.linearVelocity = v;
     }
@@ -67,6 +65,7 @@ public class CarControllerSimple : MonoBehaviour
     {
         Vector3 v = rb.linearVelocity;
 
+        // If no input, stop along that axis; if input, move at fixed speed
         float targetSpeed = input * maxSpeed;
 
         if (moveAxis == MoveAxis.X)
@@ -75,5 +74,11 @@ public class CarControllerSimple : MonoBehaviour
             v.z = targetSpeed;
 
         rb.linearVelocity = v;
+    }
+
+    // Called by the Toggle's OnValueChanged(bool)
+    public void SetUseConstantSpeed(bool value)
+    {
+        useConstantSpeed = value;
     }
 }
