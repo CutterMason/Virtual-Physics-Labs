@@ -9376,7 +9376,6 @@ GameObject:
   - component: {fileID: 2025493719}
   - component: {fileID: 2025493720}
   - component: {fileID: 2025493721}
-  - component: {fileID: 2025493722}
   m_Layer: 0
   m_Name: CarRoot
   m_TagString: Untagged
@@ -9465,21 +9464,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4, y: 0.22, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2025493722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025493717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05ccf64ee81dbf41b3e01401619637a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mass: 1
-  speed: 5
-  size: {x: 1, y: 1, z: 1}
 --- !u!1 &2054562289
 GameObject:
   m_ObjectHideFlags: 0

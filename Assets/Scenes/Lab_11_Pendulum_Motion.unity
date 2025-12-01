@@ -3091,7 +3091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &264507761
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4015,7 +4015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 970960694002656678, guid: acae108315116dc4292fd2182031df70, type: 3}
       propertyPath: m_Mass
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 970960694002656678, guid: acae108315116dc4292fd2182031df70, type: 3}
       propertyPath: m_Constraints
@@ -4077,7 +4077,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 581068795939653562, guid: acae108315116dc4292fd2182031df70, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -4092,7 +4093,7 @@ PrefabInstance:
       addedObject: {fileID: 1358310868}
     - targetCorrespondingSourceObject: {fileID: 2763326028599240538, guid: acae108315116dc4292fd2182031df70, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1358310870}
+      addedObject: {fileID: 1358310875}
   m_SourcePrefab: {fileID: 100100000, guid: acae108315116dc4292fd2182031df70, type: 3}
 --- !u!1 &390661586
 GameObject:
@@ -16101,7 +16102,7 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &1358310870
+--- !u!114 &1358310875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18829,12 +18830,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSwitcher: {fileID: 0}
   targets:
-  - {fileID: 1283246770}
-  - {fileID: 1348701744}
-  - {fileID: 529821626}
-  - {fileID: 1131622755}
-  - {fileID: 1788461737}
-  - {fileID: 1437935729}
+  - {fileID: 1358310858}
+  - {fileID: 1401453585}
+  - {fileID: 1187287754}
+  - {fileID: 511517054}
+  - {fileID: 605459917}
+  - {fileID: 2072185525}
   switchKey: 99
 --- !u!114 &1586216347
 MonoBehaviour:
@@ -19312,7 +19313,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 581068795939653562, guid: acae108315116dc4292fd2182031df70, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -23842,6 +23844,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6237119253755358348, guid: d897d438eb2b85743b8dc8b59670abab, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6237119253755358348, guid: d897d438eb2b85743b8dc8b59670abab, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6237119253755358348, guid: d897d438eb2b85743b8dc8b59670abab, type: 3}
+      propertyPath: m_MinValue
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6809394289653320264, guid: d897d438eb2b85743b8dc8b59670abab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.1
@@ -24056,7 +24070,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2145286222}
-  - component: {fileID: 2145286221}
   - component: {fileID: 2145286220}
   - component: {fileID: 2145286218}
   - component: {fileID: 2145286219}
@@ -24131,21 +24144,6 @@ MonoBehaviour:
     prefab: {fileID: 0}
   spawnPoint: {fileID: 0}
   slideSpeed: 10
---- !u!114 &2145286221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145286217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b9d893c5cbdfc48ad0edbb8f6475ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  propertyPanelPrefab: {fileID: 0}
-  selectedObject: {fileID: 0}
 --- !u!4 &2145286222
 Transform:
   m_ObjectHideFlags: 0
