@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;   // <-- add this
 
 public class CarControllerSimple : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class CarControllerSimple : MonoBehaviour
     public float maxSpeed = 5f;              // target speed (const-speed mode too)
 
     [Header("Mode")]
-    public bool useConstantSpeed = false;    // toggled by UI
+    public bool useConstantSpeed = false;    // actually used by the movement code
+    public Toggle constantSpeedToggle;       // <-- drag your Toggle here in Inspector
 
     private Rigidbody rb;
 
@@ -22,9 +24,17 @@ public class CarControllerSimple : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    void Start()
+    {
+        // Make sure the script’s bool matches whatever the toggle LOOKS like
+        SetUseConstantSpeed(constantSpeedToggle.isOn);
+
+        // Also hook up the listener in code (you can remove it from the inspector if you want)
+        constantSpeedToggle.onValueChanged.AddListener(SetUseConstantSpeed);
+    }
+
     void FixedUpdate()
     {
-        // Read input every frame
         float input = 0f;
         if (Input.GetKey(KeyCode.A)) input -= 1f;
         if (Input.GetKey(KeyCode.D)) input += 1f;
@@ -32,7 +42,6 @@ public class CarControllerSimple : MonoBehaviour
         if (invertDirection)
             input = -input;
 
-        // Choose movement model
         if (useConstantSpeed)
             ApplyConstantSpeed(input);
         else
@@ -43,16 +52,20 @@ public class CarControllerSimple : MonoBehaviour
     {
         Vector3 v = rb.linearVelocity;
 
-        // current speed along our chosen axis
         float current = (moveAxis == MoveAxis.X) ? v.x : v.z;
 
-        // accelerate based on input
-        current += input * acceleration * Time.fixedDeltaTime;
+        if (Mathf.Abs(input) < 0.01f)
+        {
+            // No input: gradually slow down toward 0
+            current = Mathf.MoveTowards(current, 0f, acceleration * Time.fixedDeltaTime);
+        }
+        else
+        {
+            // Input: accelerate
+            current += input * acceleration * Time.fixedDeltaTime;
+            current = Mathf.Clamp(current, -maxSpeed, maxSpeed);
+        }
 
-        // clamp to maxSpeed
-        current = Mathf.Clamp(current, -maxSpeed, maxSpeed);
-
-        // write back to velocity
         if (moveAxis == MoveAxis.X)
             v.x = current;
         else
@@ -64,8 +77,6 @@ public class CarControllerSimple : MonoBehaviour
     void ApplyConstantSpeed(float input)
     {
         Vector3 v = rb.linearVelocity;
-
-        // If no input, stop along that axis; if input, move at fixed speed
         float targetSpeed = input * maxSpeed;
 
         if (moveAxis == MoveAxis.X)
@@ -76,9 +87,17 @@ public class CarControllerSimple : MonoBehaviour
         rb.linearVelocity = v;
     }
 
-    // Called by the Toggle's OnValueChanged(bool)
     public void SetUseConstantSpeed(bool value)
     {
         useConstantSpeed = value;
+
+        if (!useConstantSpeed)
+        {
+            // When switching OFF constant speed, zero out motion on that axis
+            Vector3 v = rb.linearVelocity;
+            if (moveAxis == MoveAxis.X) v.x = 0f;
+            else v.z = 0f;
+            rb.linearVelocity = v;
+        }
     }
 }
