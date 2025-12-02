@@ -31,10 +31,26 @@ public class GraphPanelController : MonoBehaviour
         if (graphPanels == null || index < 0 || index >= graphPanels.Length)
             return;
 
-        // toggle this panel
+        // If clicking a new graph, close all others first
+        CloseAllExcept(index);
+
+        // Toggle this panel
         isOpen[index] = !isOpen[index];
 
         if (graphPanels[index] != null)
             graphPanels[index].SetActive(isOpen[index]);
+    }
+    
+    private void CloseAllExcept(int keepIndex)
+    {
+        for (int i = 0; i < graphPanels.Length; i++)
+        {
+            if (i == keepIndex) continue;
+
+            isOpen[i] = false;
+
+            if (graphPanels[i] != null)
+                graphPanels[i].SetActive(false);
+        }
     }
 }
