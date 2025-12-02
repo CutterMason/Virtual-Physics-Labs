@@ -38,7 +38,6 @@ public class LoginAuth : MonoBehaviour
 
     bool IsValidEmailForRole(string email, string role)
     {
-        
         email = email.ToLowerInvariant();
 
         if (role == "Student" && email.EndsWith("@buffs.wtamu.edu"))
@@ -52,7 +51,7 @@ public class LoginAuth : MonoBehaviour
 
     public void OnCreateAccountButton()
     {
-        string email = emailInput.text.Trim().ToLowerInvariant();   
+        string email = emailInput.text.Trim().ToLowerInvariant();
         string password = passwordInput.text;
         string role = GetSelectedRole();
 
@@ -104,7 +103,7 @@ public class LoginAuth : MonoBehaviour
 
     public void OnLoginButton()
     {
-        string email = emailInput.text.Trim().ToLowerInvariant();   
+        string email = emailInput.text.Trim().ToLowerInvariant();
         string password = passwordInput.text;
         string role = GetSelectedRole();
 
@@ -148,14 +147,13 @@ public class LoginAuth : MonoBehaviour
                     string storedRole = docTask.Result.GetValue<string>("role");
                     messageText.text = $"Welcome, {storedRole}!";
 
-                    if (storedRole == "Teacher")
+                  
+                    if (SessionManager.Instance != null)
                     {
-                        SceneManager.LoadScene("TeacherHomePage");
+                        SessionManager.Instance.UserRole = storedRole;
                     }
-                    else
-                    {
-                        SceneManager.LoadScene("MainMenuUI");
-                    }
+
+                    SceneManager.LoadScene("MainMenuUI");
                 }
                 else
                 {

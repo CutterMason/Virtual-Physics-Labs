@@ -50,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lab_11_Pendulum_Motion.unity
     guid: 7e414752c8e19944d872d4de40dc9494
+  - enabled: 1
+    path: Assets/Scenes/TeacherGradesUI.unity
+    guid: 56153a7d1561d754d8b999d52a2ee4c7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
