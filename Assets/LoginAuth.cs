@@ -3,7 +3,7 @@ using Firebase;
 using Firebase.Auth;
 using Firebase.Firestore;
 using Firebase.Extensions;
-using TMPro;  
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -38,6 +38,9 @@ public class LoginAuth : MonoBehaviour
 
     bool IsValidEmailForRole(string email, string role)
     {
+        
+        email = email.ToLowerInvariant();
+
         if (role == "Student" && email.EndsWith("@buffs.wtamu.edu"))
             return true;
 
@@ -49,13 +52,19 @@ public class LoginAuth : MonoBehaviour
 
     public void OnCreateAccountButton()
     {
-        string email = emailInput.text.Trim();
+        string email = emailInput.text.Trim().ToLowerInvariant();   
         string password = passwordInput.text;
         string role = GetSelectedRole();
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
             messageText.text = "Please fill in all fields.";
+            return;
+        }
+
+        if (!IsValidEmailForRole(email, role))
+        {
+            messageText.text = $"You must use a valid {role} WTAMU email.";
             return;
         }
 
@@ -93,12 +102,11 @@ public class LoginAuth : MonoBehaviour
         });
     }
 
-   
     public void OnLoginButton()
     {
-        string email = emailInput.text.Trim();
+        string email = emailInput.text.Trim().ToLowerInvariant();   
         string password = passwordInput.text;
-        string role = GetSelectedRole();  
+        string role = GetSelectedRole();
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
@@ -106,7 +114,6 @@ public class LoginAuth : MonoBehaviour
             return;
         }
 
-       
         if (!IsValidEmailForRole(email, role))
         {
             messageText.text = $"Invalid email for {role}.";
@@ -138,16 +145,16 @@ public class LoginAuth : MonoBehaviour
 
                 if (docTask.Result.Exists)
                 {
-                    string role = docTask.Result.GetValue<string>("role");
-                    messageText.text = $"Welcome, {role}!";
+                    string storedRole = docTask.Result.GetValue<string>("role");
+                    messageText.text = $"Welcome, {storedRole}!";
 
-                    if (role == "Teacher")
+                    if (storedRole == "Teacher")
                     {
                         SceneManager.LoadScene("TeacherHomePage");
                     }
                     else
                     {
-                        SceneManager.LoadScene("MainMenuUI"); 
+                        SceneManager.LoadScene("MainMenuUI");
                     }
                 }
                 else
@@ -158,7 +165,6 @@ public class LoginAuth : MonoBehaviour
         });
     }
 
-    
     private string GetSelectedRole()
     {
         if (teacherToggle != null && teacherToggle.isOn)
