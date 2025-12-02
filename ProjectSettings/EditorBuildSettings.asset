@@ -38,6 +38,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StudentGradeUI.unity
     guid: cff7e0730a9a2d649a168f80315718f4
+  - enabled: 1
+    path: Assets/Scenes/Lab_3_2nd_law.unity
+    guid: e11fa4d19cbdd694b8fb9527b8825999
+  - enabled: 1
+    path: Assets/Scenes/Lab_7_Energy.unity
+    guid: 81e92692b67a09d4cb5aeca0c95d83be
+  - enabled: 1
+    path: Assets/Scenes/Lab_9_Momentum.unity
+    guid: 998abccdc95517945bcb75c3819f65bb
+  - enabled: 1
+    path: Assets/Scenes/Lab_11_Pendulum_Motion.unity
+    guid: 7e414752c8e19944d872d4de40dc9494
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
