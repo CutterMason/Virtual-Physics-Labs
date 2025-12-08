@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 2375488376213241848}
   - component: {fileID: 6763774054832337134}
   - component: {fileID: 6848185736070682494}
+  - component: {fileID: 3891236229717798523}
   m_Layer: 0
   m_Name: Car3D_2
   m_TagString: Savable
@@ -389,6 +390,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 
+  prefab: {fileID: 0}
+  prefabName: 
+  isPresetObject: 0
 --- !u!114 &6848185736070682494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +408,18 @@ MonoBehaviour:
   mass: 1
   speed: 5
   size: {x: 1, y: 1, z: 1}
+--- !u!114 &3891236229717798523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667929815156504641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9a63df3670f904fa4165d0d4982926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4824376620529883487
 GameObject:
   m_ObjectHideFlags: 0

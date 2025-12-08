@@ -1404,6 +1404,8 @@ GameObject:
   - component: {fileID: 706975009448564418}
   - component: {fileID: 2421134286875998358}
   - component: {fileID: 7989427720161090393}
+  - component: {fileID: 8017996327993490952}
+  - component: {fileID: 3074893763494783068}
   m_Layer: 0
   m_Name: Car3D_3
   m_TagString: Savable
@@ -1489,6 +1491,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 
+  prefab: {fileID: 0}
+  prefabName: 
+  isPresetObject: 0
+--- !u!114 &8017996327993490952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684975366224940502}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9a63df3670f904fa4165d0d4982926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3074893763494783068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684975366224940502}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05ccf64ee81dbf41b3e01401619637a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 1
+  speed: 5
+  size: {x: 1, y: 1, z: 1}
 --- !u!1 &7916871744194312617
 GameObject:
   m_ObjectHideFlags: 0

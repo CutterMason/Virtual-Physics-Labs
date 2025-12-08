@@ -45,12 +45,11 @@ public class MotionGraph : MonoBehaviour
     public float accelSmoothFactor = 0.25f;
 
     [Header("Calibration")]
-    public float accelScale = 1f;   // scale applied to acceleration values
+    public float accelScale = 1f;   
 
     [Header("Velocity Scaling")]
-    public float velocityScale = 1f;   // <<--- ADDED
+    public float velocityScale = 1f;   
 
-    // internal buffers
     private float[] values;
     private int index;
     private float timer;
@@ -81,6 +80,8 @@ public class MotionGraph : MonoBehaviour
 
         if (peakText)
             peakText.text = $"{graphType} Peak: 0.00";
+
+        if (xAxisLabel) xAxisLabel.text = "";
 
         if (targetTransform)
         {
@@ -158,7 +159,7 @@ public class MotionGraph : MonoBehaviour
                     yAxisLabel.text = $"{graphType}: {lastRecordedValue:F2}";
             }
 
-            if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
+            //if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
 
             UpdatePeakDisplay();
             return;
@@ -177,7 +178,7 @@ public class MotionGraph : MonoBehaviour
                 break;
 
             case GraphType.Velocity:
-                newValue = velZ * velocityScale;   // <<--- APPLIED HERE
+                newValue = velZ * velocityScale; 
                 peakVelocity = Mathf.Max(peakVelocity, Mathf.Abs(newValue));
                 break;
 
@@ -193,7 +194,7 @@ public class MotionGraph : MonoBehaviour
         RedrawGraph();
 
         if (yAxisLabel) yAxisLabel.text = $"{graphType}: {newValue:F2}";
-        if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
+        //if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
 
         UpdatePeakDisplay();
     }

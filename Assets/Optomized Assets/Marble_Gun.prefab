@@ -120,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6699193248700657711}
   - component: {fileID: 5971151025638469901}
+  - component: {fileID: 4273342396303177192}
   m_Layer: 0
   m_Name: Marble_Gun
   m_TagString: Savable
@@ -157,6 +158,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 
+  prefab: {fileID: 0}
+  prefabName: 
+  isPresetObject: 0
+--- !u!114 &4273342396303177192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778476401112847750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9a63df3670f904fa4165d0d4982926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6339929936108033807
 GameObject:
   m_ObjectHideFlags: 0
