@@ -81,6 +81,8 @@ public class MotionGraph : MonoBehaviour
         if (peakText)
             peakText.text = $"{graphType} Peak: 0.00";
 
+        if (xAxisLabel) xAxisLabel.text = "";
+
         if (targetTransform)
         {
             prevPosZ_ForFallback = GetCurrentPositionZ();
@@ -157,7 +159,7 @@ public class MotionGraph : MonoBehaviour
                     yAxisLabel.text = $"{graphType}: {lastRecordedValue:F2}";
             }
 
-            if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
+            //if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
 
             UpdatePeakDisplay();
             return;
@@ -192,7 +194,7 @@ public class MotionGraph : MonoBehaviour
         RedrawGraph();
 
         if (yAxisLabel) yAxisLabel.text = $"{graphType}: {newValue:F2}";
-        if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
+        //if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
 
         UpdatePeakDisplay();
     }
