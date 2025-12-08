@@ -12,8 +12,11 @@ public class LoginAuth : MonoBehaviour
     [Header("UI References")]
     public TMP_InputField emailInput;
     public TMP_InputField passwordInput;
+
+    [Header("Role (Radio Toggles)")]
     public Toggle studentToggle;
     public Toggle teacherToggle;
+    public ToggleGroup roleToggleGroup;  
     public TMP_Text messageText;
 
     FirebaseAuth auth;
@@ -28,6 +31,11 @@ public class LoginAuth : MonoBehaviour
             db = FirebaseFirestore.DefaultInstance;
             messageText.text = "Firebase ready!";
             Debug.Log("Firebase initialized.");
+
+            if (!studentToggle.isOn && !teacherToggle.isOn)
+            {
+                studentToggle.isOn = true;
+            }
         }
         else
         {
@@ -38,6 +46,9 @@ public class LoginAuth : MonoBehaviour
 
     bool IsValidEmailForRole(string email, string role)
     {
+        if (string.IsNullOrEmpty(role))
+            return false;
+
         email = email.ToLowerInvariant();
 
         if (role == "Student" && email.EndsWith("@buffs.wtamu.edu"))
@@ -58,6 +69,12 @@ public class LoginAuth : MonoBehaviour
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
             messageText.text = "Please fill in all fields.";
+            return;
+        }
+
+        if (string.IsNullOrEmpty(role))
+        {
+            messageText.text = "Please select Student or Teacher.";
             return;
         }
 
@@ -113,6 +130,12 @@ public class LoginAuth : MonoBehaviour
             return;
         }
 
+        if (string.IsNullOrEmpty(role))
+        {
+            messageText.text = "Please select Student or Teacher.";
+            return;
+        }
+
         if (!IsValidEmailForRole(email, role))
         {
             messageText.text = $"Invalid email for {role}.";
@@ -147,7 +170,6 @@ public class LoginAuth : MonoBehaviour
                     string storedRole = docTask.Result.GetValue<string>("role");
                     messageText.text = $"Welcome, {storedRole}!";
 
-                  
                     if (SessionManager.Instance != null)
                     {
                         SessionManager.Instance.UserRole = storedRole;
@@ -169,6 +191,6 @@ public class LoginAuth : MonoBehaviour
             return "Teacher";
         if (studentToggle != null && studentToggle.isOn)
             return "Student";
-        return "Student";
+        return null;
     }
 }
