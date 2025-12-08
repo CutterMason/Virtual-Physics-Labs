@@ -136,7 +136,24 @@ public class LoadManager : MonoBehaviour
 
     private void RestoreExperiment(SceneSaveData save)
     {
-        // You can populate this later when you have real UI / experiment values.
+        if (save.experimentData == null)
+        {
+            Debug.Log("[LoadManager] No experimentData in save; skipping restore.");
+            return;
+        }
+
+        // --- restore notepad text ---
+        LabNotepad labNotepad = FindObjectOfType<LabNotepad>();
+        if (labNotepad != null && labNotepad.notepadInput != null)
+        {
+            string text = save.experimentData.notepadText ?? "";
+            labNotepad.notepadInput.text = text;   // this will also update LabNotepad's static cache
+            Debug.Log($"[LoadManager] Restored notepad text ({text.Length} chars).");
+        }
+        else
+        {
+            Debug.LogWarning("[LoadManager] Could not find LabNotepad to restore notes.");
+        }
     }
 
     public void StartLoadFromSave(LabSave save)

@@ -3,11 +3,15 @@ using Firebase.Auth;
 using Firebase.Firestore;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SaveManager : MonoBehaviour
 {
     FirebaseAuth auth;
     FirebaseFirestore db;
+
+    [Header("Experiment UI")]
+    public TMP_InputField notepadInput;
 
     void Update()
     {

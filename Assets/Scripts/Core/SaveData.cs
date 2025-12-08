@@ -28,8 +28,10 @@ public class ObjectSaveData
 [Serializable]
 public class ExperimentData
 {
-    // Add whatever your lab needs (you can expand later)
     public float sliderValue;
     public bool toggleValue;
     public float timerValue;
+
+    // NEW: notepad contents
+    public string notepadText;
 }
