@@ -45,12 +45,11 @@ public class MotionGraph : MonoBehaviour
     public float accelSmoothFactor = 0.25f;
 
     [Header("Calibration")]
-    public float accelScale = 1f;   // scale applied to acceleration values
+    public float accelScale = 1f;   
 
     [Header("Velocity Scaling")]
-    public float velocityScale = 1f;   // <<--- ADDED
+    public float velocityScale = 1f;   
 
-    // internal buffers
     private float[] values;
     private int index;
     private float timer;
@@ -177,7 +176,7 @@ public class MotionGraph : MonoBehaviour
                 break;
 
             case GraphType.Velocity:
-                newValue = velZ * velocityScale;   // <<--- APPLIED HERE
+                newValue = velZ * velocityScale; 
                 peakVelocity = Mathf.Max(peakVelocity, Mathf.Abs(newValue));
                 break;
 

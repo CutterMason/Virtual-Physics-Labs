@@ -36,14 +36,11 @@ public class InelasticCollision : MonoBehaviour
 
         float finalV = (mA * vA + mB * vB) / (mA + mB);
 
-        // Wait for collision to finish
         yield return new WaitForFixedUpdate();
 
-        // Apply momentum first
         A.linearVelocity = new Vector3(0, 0, finalV);
         B.linearVelocity = new Vector3(0, 0, finalV);
 
-        // Create a fixed joint
         FixedJoint joint = A.gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = B;
         joint.breakForce = Mathf.Infinity;
