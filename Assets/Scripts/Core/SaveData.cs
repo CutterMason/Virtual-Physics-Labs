@@ -31,7 +31,5 @@ public class ExperimentData
     public float sliderValue;
     public bool toggleValue;
     public float timerValue;
-
-    // NEW: notepad contents
     public string notepadText;
 }

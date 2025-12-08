@@ -115,6 +115,7 @@ public class SaveManager : MonoBehaviour
             sliderValue = 0f,
             toggleValue = false,
             timerValue = 0f
+            notepadText = notepadInput != null ? notepadInput.text : ""
         };
 
         string json = JsonUtility.ToJson(save);

@@ -3,60 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CarController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\CarController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\BackButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\BackButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\LoginAuth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\LoginAuth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GradesButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\GradesButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SessionManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SessionManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SaveManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\FirebaseInit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SaveUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\PrefabRegistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SaveData.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveAbleObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SaveAbleObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\UI\\SavedLabsUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\UI\\SavedLabsUI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LabSave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LabSave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,181 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LoadManager.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\LoadManager.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\LoadManager.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAAAIkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T00:09:03.147Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CarController.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CarController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\CarController.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CarController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\CarController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAqwGUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T01:51:45.747Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BackButton.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\BackButton.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\BackButton.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\BackButton.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\BackButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T01:22:42.981Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GradesButton.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GradesButton.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\GradesButton.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GradesButton.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\GradesButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T01:02:39.855Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SessionManager.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SessionManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SessionManager.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SessionManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\SessionManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T01:00:00.729Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "LoginAuth.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\LoginAuth.cs",
               "RelativeDocumentMoniker": "Assets\\LoginAuth.cs",
               "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\LoginAuth.cs",
               "RelativeToolTip": "Assets\\LoginAuth.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAJUAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-02T00:03:05.503Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PrefabRegistry.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\PrefabRegistry.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\PrefabRegistry.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T03:54:30.424Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SavedLabsUI.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\UI\\SavedLabsUI.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\SavedLabsUI.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\UI\\SavedLabsUI.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UI\\SavedLabsUI.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T01:21:22.327Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LabSave.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LabSave.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\LabSave.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LabSave.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\LabSave.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T01:00:46.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "SaveData.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveData.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SaveData.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveData.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\SaveData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T00:48:12.98Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SaveAbleObject.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveAbleObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SaveAbleObject.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveAbleObject.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\SaveAbleObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T00:46:45.361Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SaveUIManager.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveUIManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SaveUIManager.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveUIManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\SaveUIManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T00:09:34.368Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FirebaseInit.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\FirebaseInit.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\FirebaseInit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T00:09:13.092Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SaveManager.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SaveManager.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Core\\SaveManager.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAD4AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T00:08:52.897Z",
               "EditorCaption": ""
             }
           ]
