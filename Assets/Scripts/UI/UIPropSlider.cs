@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PropertyPanel : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class PropertyPanel : MonoBehaviour
     public Button applyButton;
     public Button resetButton;
     public Button closeButton;
+
+    [Header("Value Labels")]  //only added 2 texts (Mass & Size) as speed has not been implemented
+    public TMP_Text massValueText;
+    public TMP_Text sizeValueText;
 
     private PhysicsObject targetObject;
     private PropertyEditorManager manager;
@@ -45,8 +50,19 @@ public class PropertyPanel : MonoBehaviour
         speedSlider.onValueChanged.RemoveAllListeners();
 
         // Update pending variables when sliders move
-        massSlider.onValueChanged.AddListener(v => temp_mass = v);
-        sizeSlider.onValueChanged.AddListener(v => temp_size = v);
+        massSlider.onValueChanged.AddListener(v =>
+        {
+            temp_mass = v;
+            UpdateValueLabel(massValueText, v);
+        });
+        UpdateValueLabel(massValueText, massSlider.value);
+
+        sizeSlider.onValueChanged.AddListener(v =>
+        {
+            temp_size = v;
+            UpdateValueLabel(sizeValueText, v);
+        });
+        UpdateValueLabel(sizeValueText, sizeSlider.value);
         speedSlider.onValueChanged.AddListener(v => temp_speed = v);
 
         // Activate/deactivate speed slider dynamically
@@ -62,6 +78,11 @@ public class PropertyPanel : MonoBehaviour
         closeButton.onClick.AddListener(ClosePanel);
     }
 
+    private void UpdateValueLabel(TMP_Text label, float value)
+    {
+        if (label != null)
+            label.text = value.ToString("0.00");
+    }
     public void ApplyChanges()
     {
         if (targetObject == null) return;
@@ -84,6 +105,7 @@ public class PropertyPanel : MonoBehaviour
     //Ex: car(mass, size, speed)
     public void Masschanged(float value)
     {
+
         targetObject.ApplyChanges(value, targetObject.size, targetObject.speed);
     }
 
