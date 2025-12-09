@@ -114,7 +114,7 @@ public class SaveManager : MonoBehaviour
         {
             sliderValue = 0f,
             toggleValue = false,
-            timerValue = 0f
+            timerValue = 0f,
             notepadText = notepadInput != null ? notepadInput.text : ""
         };
 

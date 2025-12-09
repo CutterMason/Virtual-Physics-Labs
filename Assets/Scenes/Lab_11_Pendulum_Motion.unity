@@ -3853,7 +3853,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4517980846527310455, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
   m_PrefabInstance: {fileID: 1631588849}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1631588850}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
@@ -8147,6 +8147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea23d4369f012f84ca8b6c975fbb8ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notepadInput: {fileID: 1973836326}
 --- !u!4 &690404586
 Transform:
   m_ObjectHideFlags: 0
@@ -20764,8 +20765,30 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4156713743723874408, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       insertIndex: 3
       addedObject: {fileID: 1362399058}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7241225171626796970, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1631588851}
   m_SourcePrefab: {fileID: 100100000, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
+--- !u!1 &1631588850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7241225171626796970, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
+  m_PrefabInstance: {fileID: 1631588849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1631588851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631588850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff4ad6df0499164096e2c4b4c4432df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notepadInput: {fileID: 323373053}
+  labIdOverride: 
 --- !u!1001 &1633824322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25297,6 +25320,7 @@ GameObject:
   - component: {fileID: 1973836328}
   - component: {fileID: 1973836327}
   - component: {fileID: 1973836326}
+  - component: {fileID: 1973836329}
   m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
@@ -25463,6 +25487,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973836324}
   m_CullTransparentMesh: 1
+--- !u!114 &1973836329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973836324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff4ad6df0499164096e2c4b4c4432df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notepadInput: {fileID: 1973836326}
+  labIdOverride: 
 --- !u!4 &1984821142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7846715146563959156, guid: 2c32c80987d6e7746942e679a2f88284, type: 3}

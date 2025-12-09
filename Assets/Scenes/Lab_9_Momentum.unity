@@ -2108,6 +2108,7 @@ GameObject:
   - component: {fileID: 358079329}
   - component: {fileID: 358079328}
   - component: {fileID: 358079327}
+  - component: {fileID: 358079330}
   m_Layer: 5
   m_Name: InputField (TMP)
   m_TagString: Untagged
@@ -2274,6 +2275,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358079325}
   m_CullTransparentMesh: 1
+--- !u!114 &358079330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358079325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff4ad6df0499164096e2c4b4c4432df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notepadInput: {fileID: 358079327}
+  labIdOverride: 
 --- !u!1 &359631152
 GameObject:
   m_ObjectHideFlags: 0
@@ -7471,6 +7486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea23d4369f012f84ca8b6c975fbb8ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notepadInput: {fileID: 358079327}
 --- !u!4 &1099176302
 Transform:
   m_ObjectHideFlags: 0
