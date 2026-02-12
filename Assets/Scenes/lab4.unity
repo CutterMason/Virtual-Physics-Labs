@@ -4005,6 +4005,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1775182829}
+    - target: {fileID: 5511513270814258408, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseGame
+      objectReference: {fileID: 0}
     - target: {fileID: 5776144784051061736, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: targetRigidbody
       value: 
