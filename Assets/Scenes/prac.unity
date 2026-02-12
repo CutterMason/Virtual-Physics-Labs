@@ -1722,7 +1722,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2379,6 +2380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea23d4369f012f84ca8b6c975fbb8ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notepadInput: {fileID: 0}
 --- !u!4 &1004155502
 Transform:
   m_ObjectHideFlags: 0
@@ -4217,6 +4219,7 @@ MonoBehaviour:
   negativeLineContainer: {fileID: 1841472288}
   yAxisLabel: {fileID: 823390875}
   xAxisLabel: {fileID: 2023042139}
+  peakText: {fileID: 0}
   maxPoints: 150
   updateInterval: 0.05
   minAutoScale: 1
@@ -4230,6 +4233,12 @@ MonoBehaviour:
   targetRigidbody: {fileID: 1348608528}
   targetTransform: {fileID: 1348608513}
   referenceTransform: {fileID: 33074937}
+  movementEpsilon: 0.000001
+  movementThreshold: 0.01
+  maxReasonableAccel: 50
+  accelSmoothFactor: 0.25
+  accelScale: 1
+  velocityScale: 1
 --- !u!1 &1566775471
 GameObject:
   m_ObjectHideFlags: 0
@@ -5623,7 +5632,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
