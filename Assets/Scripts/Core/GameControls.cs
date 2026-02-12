@@ -12,21 +12,18 @@ public class GameControls : MonoBehaviour
 
     private void Start()
     {
-        PauseGame(); // Scene always starts paused
+        PauseGame(); // keep if you want scenes to start paused
     }
 
     public void PauseGame()
     {
-        if (IsPaused) return;
+        // ALWAYS force paused state (no early return)
         IsPaused = true;
 
-        // Freeze "time" for anything using deltaTime / FixedUpdate timing
         Time.timeScale = 0f;
-
-        // If you want, keep this too (not strictly required if timeScale=0)
         Physics.autoSimulation = false;
 
-        allBodies = FindObjectsOfType<Rigidbody>();
+        allBodies = FindObjectsOfType<Rigidbody>(includeInactive: true);
 
         storedVelocities.Clear();
         storedAngularVelocities.Clear();
@@ -45,22 +42,32 @@ public class GameControls : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (!IsPaused) return;
+        // ALWAYS force unpaused state (no early return)
         IsPaused = false;
 
-        foreach (var rb in allBodies)
+        // Restore if we captured anything; if not, still unpause time/physics
+        if (allBodies != null)
         {
-            if (rb == null) continue;
+            foreach (var rb in allBodies)
+            {
+                if (rb == null) continue;
 
-            if (storedVelocities.TryGetValue(rb, out var v))
-                rb.linearVelocity = v;
+                if (storedVelocities.TryGetValue(rb, out var v))
+                    rb.linearVelocity = v;
 
-            if (storedAngularVelocities.TryGetValue(rb, out var av))
-                rb.angularVelocity = av;
+                if (storedAngularVelocities.TryGetValue(rb, out var av))
+                    rb.angularVelocity = av;
+            }
         }
 
         Physics.autoSimulation = true;
         Time.timeScale = 1f;
+    }
+
+    public void TogglePause()
+    {
+        if (IsPaused) ResumeGame();
+        else PauseGame();
     }
 
     public void RestartScene()

@@ -18,6 +18,7 @@ public class Camera_Switcher : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("GameControls instance: " + gameObject.name + " ID=" + GetInstanceID());
         cam = GetComponent<Camera>();
         cam.orthographic = true;
         SetSideViewInstant();
@@ -44,6 +45,7 @@ public class Camera_Switcher : MonoBehaviour
 
     void LateUpdate()
     {
+        if (GameControls.IsPaused) return;
         if (player == null) return;
 
         if (isTopDown)
@@ -94,14 +96,20 @@ public class Camera_Switcher : MonoBehaviour
 
     void SetSideViewInstant()
     {
+        Quaternion rot = Quaternion.Euler(0f, sideViewYRotation, 0f);
+
+        Vector3 forward = rot * Vector3.forward;
+        Vector3 right = rot * Vector3.right;
+
         Vector3 offset =
-            (-transform.forward * Mathf.Abs(sideViewZ)) +
+            (-forward * Mathf.Abs(sideViewZ)) +
             (Vector3.up * sideViewHeight) +
-            (transform.right * sideViewXOffset);
+            (right * sideViewXOffset);
 
         transform.position = player.position + offset;
-
-        transform.rotation = Quaternion.Euler(0f, sideViewYRotation, 0f);
+        transform.rotation = rot;
         cam.orthographicSize = orthoSize;
+
+        UpdateTransparencySorting();
     }
 }
