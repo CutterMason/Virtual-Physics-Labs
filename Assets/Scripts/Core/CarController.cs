@@ -26,7 +26,7 @@ public class CarControllerSimple : MonoBehaviour
 
     void Start()
     {
-        // Make sure the script’s bool matches whatever the toggle LOOKS like
+        // Make sure the scriptï¿½s bool matches whatever the toggle LOOKS like
         SetUseConstantSpeed(constantSpeedToggle.isOn);
 
         // Also hook up the listener in code (you can remove it from the inspector if you want)
