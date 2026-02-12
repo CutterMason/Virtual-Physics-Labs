@@ -4,21 +4,26 @@ using UnityEngine.SceneManagement;
 
 public class GameControls : MonoBehaviour
 {
-    private bool isPaused = false;
+    public static bool IsPaused { get; private set; } = false;
+
     private Rigidbody[] allBodies;
     private Dictionary<Rigidbody, Vector3> storedVelocities = new();
     private Dictionary<Rigidbody, Vector3> storedAngularVelocities = new();
 
     private void Start()
     {
-        PauseGame();   // Scene always starts paused
+        PauseGame(); // Scene always starts paused
     }
 
     public void PauseGame()
     {
-        if (isPaused) return;
-        isPaused = true;
+        if (IsPaused) return;
+        IsPaused = true;
 
+        // Freeze "time" for anything using deltaTime / FixedUpdate timing
+        Time.timeScale = 0f;
+
+        // If you want, keep this too (not strictly required if timeScale=0)
         Physics.autoSimulation = false;
 
         allBodies = FindObjectsOfType<Rigidbody>();
@@ -28,6 +33,8 @@ public class GameControls : MonoBehaviour
 
         foreach (var rb in allBodies)
         {
+            if (rb == null) continue;
+
             storedVelocities[rb] = rb.linearVelocity;
             storedAngularVelocities[rb] = rb.angularVelocity;
 
@@ -38,27 +45,28 @@ public class GameControls : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (!isPaused) return;
-        isPaused = false;
+        if (!IsPaused) return;
+        IsPaused = false;
 
         foreach (var rb in allBodies)
         {
-            if (rb != null)
-            {
-                if (storedVelocities.ContainsKey(rb))
-                    rb.linearVelocity = storedVelocities[rb];
+            if (rb == null) continue;
 
-                if (storedAngularVelocities.ContainsKey(rb))
-                    rb.angularVelocity = storedAngularVelocities[rb];
-            }
+            if (storedVelocities.TryGetValue(rb, out var v))
+                rb.linearVelocity = v;
+
+            if (storedAngularVelocities.TryGetValue(rb, out var av))
+                rb.angularVelocity = av;
         }
 
         Physics.autoSimulation = true;
+        Time.timeScale = 1f;
     }
 
     public void RestartScene()
     {
         Physics.autoSimulation = true;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

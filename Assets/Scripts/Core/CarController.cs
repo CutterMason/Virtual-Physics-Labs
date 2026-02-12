@@ -35,6 +35,7 @@ public class CarControllerSimple : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameControls.IsPaused) return;
         float input = 0f;
         if (Input.GetKey(KeyCode.A)) input -= 1f;
         if (Input.GetKey(KeyCode.D)) input += 1f;
