@@ -7879,6 +7879,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 720087429}
     m_Modifications:
     - target: {fileID: 970960694002656678, guid: acae108315116dc4292fd2182031df70, type: 3}
+      propertyPath: m_Mass
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 970960694002656678, guid: acae108315116dc4292fd2182031df70, type: 3}
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
@@ -8497,7 +8501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 993871833}
-  springStrength: 10
+  springStrength: 200
   damping: 5
 --- !u!54 &1778358388
 Rigidbody:
