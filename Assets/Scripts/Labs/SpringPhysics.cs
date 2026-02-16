@@ -20,6 +20,14 @@ public class SpringPhysicsRigidbody : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameControls.IsPaused)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.Sleep();
+            return;
+        }
+
         if (targetPoint == null) return;
         if (lastVelocity.sqrMagnitude < 0.0001f && rb.linearVelocity.sqrMagnitude > 0.0001f)
         {
