@@ -955,7 +955,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1977895193}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4087,8 +4087,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 308705389}
   m_HandleRect: {fileID: 308705388}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.47874993
+  m_Value: 1.0000002
+  m_Size: 0.47874996
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6004,7 +6004,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 700, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1200}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
