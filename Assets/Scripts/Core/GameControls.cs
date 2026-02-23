@@ -89,17 +89,17 @@ public class GameControls : MonoBehaviour
 
     public void RestartScene()
     {
-        // IMPORTANT: restore engine state so reload is clean
+        
         IsPaused = false;
         Time.timeScale = 1f;
         Physics.autoSimulation = true;
 
-        // IMPORTANT: clear stored pause data so nothing restores old motion later
+        
         storedVelocities.Clear();
         storedAngularVelocities.Clear();
         allBodies = null;
 
-        pauseOnLoad = true; // ensure the reloaded scene starts paused
+        pauseOnLoad = true; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
