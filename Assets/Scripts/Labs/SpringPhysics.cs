@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SpringPhysicsRigidbody : MonoBehaviour
 {
+    [Range(250f,600f)]
     public Transform targetPoint;
-    public float springStrength = 50f;
+    public float springStrength = 250f;  //changing to 250 for bottom limit as we know 470 matches
     public float damping = 5f;
+    public Slider springSlider;
+    public TMP_Text SpringValueText;
 
     private Rigidbody rb;
 
@@ -16,6 +21,29 @@ public class SpringPhysicsRigidbody : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         lastVelocity = rb.linearVelocity;
+
+        if (springSlider != null)
+        {
+            springSlider.minValue = 250f;
+            springSlider.maxValue = 600f;
+            springSlider.value = springStrength;
+
+            springSlider.onValueChanged.AddListener(SetSpringStrength);
+        }
+
+        if (SpringValueText != null)
+        {
+            SpringValueText.text = "Launcher Strength: " + springStrength.ToString("F0") + " N";
+        }
+    }
+
+    public void SetSpringStrength(float value)
+    {
+        springStrength = value;
+        if (SpringValueText != null)
+        {
+            SpringValueText.text = "Launcher Strength: " + springStrength.ToString("F0") + " N";
+        }
     }
 
     void FixedUpdate()
