@@ -11965,7 +11965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 1617876415}
-  springStrength: 467
+  springStrength: 250
   damping: 5
   springSlider: {fileID: 1243915345}
   SpringValueText: {fileID: 385407}
@@ -15472,7 +15472,7 @@ GameObject:
   - component: {fileID: 963194233}
   - component: {fileID: 963194236}
   - component: {fileID: 963194235}
-  - component: {fileID: 963194234}
+  - component: {fileID: 963194237}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -15497,8 +15497,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.61898255, g: 0.61898255, b: 0.7484276, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -15521,7 +15521,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -15547,13 +15547,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05927866, y: -0.20808235, z: 0.013833463, w: -0.97621536}
-  m_LocalPosition: {x: -3.3, y: 2.76, z: 2.24}
+  m_LocalRotation: {x: -0.014781375, y: -0.99814206, z: 0.0070096515, w: 0.058692306}
+  m_LocalPosition: {x: 0.62, y: 1.71, z: 14.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 5.603, y: -128.848, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.702, y: 186.741, z: 1.738}
 --- !u!320 &963194230
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -15585,7 +15585,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
@@ -15622,22 +15622,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &963194234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5fb5c469f2b6e439342d588769a8ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoomSpeed: 5
-  smoothSpeed: 10
-  minZoom: 1
-  maxZoom: 1000
 --- !u!114 &963194235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15645,7 +15629,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a574e4df6cc35c24dabd7a32f7175396, type: 3}
   m_Name: 
@@ -15661,7 +15645,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f3ff38fac0912641924bbda58f064a6, type: 3}
   m_Name: 
@@ -15675,6 +15659,22 @@ MonoBehaviour:
   sideViewXOffset: 0
   topDownXOffset: 0
   sideViewHeight: 0
+--- !u!114 &963194237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4827494e7eca29b4480939142964301d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 5
+  smoothSpeed: 10
+  minZoom: 90
+  maxZoom: 100
 --- !u!1 &964649274
 GameObject:
   m_ObjectHideFlags: 0
@@ -31643,7 +31643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369290313283509862, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.00027
+      value: 417.00037
       objectReference: {fileID: 0}
     - target: {fileID: 2736958689571718785, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_Name

@@ -1,11 +1,10 @@
 using UnityEngine;
 
-public class Camera_Zoom : MonoBehaviour
-{
+public class EngineerCamZoom : MonoBehaviour{
     public float zoomSpeed = 5f;        // How fast the zoom reacts to the scroll
     public float smoothSpeed = 10f;     // How smooth the zoom feels
-    public float minZoom = 3f;          // Minimum orthographic size or FOV 
-    public float maxZoom = 15f;         // Maximum orthographic size or FOV
+    public float minZoom = 90f;          // Minimum orthographic size or FOV 
+    public float maxZoom = 100f;         // Maximum orthographic size or FOV
 
     private Camera cam;
     private float targetZoom;
@@ -15,7 +14,7 @@ public class Camera_Zoom : MonoBehaviour
         cam = GetComponent<Camera>();
 
         // Set the starting zoom here
-        targetZoom = 3f; // smaller number = closer zoom
+        targetZoom = 90f; // smaller number = closer zoom
 
         if (cam.orthographic)
             cam.orthographicSize = targetZoom;
