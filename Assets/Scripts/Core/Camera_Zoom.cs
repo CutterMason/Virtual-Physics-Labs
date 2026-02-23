@@ -40,10 +40,11 @@ public class Camera_Zoom : MonoBehaviour
             targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
         }
 
-        // Smoothly interpolate toward target zoom
+        float dt = Time.unscaledDeltaTime;
+
         if (cam.orthographic)
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime * smoothSpeed);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, dt * smoothSpeed);
         else
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetZoom, Time.deltaTime * smoothSpeed);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetZoom, dt * smoothSpeed);
     }
 }

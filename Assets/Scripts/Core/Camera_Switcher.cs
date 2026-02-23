@@ -18,7 +18,6 @@ public class Camera_Switcher : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("GameControls instance: " + gameObject.name + " ID=" + GetInstanceID());
         cam = GetComponent<Camera>();
         cam.orthographic = true;
         SetSideViewInstant();
@@ -45,7 +44,6 @@ public class Camera_Switcher : MonoBehaviour
 
     void LateUpdate()
     {
-        if (GameControls.IsPaused) return;
         if (player == null) return;
 
         if (isTopDown)
@@ -56,42 +54,35 @@ public class Camera_Switcher : MonoBehaviour
 
     void MoveToSideView()
     {
-        // calculate a forward-facing offset based on camera rotation
+        float dt = Time.unscaledDeltaTime; // << key change
+
         Vector3 offset =
-            (-transform.forward * Mathf.Abs(sideViewZ)) +   // move back from camera's forward
-            (Vector3.up * sideViewHeight) +                 // lift camera up
-            (transform.right * sideViewXOffset);            // optional left/right shift
+            (-transform.forward * Mathf.Abs(sideViewZ)) +
+            (Vector3.up * sideViewHeight) +
+            (transform.right * sideViewXOffset);
 
         Vector3 targetPos = player.position + offset;
 
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetPos,
-            Time.deltaTime * smoothSpeed
-        );
+        transform.position = Vector3.Lerp(transform.position, targetPos, dt * smoothSpeed);
 
         Quaternion targetRot = Quaternion.Euler(0f, sideViewYRotation, 0f);
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRot,
-            Time.deltaTime * smoothSpeed
-        );
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, dt * smoothSpeed);
     }
 
     void MoveToTopDown()
     {
+        float dt = Time.unscaledDeltaTime; // << key change
+
         Vector3 targetPos = new Vector3(
-        player.position.x + topDownXOffset,
-        player.position.y + topDownHeight,
-        player.position.z
+            player.position.x + topDownXOffset,
+            player.position.y + topDownHeight,
+            player.position.z
         );
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
+        transform.position = Vector3.Lerp(transform.position, targetPos, dt * smoothSpeed);
 
         Quaternion targetRot = Quaternion.Euler(90f, sideViewYRotation, 0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * smoothSpeed);
-
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, orthoSize, Time.deltaTime * smoothSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, dt * smoothSpeed);
     }
 
     void SetSideViewInstant()
@@ -108,7 +99,6 @@ public class Camera_Switcher : MonoBehaviour
 
         transform.position = player.position + offset;
         transform.rotation = rot;
-        cam.orthographicSize = orthoSize;
 
         UpdateTransparencySorting();
     }
