@@ -25,7 +25,7 @@ public class SpringPhysicsRigidbody : MonoBehaviour
         if (springSlider != null)
         {
             springSlider.minValue = 250f;
-            springSlider.maxValue = 600f;
+            springSlider.maxValue = 800f;
             springSlider.value = springStrength;
 
             springSlider.onValueChanged.AddListener(SetSpringStrength);
