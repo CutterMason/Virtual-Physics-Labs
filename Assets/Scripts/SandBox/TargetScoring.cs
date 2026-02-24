@@ -1,9 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(MeshCollider))]
 public class TargetScoring : MonoBehaviour
 {
     public float maxScore = 10f;
+    public TMP_Text Scorekeeper;
+    private float Totalscore = 0f;
+
 
     [Header("Debug / Live Score")]
     [SerializeField] private float lastScore;   // <-- shows in Inspector
@@ -41,12 +45,16 @@ public class TargetScoring : MonoBehaviour
         ContactPoint contact = collision.contacts[0];
         Vector3 localHitPoint = transform.InverseTransformPoint(contact.point);
 
-        // Target faces X → use Y & Z
         Vector2 hit2D = new Vector2(localHitPoint.y, localHitPoint.z);
 
         float distanceFromCenter = hit2D.magnitude;
 
         lastScore = CalculateScore(distanceFromCenter);
+
+        Totalscore += lastScore;
+
+        if (Scorekeeper != null)
+            Scorekeeper.text = "Score: " + Totalscore;
 
         Debug.Log("Score: " + lastScore);
     }
