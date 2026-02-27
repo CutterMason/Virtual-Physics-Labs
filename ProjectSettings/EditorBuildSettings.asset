@@ -6,82 +6,82 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenuUI.unity
+    path: Assets/Scenes/MenuUI/MainMenuUI.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/LoginPageUI.unity
+    path: Assets/Scenes/MenuUI/LoginPageUI.unity
     guid: 087e7d9a21c2ccf478c94062dc18e249
   - enabled: 1
-    path: Assets/Scenes/PresetLabsUI.unity
+    path: Assets/Scenes/MenuUI/PresetLabsUI.unity
     guid: 521cb9bb204657544b3e9b8b4e4bd9b0
   - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: edce728f1f48d144cb4bfe2ab3863067
   - enabled: 1
-    path: Assets/Scenes/SettingsUI.unity
+    path: Assets/Scenes/MenuUI/SettingsUI.unity
     guid: 7feebcfcfb8858f4fb14add081e5b7aa
   - enabled: 1
     path: Assets/Scenes/Project_Showcase_1.unity
     guid: 619ca4b0e79c3df49aad5b0e8c738b92
   - enabled: 1
-    path: Assets/Scenes/Lab_5_Projectile_Motion.unity
+    path: Assets/Scenes/PresetLabs/Lab_5_Projectile_Motion.unity
     guid: 89c1c3b0264208742aa5d7c35c967998
   - enabled: 1
-    path: Assets/Scenes/lab4.unity
+    path: Assets/Scenes/PresetLabs/lab4.unity
     guid: eee55ccd11df22249b73712b699eff28
   - enabled: 1
     path: Assets/Scenes/prac.unity
     guid: ced494c388d548046b12a2def588cd8c
   - enabled: 1
-    path: Assets/Scenes/SavedLabsUI.unity
+    path: Assets/Scenes/MenuUI/SavedLabsUI.unity
     guid: 975286ba70bcfab429a70dc2f92ae7bb
   - enabled: 1
-    path: Assets/Scenes/StudentGradeUI.unity
+    path: Assets/Scenes/MenuUI/StudentGradeUI.unity
     guid: cff7e0730a9a2d649a168f80315718f4
   - enabled: 1
-    path: Assets/Scenes/Lab_3_2nd_law.unity
+    path: Assets/Scenes/PresetLabs/Lab_3_2nd_law.unity
     guid: e11fa4d19cbdd694b8fb9527b8825999
   - enabled: 1
-    path: Assets/Scenes/Lab_7_Energy.unity
+    path: Assets/Scenes/PresetLabs/Lab_7_Energy.unity
     guid: 81e92692b67a09d4cb5aeca0c95d83be
   - enabled: 1
-    path: Assets/Scenes/Lab_9_Momentum.unity
+    path: Assets/Scenes/PresetLabs/Lab_9_Momentum.unity
     guid: 998abccdc95517945bcb75c3819f65bb
   - enabled: 1
-    path: Assets/Scenes/Lab_11_Pendulum_Motion.unity
+    path: Assets/Scenes/PresetLabs/Lab_11_Pendulum_Motion.unity
     guid: 7e414752c8e19944d872d4de40dc9494
   - enabled: 1
-    path: Assets/Scenes/TeacherGradesUI.unity
+    path: Assets/Scenes/MenuUI/TeacherGradesUI.unity
     guid: 56153a7d1561d754d8b999d52a2ee4c7
   - enabled: 1
-    path: Assets/Scenes/Tutorial2.unity
+    path: Assets/Scenes/Tutorial/Tutorial2.unity
     guid: ec3f4623d045afd479ea31235cca182c
   - enabled: 1
-    path: Assets/Scenes/Tutorial1.unity
+    path: Assets/Scenes/Tutorial/Tutorial1.unity
     guid: 8fccbf7e4eb75d8449e29f9dcdcb34ef
   - enabled: 1
-    path: Assets/Scenes/Tutorial3.unity
+    path: Assets/Scenes/Tutorial/Tutorial3.unity
     guid: f35427b3bdef0b64a9ff133b84bb121e
   - enabled: 1
-    path: Assets/Scenes/Tutorial4.unity
+    path: Assets/Scenes/Tutorial/Tutorial4.unity
     guid: eab579992ae3ff641b4400d9e98623e2
   - enabled: 1
-    path: Assets/Scenes/Tutorial5.unity
+    path: Assets/Scenes/Tutorial/Tutorial5.unity
     guid: 27de29dede674c748bb1f88a4722850c
   - enabled: 1
-    path: Assets/Scenes/Tutorial6.unity
+    path: Assets/Scenes/Tutorial/Tutorial6.unity
     guid: b8d0f993d2482b94f9648c196fef6a62
   - enabled: 1
-    path: Assets/Scenes/Tutorial7.unity
+    path: Assets/Scenes/Tutorial/Tutorial7.unity
     guid: ef2ae2587e12a9f438241b6588bb771d
   - enabled: 1
-    path: Assets/Scenes/Tutorial9.unity
+    path: Assets/Scenes/Tutorial/Tutorial9.unity
     guid: 87a8d6b01255ad7418094ee69af06b2d
   - enabled: 1
     path: Assets/Scenes/Tutorial9.unity
     guid: 34f9c0e0e7a3dd94e872b5e5aed1d9e3
   - enabled: 1
-    path: Assets/Scenes/Tutorial8.unity
+    path: Assets/Scenes/Tutorial/Tutorial8.unity
     guid: f0f417c5f5997c04b81b9f3cd23e6500
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

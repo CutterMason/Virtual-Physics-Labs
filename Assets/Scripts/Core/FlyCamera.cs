@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class FlyCameraCC : MonoBehaviour
@@ -6,22 +7,26 @@ public class FlyCameraCC : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 6f;
     public float fastMultiplier = 3f;
-    public float verticalSpeed = 4f;          // Space/Ctrl
-    public float acceleration = 20f;          // smoothing (optional)
+    public float verticalSpeed = 4f;          
+    public float acceleration = 20f;          
 
     [Header("Look")]
     public float lookSensitivity = 2f;
     public float maxPitch = 85f;
 
     [Header("Collision")]
-    public float antiStickPush = 0.2f;        // tiny push so we don’t “stick” to walls
+    public float antiStickPush = 0.2f;        
+
+    [Header("UI")]
+    public Slider speedSlider;                 
+    public Text speedText;                     // Assign a Text UI to show current speed
 
     private CharacterController cc;
-
     private float yaw;
     private float pitch;
+    private Vector3 currentVelocity;
 
-    private Vector3 currentVelocity;          // smoothed velocity
+    private float speedMultiplier = 1f;
 
     void Awake()
     {
@@ -29,6 +34,30 @@ public class FlyCameraCC : MonoBehaviour
         Vector3 euler = transform.eulerAngles;
         yaw = euler.y;
         pitch = euler.x;
+
+        // Setup slider
+        if (speedSlider != null)
+        {
+            speedSlider.minValue = 0.5f;
+            speedSlider.maxValue = 1.5f;
+            speedSlider.value = 1f;
+            speedSlider.onValueChanged.AddListener(UpdateSpeedMultiplier);
+        }
+    }
+
+    void UpdateSpeedMultiplier(float value)
+    {
+        speedMultiplier = value;
+        UpdateSpeedText();
+    }
+
+    void UpdateSpeedText()
+    {
+        if (speedText != null)
+        {
+            float currentSpeed = moveSpeed * speedMultiplier;
+            speedText.text = $"Speed: {currentSpeed:0.0}";
+        }
     }
 
     void Update()
@@ -61,14 +90,13 @@ public class FlyCameraCC : MonoBehaviour
 
     void MoveWithCollisions()
     {
-        float speed = moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? fastMultiplier : 1f);
+        float speed = moveSpeed * speedMultiplier * (Input.GetKey(KeyCode.LeftShift) ? fastMultiplier : 1f);
 
-        float x = Input.GetAxisRaw("Horizontal"); // A/D
-        float z = Input.GetAxisRaw("Vertical");   // W/S
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
 
         Vector3 input = (transform.right * x + transform.forward * z);
 
-        // Vertical fly (optional)
         if (Input.GetKey(KeyCode.Space)) input += Vector3.up;
         if (Input.GetKey(KeyCode.LeftControl)) input += Vector3.down;
 
@@ -76,20 +104,20 @@ public class FlyCameraCC : MonoBehaviour
 
         Vector3 targetVel = input * speed;
 
-        // Smooth acceleration so it feels nicer (you can remove this if you want instant)
         currentVelocity = Vector3.MoveTowards(
             currentVelocity,
             targetVel,
             acceleration * Time.deltaTime * speed
         );
 
-        // CharacterController.Move handles collision resolution
         CollisionFlags flags = cc.Move(currentVelocity * Time.deltaTime);
 
-        // If we hit something, add a tiny outward move next frame to reduce “sticking”
         if ((flags & CollisionFlags.Sides) != 0)
         {
             cc.Move(-currentVelocity.normalized * antiStickPush * Time.deltaTime);
         }
+
+        // Update speed display while moving
+        UpdateSpeedText();
     }
 }
