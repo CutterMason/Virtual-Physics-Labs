@@ -7,19 +7,19 @@ public class FlyCameraCC : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 6f;
     public float fastMultiplier = 3f;
-    public float verticalSpeed = 4f;          
-    public float acceleration = 20f;          
+    public float verticalSpeed = 4f;
+    public float acceleration = 20f;
 
     [Header("Look")]
     public float lookSensitivity = 2f;
     public float maxPitch = 85f;
 
     [Header("Collision")]
-    public float antiStickPush = 0.2f;        
+    public float antiStickPush = 0.2f;
 
     [Header("UI")]
-    public Slider speedSlider;                 
-    public Text speedText;                     // Assign a Text UI to show current speed
+    public Slider speedSlider;
+    public Text speedText; // Assign a Text UI to show current speed
 
     private CharacterController cc;
     private float yaw;
@@ -43,6 +43,8 @@ public class FlyCameraCC : MonoBehaviour
             speedSlider.value = 1f;
             speedSlider.onValueChanged.AddListener(UpdateSpeedMultiplier);
         }
+
+        UpdateSpeedText();
     }
 
     void UpdateSpeedMultiplier(float value)
@@ -68,6 +70,7 @@ public class FlyCameraCC : MonoBehaviour
 
     void HandleLook()
     {
+        // Default state: cursor acts like a normal cursor
         if (!Input.GetMouseButton(1))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -75,6 +78,7 @@ public class FlyCameraCC : MonoBehaviour
             return;
         }
 
+        // RMB held: lock + hide for free-look
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -90,6 +94,15 @@ public class FlyCameraCC : MonoBehaviour
 
     void MoveWithCollisions()
     {
+
+        if (UnityEngine.EventSystems.EventSystem.current != null &&
+        UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject != null)
+        {
+            // Optional: return only if it's an InputField (typing), not sliders/buttons
+        }
+        // Use unscaled time so camera movement works even when Time.timeScale = 0
+        float dt = Time.unscaledDeltaTime;
+
         float speed = moveSpeed * speedMultiplier * (Input.GetKey(KeyCode.LeftShift) ? fastMultiplier : 1f);
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -107,17 +120,16 @@ public class FlyCameraCC : MonoBehaviour
         currentVelocity = Vector3.MoveTowards(
             currentVelocity,
             targetVel,
-            acceleration * Time.deltaTime * speed
+            acceleration * dt * speed
         );
 
-        CollisionFlags flags = cc.Move(currentVelocity * Time.deltaTime);
+        CollisionFlags flags = cc.Move(currentVelocity * dt);
 
-        if ((flags & CollisionFlags.Sides) != 0)
+        if ((flags & CollisionFlags.Sides) != 0 && currentVelocity.sqrMagnitude > 0.0001f)
         {
-            cc.Move(-currentVelocity.normalized * antiStickPush * Time.deltaTime);
+            cc.Move(-currentVelocity.normalized * antiStickPush * dt);
         }
 
-        // Update speed display while moving
         UpdateSpeedText();
     }
 }
