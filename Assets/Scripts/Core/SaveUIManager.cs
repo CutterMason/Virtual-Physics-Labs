@@ -9,6 +9,12 @@ public class SaveUIManager : MonoBehaviour
 
     public void OpenSavePanel()
     {
+        if (!GameControls.CanSave)
+        {
+            Debug.LogWarning("Save is only available in Edit Mode.");
+            return;
+        }
+
         savePanel.SetActive(true);
     }
 

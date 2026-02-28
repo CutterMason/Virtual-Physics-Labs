@@ -1,16 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameControls : MonoBehaviour
 {
     public static bool IsPaused { get; private set; } = false;
+    public static bool IsEditMode { get; private set; } = false;
+
+    [Header("Startup")]
+    [SerializeField] private bool pauseOnLoad = true;
+    [SerializeField] private bool startInEditMode = true;
+    [SerializeField] private bool pauseWhenEnteringEditMode = true;
 
     private Rigidbody[] allBodies;
     private readonly Dictionary<Rigidbody, Vector3> storedVelocities = new();
     private readonly Dictionary<Rigidbody, Vector3> storedAngularVelocities = new();
 
-    private bool pauseOnLoad = true; // set true if you want restart to come up paused
+    // ---- Capability gates (use these elsewhere) ----
+    public static bool CanSpawn => IsEditMode;
+    public static bool CanSave => IsEditMode;
+    public static bool CanDelete => IsEditMode;
+    public static bool CanMoveObjects => IsEditMode;
 
     private void OnEnable()
     {
@@ -24,19 +35,73 @@ public class GameControls : MonoBehaviour
 
     private void Start()
     {
-        PauseGame(); // keep if you want scenes to start paused
-    }
+        // Decide initial mode
+        if (startInEditMode) EnterEditMode();
+        else ExitEditMode();
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // scene just reloaded, optionally start paused again
         if (pauseOnLoad)
             PauseGame();
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-apply mode on load if desired
+        if (startInEditMode) EnterEditMode();
+        else ExitEditMode();
+
+        if (pauseOnLoad)
+            PauseGame();
+    }
+
+    // ------------------- EDIT MODE -------------------
+    public void EnterEditMode()
+    {
+        IsEditMode = true;
+
+        // Optional: freeze the sim while editing
+        if (pauseWhenEnteringEditMode && !IsPaused)
+            PauseGame();
+
+        // Make UI usable
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        // TODO (optional): broadcast to other systems
+        // OnEditModeChanged?.Invoke(true);
+    }
+
+    public void ExitEditMode()
+    {
+        IsEditMode = false;
+
+        // UI stays usable; camera only locks when RMB is held
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        // TODO (optional): broadcast to other systems
+        // OnEditModeChanged?.Invoke(false);
+    }
+
+    public void ToggleEditMode()
+    {
+        if (IsEditMode) ExitEditMode();
+        else EnterEditMode();
+    }
+
+    // ------------------- PAUSE -------------------
     public void PauseGame()
     {
         IsPaused = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
 
         Time.timeScale = 0f;
         Physics.autoSimulation = false;
@@ -89,17 +154,16 @@ public class GameControls : MonoBehaviour
 
     public void RestartScene()
     {
-        
         IsPaused = false;
         Time.timeScale = 1f;
         Physics.autoSimulation = true;
 
-        
         storedVelocities.Clear();
         storedAngularVelocities.Clear();
         allBodies = null;
 
-        pauseOnLoad = true; 
+        // Keep whatever you prefer on restart:
+        pauseOnLoad = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
