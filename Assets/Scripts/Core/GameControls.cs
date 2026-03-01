@@ -76,15 +76,15 @@ public class GameControls : MonoBehaviour
     {
         IsEditMode = false;
 
-        // UI stays usable; camera only locks when RMB is held
+        // Leaving edit mode should resume simulation
+        if (IsPaused)
+            ResumeGame();
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
-
-        // TODO (optional): broadcast to other systems
-        // OnEditModeChanged?.Invoke(false);
     }
 
     public void ToggleEditMode()

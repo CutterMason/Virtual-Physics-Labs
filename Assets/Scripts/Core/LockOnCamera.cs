@@ -4,6 +4,10 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Collider))]
 public class LockOnCamera : MonoBehaviour
 {
+    [Header("Edit Mode Gate")]
+    // Change this line if your flag/property is named differently.
+    private bool EditModeActive => GameControls.IsEditMode;
+
     [Header("Camera Settings")]
     public float distance = 1f;
     [Range(0f, 89f)]
@@ -16,7 +20,7 @@ public class LockOnCamera : MonoBehaviour
     public float verticalMoveSpeed = 3f;
     public float rotationSpeed = 100f;
 
-    private List<Transform> scaledObjects = new List<Transform>();
+    private readonly List<Transform> scaledObjects = new();
     private Transform target;
 
     private float targetHorizontalAngle;
@@ -32,14 +36,28 @@ public class LockOnCamera : MonoBehaviour
 
     private Collider targetCollider; // store collider of the object being moved
 
+    private Rigidbody targetRb;
+    private bool targetRbWasKinematic;
+    private bool targetRbHadGravity;
+
     void Start()
     {
         targetHorizontalAngle = horizontalAngle;
-        FindAllScaledObjects();
+
+        if (EditModeActive)
+            FindAllScaledObjects();
     }
 
     void Update()
     {
+        // If we're not in edit mode, hard-disable behavior and exit.
+        if (!EditModeActive)
+        {
+            ForceUnlock();
+            return;
+        }
+
+        // In edit mode, allow behavior
         HandleMouseSelection();
         HandleUnlock();
         HandleTabCycle();
@@ -53,14 +71,19 @@ public class LockOnCamera : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!EditModeActive)
+            return;
+
         if (!isLocked || target == null)
             return;
+
+        float dt = Time.unscaledDeltaTime;
 
         float appliedAngle = horizontalAngle;
         if (flipView)
             appliedAngle += 180f;
 
-        horizontalAngle = Mathf.LerpAngle(horizontalAngle, targetHorizontalAngle, smoothSpeed * Time.deltaTime);
+        horizontalAngle = Mathf.LerpAngle(horizontalAngle, targetHorizontalAngle, smoothSpeed * dt);
 
         float verticalRad = verticalAngle * Mathf.Deg2Rad;
         float horizontalRad = appliedAngle * Mathf.Deg2Rad;
@@ -73,9 +96,29 @@ public class LockOnCamera : MonoBehaviour
 
         Vector3 desiredPosition = target.position + offset;
 
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        // If paused, snap (prevents micro-jitter from smoothing while editing)
+        if (GameControls.IsPaused)
+        {
+            transform.position = desiredPosition;
+            transform.LookAt(target);
+            return;
+        }
 
+        // Otherwise smooth normally
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * dt);
         transform.LookAt(target);
+    }
+
+    void ForceUnlock()
+    {
+        // Leaving edit mode: stop controlling anything immediately
+        if (!isLocked && target == null && currentIndex == -1) return;
+
+        isLocked = false;
+        target = null;
+        currentIndex = -1;
+        targetCollider = null;
+        flipView = false;
     }
 
     void FindAllScaledObjects()
@@ -84,18 +127,20 @@ public class LockOnCamera : MonoBehaviour
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjects)
         {
-            if (obj.name.Contains("Scaled"))
+            if (obj != null && obj.name.Contains("Scaled"))
                 scaledObjects.Add(obj.transform);
         }
     }
 
     void HandleMouseSelection()
     {
+        // If physics sim is off, keep collider data in sync for raycasts.
+        if (GameControls.IsPaused) Physics.SyncTransforms();
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 if (hit.transform.name.Contains("Scaled"))
                 {
@@ -106,6 +151,20 @@ public class LockOnCamera : MonoBehaviour
                     initialPosition = target.position;
 
                     targetCollider = target.GetComponent<Collider>();
+
+                    // --- NEW: handle rigidbody safely while paused/editing ---
+                    targetRb = target.GetComponent<Rigidbody>();
+                    if (targetRb != null)
+                    {
+                        targetRbWasKinematic = targetRb.isKinematic;
+                        targetRbHadGravity = targetRb.useGravity;
+
+                        // Make it safe to move by transform/MovePosition during pause/edit mode
+                        targetRb.isKinematic = true;
+                        targetRb.useGravity = false;
+                        targetRb.linearVelocity = Vector3.zero;
+                        targetRb.angularVelocity = Vector3.zero;
+                    }
 
                     currentIndex = scaledObjects.IndexOf(target);
                     flipView = false;
@@ -146,9 +205,22 @@ public class LockOnCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            RestoreTargetRigidbody();
             isLocked = false;
             target = null;
             currentIndex = -1;
+            targetCollider = null;
+            flipView = false;
+        }
+    }
+
+    void RestoreTargetRigidbody()
+    {
+        if (targetRb != null)
+        {
+            targetRb.isKinematic = targetRbWasKinematic;
+            targetRb.useGravity = targetRbHadGravity;
+            targetRb = null;
         }
     }
 
@@ -157,15 +229,32 @@ public class LockOnCamera : MonoBehaviour
         if (!isLocked || target == null || targetCollider == null)
             return;
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float dt = Time.unscaledDeltaTime;
 
-        Vector3 move = new Vector3(h, 0f, v) * moveSpeed * Time.deltaTime;
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
 
-        // Only move if the path is clear
-        if (!Physics.BoxCast(target.position, targetCollider.bounds.extents, move.normalized, out _, target.rotation, move.magnitude))
+        Vector3 move = new Vector3(h, 0f, v) * moveSpeed * dt;
+        if (move.sqrMagnitude < 0.000001f)
+            return;
+
+        if (GameControls.IsPaused) Physics.SyncTransforms();
+
+        Vector3 nextPos = target.position + move;
+
+        if (IsPositionClear(nextPos, target.rotation))
         {
-            target.Translate(move, Space.World);
+            // KEY CHANGE: while paused, move transform directly (NOT MovePosition)
+            if (GameControls.IsPaused || targetRb == null)
+            {
+                target.position = nextPos;
+            }
+            else
+            {
+                targetRb.MovePosition(nextPos);
+            }
+
+            if (GameControls.IsPaused) Physics.SyncTransforms();
         }
     }
 
@@ -174,18 +263,32 @@ public class LockOnCamera : MonoBehaviour
         if (!isLocked || target == null || targetCollider == null)
             return;
 
-        if (Input.GetKey(KeyCode.Q))
-        {
-            Vector3 move = Vector3.down * verticalMoveSpeed * Time.deltaTime;
-            if (!Physics.BoxCast(target.position, targetCollider.bounds.extents, move.normalized, out _, target.rotation, move.magnitude))
-                target.Translate(move, Space.World);
-        }
+        float dt = Time.unscaledDeltaTime;
 
-        if (Input.GetKey(KeyCode.E))
+        Vector3 move = Vector3.zero;
+        if (Input.GetKey(KeyCode.Q)) move = Vector3.down * verticalMoveSpeed * dt;
+        if (Input.GetKey(KeyCode.E)) move = Vector3.up * verticalMoveSpeed * dt;
+
+        if (move.sqrMagnitude < 0.000001f)
+            return;
+
+        if (GameControls.IsPaused) Physics.SyncTransforms();
+
+        Vector3 nextPos = target.position + move;
+
+        if (IsPositionClear(nextPos, target.rotation))
         {
-            Vector3 move = Vector3.up * verticalMoveSpeed * Time.deltaTime;
-            if (!Physics.BoxCast(target.position, targetCollider.bounds.extents, move.normalized, out _, target.rotation, move.magnitude))
-                target.Translate(move, Space.World);
+            // KEY CHANGE: while paused, move transform directly (NOT MovePosition)
+            if (GameControls.IsPaused || targetRb == null)
+            {
+                target.position = nextPos;
+            }
+            else
+            {
+                targetRb.MovePosition(nextPos);
+            }
+
+            if (GameControls.IsPaused) Physics.SyncTransforms();
         }
     }
 
@@ -194,8 +297,10 @@ public class LockOnCamera : MonoBehaviour
         if (!isLocked || target == null)
             return;
 
+        float dt = Time.unscaledDeltaTime;
+
         if (Input.GetKey(KeyCode.R))
-            target.Rotate(currentRotationAxis * rotationSpeed * Time.deltaTime, Space.World);
+            target.Rotate(currentRotationAxis * rotationSpeed * dt, Space.World);
     }
 
     void HandleAxisChange()
@@ -226,4 +331,31 @@ public class LockOnCamera : MonoBehaviour
             flipView = false;
         }
     }
+    bool IsPositionClear(Vector3 nextPos, Quaternion nextRot)
+    {
+        Vector3 halfExtents = targetCollider.bounds.extents;
+
+        // Use a slightly smaller box so we don't "stick" on tiny contacts
+        halfExtents *= 0.98f;
+
+        Collider[] hits = Physics.OverlapBox(
+            nextPos,
+            halfExtents,
+            nextRot,
+            ~0,
+            QueryTriggerInteraction.Ignore
+        );
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i] == null) continue;
+            if (hits[i] == targetCollider) continue; // ignore self
+
+            // If you want to ignore certain layers, filter here
+            return false;
+        }
+
+        return true;
+    }
+
 }
