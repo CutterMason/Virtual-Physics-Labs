@@ -23,6 +23,7 @@ public class ObjectSaveData
     public float rx, ry, rz; // rotation
     public bool active;      // active state (enabled/disabled)
     public string prefabName;
+    public bool isPresetObject;
 }
 
 [Serializable]

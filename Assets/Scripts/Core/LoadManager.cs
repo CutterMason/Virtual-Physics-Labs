@@ -1,25 +1,56 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading.Tasks;
 using Firebase.Firestore;
 using Firebase.Auth;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class LoadManager : MonoBehaviour
 {
+    public static LoadManager Instance;
+
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
+    private SceneSaveData pendingSave;
+
     void Awake()
     {
+        // Singleton + persist across scene loads
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Firebase init (needed if you use LoadAllSaves/TestLoad)
         db = FirebaseFirestore.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
     }
 
-    // Load all save documents for UI debugging
+    private void EnsureFirebase()
+    {
+        if (db == null) db = FirebaseFirestore.DefaultInstance;
+        if (auth == null) auth = FirebaseAuth.DefaultInstance;
+    }
+
+    // ------------------------------
+    // Load all saves (for UI/debug)
+    // ------------------------------
     public async Task<List<LabSave>> LoadAllSaves()
     {
+        EnsureFirebase();
+
+
+        if (auth == null)
+        {
+            Debug.LogError("[LoadManager] FirebaseAuth is null (Firebase not ready?).");
+            return null;
+        }
+
         if (auth.CurrentUser == null)
         {
             Debug.LogError("Cannot load — no user logged in.");
@@ -55,85 +86,144 @@ public class LoadManager : MonoBehaviour
         }
 
         // Load the first save for testing
-        string json = saves[0].jsonData;
-        StartCoroutine(LoadSceneFromJson(json));
+        StartLoadFromJson(saves[0].jsonData);
     }
 
     // ------------------------------
-    // Load Scene State
+    // NEW LOAD FLOW (safe across scene loads)
     // ------------------------------
-    public IEnumerator LoadSceneFromJson(string jsonData)
+    public void StartLoadFromJson(string jsonData)
     {
-        SceneSaveData save = JsonUtility.FromJson<SceneSaveData>(jsonData);
+        pendingSave = JsonUtility.FromJson<SceneSaveData>(jsonData);
 
-        // 1. Load saved scene
-        AsyncOperation op = SceneManager.LoadSceneAsync(save.sceneName);
-        yield return op;
+        if (pendingSave == null || string.IsNullOrEmpty(pendingSave.sceneName))
+        {
+            Debug.LogError("[LoadManager] Invalid save JSON or missing sceneName.");
+            return;
+        }
 
-        // 2. Restore objects after scene is loaded
-        yield return new WaitForEndOfFrame();
+        // Ensure we only have one subscription
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
-        RestoreObjects(save);
-        RestoreExperiment(save);
-
-        Debug.Log("Scene loaded and state restored.");
+        SceneManager.LoadScene(pendingSave.sceneName);
     }
 
+    public void StartLoadFromSave(LabSave save)
+    {
+        if (save == null)
+        {
+            Debug.LogError("[LoadManager] StartLoadFromSave called with null save.");
+            return;
+        }
+
+        StartLoadFromJson(save.jsonData);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (pendingSave == null)
+        {
+            Debug.LogWarning("[LoadManager] Scene loaded but no pendingSave exists.");
+            return;
+        }
+
+        // Now the new scene exists and this manager is still alive.
+        RestoreObjects(pendingSave);
+        RestoreExperiment(pendingSave);
+
+        Debug.Log("[LoadManager] Scene loaded and state restored via sceneLoaded.");
+        pendingSave = null;
+    }
+
+    // ------------------------------
+    // Restore objects
+    // ------------------------------
     private void RestoreObjects(SceneSaveData save)
     {
-        SavableObject[] existing = FindObjectsOfType<SavableObject>();
+        if (save.objects == null)
+        {
+            Debug.LogWarning("[LoadManager] Save has no objects list.");
+            return;
+        }
+
+        SavableObject[] existing = FindObjectsOfType<SavableObject>(true);
         var lookup = new Dictionary<string, SavableObject>();
 
         foreach (var so in existing)
-            lookup[so.uniqueId] = so;
+        {
+            if (!string.IsNullOrEmpty(so.uniqueId))
+                lookup[so.uniqueId] = so;
+        }
 
         Debug.Log($"[LoadManager] Existing SavableObjects in scene: {existing.Length}");
+        Debug.Log($"[LoadManager] Save contains {save.objects.Count} object(s).");
 
         foreach (var objData in save.objects)
         {
-            SavableObject so;
+            if (objData == null || string.IsNullOrEmpty(objData.id))
+                continue;
 
-            if (!lookup.TryGetValue(objData.id, out so))
+            SavableObject so = null;
+            bool found = lookup.TryGetValue(objData.id, out so);
+
+            if (objData.isPresetObject)
             {
-                GameObject prefab = PrefabRegistry.Instance.GetPrefab(objData.prefabName);
-                if (prefab == null)
+                // Preset objects must exist in the scene. We do NOT spawn them.
+                if (!found || so == null)
                 {
-                    Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
+                    Debug.LogError($"[LoadManager] Preset object missing in scene! ID={objData.id}, nameKey={objData.prefabName}");
                     continue;
                 }
-
-                GameObject spawned = Instantiate(prefab);
-                so = spawned.GetComponent<SavableObject>();
-
-                if (so == null)
-                {
-                    Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
-                    continue;
-                }
-
-                so.uniqueId = objData.id;
-                Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
             }
             else
             {
-                // Case 2: Exists in scene (ONLY spawned objects)
-                // Skip preset built-in scene objects
-                if (so.isPresetObject)
-                    continue;
+                // Spawned objects: create if missing
+                if (!found || so == null)
+                {
+                    if (PrefabRegistry.Instance == null)
+                    {
+                        Debug.LogError("[LoadManager] PrefabRegistry.Instance is null (make sure it exists and persists).");
+                        continue;
+                    }
 
-                Debug.Log($"[LoadManager] Restoring existing object {objData.prefabName} with ID {objData.id}");
+                    GameObject prefab = PrefabRegistry.Instance.GetPrefab(objData.prefabName);
+                    if (prefab == null)
+                    {
+                        Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
+                        continue;
+                    }
+
+                    GameObject spawned = Instantiate(prefab);
+                    so = spawned.GetComponent<SavableObject>();
+
+                    if (so == null)
+                    {
+                        Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
+                        Destroy(spawned);
+                        continue;
+                    }
+
+                    so.uniqueId = objData.id;
+                    Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
+                }
             }
 
-            // Apply transform and active state
+            // Apply transform and active state (both preset + spawned)
             Transform t = so.transform;
             t.position = new Vector3(objData.px, objData.py, objData.pz);
             t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
             so.gameObject.SetActive(objData.active);
         }
 
-        Debug.Log("[LoadManager] RestoreObjects complete for " + save.objects.Count + " object(s).");
+        Debug.Log("[LoadManager] RestoreObjects complete.");
     }
 
+    // ------------------------------
+    // Restore experiment data
+    // ------------------------------
     private void RestoreExperiment(SceneSaveData save)
     {
         if (save.experimentData == null)
@@ -142,12 +232,12 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        // --- restore notepad text ---
-        LabNotepad labNotepad = FindObjectOfType<LabNotepad>();
+        // Restore notepad text
+        LabNotepad labNotepad = FindObjectOfType<LabNotepad>(true);
         if (labNotepad != null && labNotepad.notepadInput != null)
         {
             string text = save.experimentData.notepadText ?? "";
-            labNotepad.notepadInput.text = text;   // this will also update LabNotepad's static cache
+            labNotepad.notepadInput.text = text;
             Debug.Log($"[LoadManager] Restored notepad text ({text.Length} chars).");
         }
         else
@@ -155,10 +245,4 @@ public class LoadManager : MonoBehaviour
             Debug.LogWarning("[LoadManager] Could not find LabNotepad to restore notes.");
         }
     }
-
-    public void StartLoadFromSave(LabSave save)
-    {
-        StartCoroutine(LoadSceneFromJson(save.jsonData));
-    }
-
 }

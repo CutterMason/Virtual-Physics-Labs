@@ -1,26 +1,42 @@
 using UnityEngine;
 using System;
 
+[ExecuteAlways]
 public class SavableObject : MonoBehaviour
 {
-    public string uniqueId;
+    [SerializeField] public string uniqueId;
 
-    // The original prefab that this object came from
     public GameObject prefab;
-
-    // The name used by the save system to match the registry
     public string prefabName;
 
-    // NEW: Marks objects that were placed in the scene manually and should NOT be saved/loaded
+    // Preset = placed in the scene in editor (not spawned at runtime)
     public bool isPresetObject = false;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        // Give editor-placed objects a stable ID
+        if (string.IsNullOrEmpty(uniqueId))
+        {
+            uniqueId = Guid.NewGuid().ToString();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        if (prefab != null && string.IsNullOrEmpty(prefabName))
+        {
+            prefabName = prefab.name;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+#endif
 
     private void Awake()
     {
-        // Ensure a unique ID exists
-        if (string.IsNullOrEmpty(uniqueId))
+        // Runtime: spawned objects might not have an ID yet, so generate one.
+        // Preset objects should already have one from the editor.
+        if (!isPresetObject && string.IsNullOrEmpty(uniqueId))
             uniqueId = Guid.NewGuid().ToString();
 
-        // Auto-fill prefabName if prefab is assigned
         if (prefab != null && string.IsNullOrEmpty(prefabName))
             prefabName = prefab.name;
     }
@@ -30,11 +46,9 @@ public class SavableObject : MonoBehaviour
         return new ObjectSaveData
         {
             id = uniqueId,
-
-            // Use saved name or fallback to prefab
             prefabName = !string.IsNullOrEmpty(prefabName)
-                     ? prefabName
-                     : (prefab != null ? prefab.name : gameObject.name),
+                ? prefabName
+                : (prefab != null ? prefab.name : gameObject.name),
 
             px = transform.position.x,
             py = transform.position.y,
@@ -44,7 +58,9 @@ public class SavableObject : MonoBehaviour
             ry = transform.eulerAngles.y,
             rz = transform.eulerAngles.z,
 
-            active = gameObject.activeSelf
+            active = gameObject.activeSelf,
+
+            isPresetObject = isPresetObject
         };
     }
 }

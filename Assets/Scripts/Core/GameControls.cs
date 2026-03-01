@@ -8,10 +8,12 @@ public class GameControls : MonoBehaviour
     public static bool IsPaused { get; private set; } = false;
     public static bool IsEditMode { get; private set; } = false;
 
+    // Optional: other systems can react to edit mode switching
+    public static System.Action<bool> OnEditModeChanged;
+
     [Header("Startup")]
     [SerializeField] private bool pauseOnLoad = true;
     [SerializeField] private bool startInEditMode = true;
-    [SerializeField] private bool pauseWhenEnteringEditMode = true;
 
     private Rigidbody[] allBodies;
     private readonly Dictionary<Rigidbody, Vector3> storedVelocities = new();
@@ -35,22 +37,24 @@ public class GameControls : MonoBehaviour
 
     private void Start()
     {
-        // Decide initial mode
+        // Start paused if requested
+        if (pauseOnLoad && !IsPaused)
+            PauseGame();
+
+        // Choose initial mode
         if (startInEditMode) EnterEditMode();
         else ExitEditMode();
-
-        if (pauseOnLoad)
-            PauseGame();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Re-apply mode on load if desired
+        // On load, start paused if requested
+        if (pauseOnLoad && !IsPaused)
+            PauseGame();
+
+        // Re-apply mode
         if (startInEditMode) EnterEditMode();
         else ExitEditMode();
-
-        if (pauseOnLoad)
-            PauseGame();
     }
 
     // ------------------- EDIT MODE -------------------
@@ -58,33 +62,33 @@ public class GameControls : MonoBehaviour
     {
         IsEditMode = true;
 
-        // Optional: freeze the sim while editing
-        if (pauseWhenEnteringEditMode && !IsPaused)
+        // Editing always happens while paused
+        if (!IsPaused)
             PauseGame();
 
-        // Make UI usable
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
 
-        // TODO (optional): broadcast to other systems
-        // OnEditModeChanged?.Invoke(true);
+        OnEditModeChanged?.Invoke(true);
     }
 
     public void ExitEditMode()
     {
         IsEditMode = false;
 
-        // Leaving edit mode should resume simulation
-        if (IsPaused)
-            ResumeGame();
+        // IMPORTANT: We DO NOT resume here.
+        // This is your "View Mode" (paused but not editing)
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
+
+        OnEditModeChanged?.Invoke(false);
     }
 
     public void ToggleEditMode()
@@ -140,7 +144,7 @@ public class GameControls : MonoBehaviour
                 if (storedAngularVelocities.TryGetValue(rb, out var av))
                     rb.angularVelocity = av;
 
-                rb.WakeUp(); // <-- ADD THIS
+                rb.WakeUp();
             }
         }
 
@@ -157,6 +161,8 @@ public class GameControls : MonoBehaviour
     public void RestartScene()
     {
         IsPaused = false;
+        IsEditMode = false;
+
         Time.timeScale = 1f;
         Physics.autoSimulation = true;
 
@@ -164,29 +170,22 @@ public class GameControls : MonoBehaviour
         storedAngularVelocities.Clear();
         allBodies = null;
 
-        // Keep whatever you prefer on restart:
-        pauseOnLoad = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void StartPlayMode()
+    // ------------------- PLAY -------------------
+    // Hook your PLAY button to THIS
+    public void PressPlay()
     {
-        // Exit edit mode first (this resumes physics too)
-        ExitEditMode();
+        // Leave edit mode (enter view mode first)
+        if (IsEditMode)
+            ExitEditMode();
 
-        // Force physics on for objects that should simulate
-        foreach (var rb in FindObjectsOfType<Rigidbody>())
-        {
-            if (!rb) continue;
+        // Turn physics on ONLY for things you moved in edit mode
+        LockOnCamera.ApplyEditedPhysics();
 
-            // Only affect the stuff you WANT to fall:
-            // Use a Tag or Layer check here.
-            // Example: if (!rb.CompareTag("Movable")) continue;
-
-            rb.isKinematic = false;
-            rb.useGravity = true;
-            rb.WakeUp();
-        }
+        // Now run the simulation
+        if (IsPaused)
+            ResumeGame();
     }
-
 }

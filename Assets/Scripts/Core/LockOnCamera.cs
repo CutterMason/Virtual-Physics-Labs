@@ -33,10 +33,31 @@ public class LockOnCamera : MonoBehaviour
 
     private int currentIndex = -1;
 
-    private Collider targetCollider; // collider used for overlap sizing (we�ll pick a good one)
+    private Collider targetCollider;
     private Rigidbody targetRb;
     private bool targetRbWasKinematic;
     private bool targetRbHadGravity;
+
+    // Track which rigidbodies were actually moved in edit mode
+    private static readonly HashSet<Rigidbody> editedBodies = new HashSet<Rigidbody>();
+
+    void OnEnable()
+    {
+        GameControls.OnEditModeChanged += HandleEditModeChanged;
+    }
+
+    void OnDisable()
+    {
+        GameControls.OnEditModeChanged -= HandleEditModeChanged;
+    }
+
+    void HandleEditModeChanged(bool isEdit)
+    {
+        if (!isEdit)
+            ForceUnlock(); // restore RB + clear selection when leaving edit mode
+        else
+            FindAllScaledObjects();
+    }
 
     void Start()
     {
@@ -92,6 +113,7 @@ public class LockOnCamera : MonoBehaviour
 
         Vector3 desiredPosition = target.position + offset;
 
+        // Snap while paused to avoid jitter
         if (GameControls.IsPaused)
         {
             transform.position = desiredPosition;
@@ -116,7 +138,6 @@ public class LockOnCamera : MonoBehaviour
         flipView = false;
     }
 
-    // --- IMPORTANT: store *movable roots*, not arbitrary "Scaled" children ---
     void FindAllScaledObjects()
     {
         scaledObjects.Clear();
@@ -127,7 +148,6 @@ public class LockOnCamera : MonoBehaviour
             if (obj == null) continue;
             if (!obj.name.Contains("Scaled")) continue;
 
-            // Prefer rigidbody root if present (so movement works after adding RB)
             Rigidbody rb = obj.GetComponentInParent<Rigidbody>();
             if (rb != null)
             {
@@ -151,7 +171,6 @@ public class LockOnCamera : MonoBehaviour
         if (!Physics.Raycast(ray, out RaycastHit hit))
             return;
 
-        // Allow click on Scaled object OR a child of a Scaled object
         if (!hit.transform.name.Contains("Scaled") &&
             (hit.transform.root == null || !hit.transform.root.name.Contains("Scaled")))
             return;
@@ -161,16 +180,13 @@ public class LockOnCamera : MonoBehaviour
 
     void SelectTargetFromHit(RaycastHit hit)
     {
-        // Grab RB from what you clicked (or its parents)
         Rigidbody rb = hit.rigidbody != null ? hit.rigidbody : hit.transform.GetComponentInParent<Rigidbody>();
 
         if (rb != null)
         {
-            target = rb.transform;   // move RB root
+            target = rb.transform;
             targetRb = rb;
 
-            // Choose a collider that belongs to that RB (better than "any child collider somewhere")
-            // Prefer the collider we actually clicked if it�s on same RB:
             if (hit.collider != null && hit.collider.attachedRigidbody == rb)
                 targetCollider = hit.collider;
             else
@@ -194,14 +210,12 @@ public class LockOnCamera : MonoBehaviour
             targetRbWasKinematic = targetRb.isKinematic;
             targetRbHadGravity = targetRb.useGravity;
 
-            // In edit mode, make it movable and not affected by physics
             targetRb.isKinematic = true;
             targetRb.useGravity = false;
             targetRb.linearVelocity = Vector3.zero;
             targetRb.angularVelocity = Vector3.zero;
         }
 
-        // Keep list fresh (in case you spawned new objects)
         if (scaledObjects.Count == 0) FindAllScaledObjects();
         currentIndex = scaledObjects.IndexOf(target);
     }
@@ -213,7 +227,6 @@ public class LockOnCamera : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            // Unlock previous selection cleanly before switching
             RestoreTargetRigidbody();
 
             currentIndex++;
@@ -227,7 +240,6 @@ public class LockOnCamera : MonoBehaviour
             initialRotation = target.rotation;
             initialPosition = target.position;
 
-            // Recompute rb/collider based on the new target root
             targetRb = target.GetComponent<Rigidbody>();
             targetCollider = target.GetComponentInChildren<Collider>();
 
@@ -291,11 +303,13 @@ public class LockOnCamera : MonoBehaviour
 
         if (IsPositionClear(nextPos, target.rotation))
         {
-            // While paused, transform move is most stable; otherwise MovePosition is fine for kinematic RBs
             if (GameControls.IsPaused || targetRb == null)
                 target.position = nextPos;
             else
                 targetRb.MovePosition(nextPos);
+
+            if (targetRb != null)
+                editedBodies.Add(targetRb);
 
             if (GameControls.IsPaused) Physics.SyncTransforms();
         }
@@ -325,6 +339,9 @@ public class LockOnCamera : MonoBehaviour
                 target.position = nextPos;
             else
                 targetRb.MovePosition(nextPos);
+
+            if (targetRb != null)
+                editedBodies.Add(targetRb);
 
             if (GameControls.IsPaused) Physics.SyncTransforms();
         }
@@ -374,9 +391,6 @@ public class LockOnCamera : MonoBehaviour
 
     bool IsPositionClear(Vector3 nextPos, Quaternion nextRot)
     {
-        // This is the big fix: ignore ALL colliders on the same rigidbody/hierarchy,
-        // otherwise OverlapBox blocks movement forever once an RB is present.
-
         Vector3 halfExtents = targetCollider.bounds.extents * 0.98f;
 
         Collider[] hits = Physics.OverlapBox(
@@ -392,19 +406,26 @@ public class LockOnCamera : MonoBehaviour
             Collider c = hits[i];
             if (!c) continue;
 
-            // Ignore the clicked collider
             if (c == targetCollider) continue;
-
-            // Ignore anything in our own hierarchy (children/parent colliders)
             if (c.transform == target) continue;
             if (c.transform.IsChildOf(target)) continue;
-
-            // Ignore colliders on the same rigidbody (very common)
             if (targetRb != null && c.attachedRigidbody == targetRb) continue;
 
             return false;
         }
 
         return true;
+    }
+
+    public static void ApplyEditedPhysics()
+    {
+        foreach (var rb in editedBodies)
+        {
+            if (!rb) continue;
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.WakeUp();
+        }
+        editedBodies.Clear();
     }
 }

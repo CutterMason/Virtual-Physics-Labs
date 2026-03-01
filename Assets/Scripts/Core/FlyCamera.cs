@@ -94,12 +94,6 @@ public class FlyCameraCC : MonoBehaviour
 
     void MoveWithCollisions()
     {
-
-        if (UnityEngine.EventSystems.EventSystem.current != null &&
-        UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject != null)
-        {
-            // Optional: return only if it's an InputField (typing), not sliders/buttons
-        }
         // Use unscaled time so camera movement works even when Time.timeScale = 0
         float dt = Time.unscaledDeltaTime;
 
@@ -107,6 +101,7 @@ public class FlyCameraCC : MonoBehaviour
 
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
+
 
         Vector3 input = (transform.right * x + transform.forward * z);
 

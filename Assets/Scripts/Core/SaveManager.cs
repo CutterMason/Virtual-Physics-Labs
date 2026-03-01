@@ -55,12 +55,11 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Lab saved successfully: " + saveName);
     }
 
-   
+
     public async void TestSave()
     {
         string randomName = "TestSave_" + Random.Range(1000, 9999);
-        string jsonData = "{ \"test\": true }";
-
+        string jsonData = SerializeScene(); // <-- change this line
         await SaveLab(randomName, jsonData);
     }
 
@@ -75,10 +74,7 @@ public class SaveManager : MonoBehaviour
 
         foreach (var so in savables)
         {
-            // NEW — skip preset scene objects
-            if (so.isPresetObject)
-                continue;
-
+            // skip prefabs / assets not actually in the scene
             if (!so.gameObject.scene.IsValid())
                 continue;
 
@@ -87,13 +83,15 @@ public class SaveManager : MonoBehaviour
             ObjectSaveData data = new ObjectSaveData();
             data.id = so.uniqueId;
 
-            string rawName = so.gameObject.name.Replace("(Clone)", "");
-            int parenIndex = rawName.IndexOf(" (");
-            if (parenIndex >= 0)
-            {
-                rawName = rawName.Substring(0, parenIndex);
-            }
-            data.prefabName = rawName.Trim();   // final key used for registry lookup
+            // Use SavableObject.prefabName if set, else fallback to cleaned scene name
+            string nameKey = !string.IsNullOrEmpty(so.prefabName)
+                ? so.prefabName
+                : so.gameObject.name;
+
+            nameKey = nameKey.Replace("(Clone)", "");
+            int parenIndex = nameKey.IndexOf(" (");
+            if (parenIndex >= 0) nameKey = nameKey.Substring(0, parenIndex);
+            data.prefabName = nameKey.Trim();
 
             data.px = t.position.x;
             data.py = t.position.y;
@@ -104,6 +102,7 @@ public class SaveManager : MonoBehaviour
             data.rz = t.eulerAngles.z;
 
             data.active = so.gameObject.activeSelf;
+            data.isPresetObject = so.isPresetObject;
 
             save.objects.Add(data);
         }
@@ -122,6 +121,4 @@ public class SaveManager : MonoBehaviour
         Debug.Log($"[SaveManager] JSON:\n{json}");
         return json;
     }
-
-
 }
