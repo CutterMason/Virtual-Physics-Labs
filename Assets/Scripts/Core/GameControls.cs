@@ -139,6 +139,8 @@ public class GameControls : MonoBehaviour
 
                 if (storedAngularVelocities.TryGetValue(rb, out var av))
                     rb.angularVelocity = av;
+
+                rb.WakeUp(); // <-- ADD THIS
             }
         }
 
@@ -166,4 +168,25 @@ public class GameControls : MonoBehaviour
         pauseOnLoad = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void StartPlayMode()
+    {
+        // Exit edit mode first (this resumes physics too)
+        ExitEditMode();
+
+        // Force physics on for objects that should simulate
+        foreach (var rb in FindObjectsOfType<Rigidbody>())
+        {
+            if (!rb) continue;
+
+            // Only affect the stuff you WANT to fall:
+            // Use a Tag or Layer check here.
+            // Example: if (!rb.CompareTag("Movable")) continue;
+
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.WakeUp();
+        }
+    }
+
 }
