@@ -47,6 +47,12 @@ public class FlyCameraCC : MonoBehaviour
         UpdateSpeedText();
     }
 
+    void Start()
+    {
+        // Load saved camera speed
+        moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
+    }
+
     void UpdateSpeedMultiplier(float value)
     {
         speedMultiplier = value;
@@ -64,6 +70,9 @@ public class FlyCameraCC : MonoBehaviour
 
     void Update()
     {
+        // OPTIONAL live update from settings
+    moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
+
         HandleLook();
         MoveWithCollisions();
     }
