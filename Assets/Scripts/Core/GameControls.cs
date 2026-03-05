@@ -8,7 +8,7 @@ public class GameControls : MonoBehaviour
     public static bool IsPaused { get; private set; } = false;
     public static bool IsEditMode { get; private set; } = false;
 
-    // Optional: other systems can react to edit mode switching
+    
     public static System.Action<bool> OnEditModeChanged;
 
     [Header("Startup")]
@@ -19,7 +19,7 @@ public class GameControls : MonoBehaviour
     private readonly Dictionary<Rigidbody, Vector3> storedVelocities = new();
     private readonly Dictionary<Rigidbody, Vector3> storedAngularVelocities = new();
 
-    // ---- Capability gates (use these elsewhere) ----
+    
     public static bool CanSpawn => IsEditMode;
     public static bool CanSave => IsEditMode;
     public static bool CanDelete => IsEditMode;
@@ -37,32 +37,30 @@ public class GameControls : MonoBehaviour
 
     private void Start()
     {
-        // Start paused if requested
+        
         if (pauseOnLoad && !IsPaused)
             PauseGame();
 
-        // Choose initial mode
         if (startInEditMode) EnterEditMode();
         else ExitEditMode();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // On load, start paused if requested
+        
         if (pauseOnLoad && !IsPaused)
             PauseGame();
 
-        // Re-apply mode
         if (startInEditMode) EnterEditMode();
         else ExitEditMode();
     }
 
-    // ------------------- EDIT MODE -------------------
+    
     public void EnterEditMode()
     {
         IsEditMode = true;
 
-        // Editing always happens while paused
+        
         if (!IsPaused)
             PauseGame();
 
@@ -79,9 +77,6 @@ public class GameControls : MonoBehaviour
     {
         IsEditMode = false;
 
-        // IMPORTANT: We DO NOT resume here.
-        // This is your "View Mode" (paused but not editing)
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -97,7 +92,6 @@ public class GameControls : MonoBehaviour
         else EnterEditMode();
     }
 
-    // ------------------- PAUSE -------------------
     public void PauseGame()
     {
         IsPaused = true;
@@ -173,18 +167,14 @@ public class GameControls : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // ------------------- PLAY -------------------
-    // Hook your PLAY button to THIS
+   
     public void PressPlay()
     {
-        // Leave edit mode (enter view mode first)
         if (IsEditMode)
             ExitEditMode();
 
-        // Turn physics on ONLY for things you moved in edit mode
         LockOnCamera.ApplyEditedPhysics();
 
-        // Now run the simulation
         if (IsPaused)
             ResumeGame();
     }

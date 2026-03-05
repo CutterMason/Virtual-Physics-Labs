@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,12 +27,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FlyCamera.cs",
+              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\FlyCamera.cs",
+              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Core\\FlyCamera.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAIEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T18:03:24.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "GameControls.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\GameControls.cs",
               "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\GameControls.cs",
-              "ViewState": "AgIAAI0AAAAAAAAAAAAAAKIAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAKMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-01T00:31:55.098Z",
               "EditorCaption": ""
@@ -41,7 +58,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\LockOnCamera.cs",
               "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\LockOnCamera.cs",
-              "ViewState": "AgIAAGMBAAAAAAAAAAAowHQBAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACoBAAAAAAAAAAAowHQBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-01T00:25:38.574Z",
               "EditorCaption": ""

@@ -38,7 +38,7 @@ public class LockOnCamera : MonoBehaviour
     private bool targetRbWasKinematic;
     private bool targetRbHadGravity;
 
-    // Track which rigidbodies were actually moved in edit mode
+    
     private static readonly HashSet<Rigidbody> editedBodies = new HashSet<Rigidbody>();
 
     void OnEnable()
@@ -54,7 +54,7 @@ public class LockOnCamera : MonoBehaviour
     void HandleEditModeChanged(bool isEdit)
     {
         if (!isEdit)
-            ForceUnlock(); // restore RB + clear selection when leaving edit mode
+            ForceUnlock(); 
         else
             FindAllScaledObjects();
     }
@@ -113,7 +113,7 @@ public class LockOnCamera : MonoBehaviour
 
         Vector3 desiredPosition = target.position + offset;
 
-        // Snap while paused to avoid jitter
+        
         if (GameControls.IsPaused)
         {
             transform.position = desiredPosition;
