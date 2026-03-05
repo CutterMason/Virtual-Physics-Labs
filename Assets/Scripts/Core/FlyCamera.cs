@@ -19,7 +19,7 @@ public class FlyCameraCC : MonoBehaviour
 
     [Header("UI")]
     public Slider speedSlider;
-    public Text speedText; // Assign a Text UI to show current speed
+    public Text speedText; 
 
     private CharacterController cc;
     private float yaw;
@@ -35,7 +35,7 @@ public class FlyCameraCC : MonoBehaviour
         yaw = euler.y;
         pitch = euler.x;
 
-        // Setup slider
+        
         if (speedSlider != null)
         {
             speedSlider.minValue = 0.5f;
@@ -49,7 +49,6 @@ public class FlyCameraCC : MonoBehaviour
 
     void Start()
     {
-        // Load saved camera speed
         moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
     }
 
@@ -103,7 +102,7 @@ public class FlyCameraCC : MonoBehaviour
 
     void MoveWithCollisions()
     {
-        // Use unscaled time so camera movement works even when Time.timeScale = 0
+     
         float dt = Time.unscaledDeltaTime;
 
         float speed = moveSpeed * speedMultiplier * (Input.GetKey(KeyCode.LeftShift) ? fastMultiplier : 1f);

@@ -16,7 +16,6 @@ public class LoadManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton + persist across scene loads
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -26,7 +25,6 @@ public class LoadManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Firebase init (needed if you use LoadAllSaves/TestLoad)
         db = FirebaseFirestore.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
     }
@@ -37,9 +35,6 @@ public class LoadManager : MonoBehaviour
         if (auth == null) auth = FirebaseAuth.DefaultInstance;
     }
 
-    // ------------------------------
-    // Load all saves (for UI/debug)
-    // ------------------------------
     public async Task<List<LabSave>> LoadAllSaves()
     {
         EnsureFirebase();
@@ -85,13 +80,10 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        // Load the first save for testing
+     
         StartLoadFromJson(saves[0].jsonData);
     }
 
-    // ------------------------------
-    // NEW LOAD FLOW (safe across scene loads)
-    // ------------------------------
     public void StartLoadFromJson(string jsonData)
     {
         pendingSave = JsonUtility.FromJson<SceneSaveData>(jsonData);
@@ -102,7 +94,6 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        // Ensure we only have one subscription
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -130,7 +121,7 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        // Now the new scene exists and this manager is still alive.
+        
         RestoreObjects(pendingSave);
         RestoreExperiment(pendingSave);
 
@@ -138,9 +129,7 @@ public class LoadManager : MonoBehaviour
         pendingSave = null;
     }
 
-    // ------------------------------
-    // Restore objects
-    // ------------------------------
+   
     private void RestoreObjects(SceneSaveData save)
     {
         if (save.objects == null)
@@ -171,7 +160,7 @@ public class LoadManager : MonoBehaviour
 
             if (objData.isPresetObject)
             {
-                // Preset objects must exist in the scene. We do NOT spawn them.
+                
                 if (!found || so == null)
                 {
                     Debug.LogError($"[LoadManager] Preset object missing in scene! ID={objData.id}, nameKey={objData.prefabName}");
@@ -180,7 +169,7 @@ public class LoadManager : MonoBehaviour
             }
             else
             {
-                // Spawned objects: create if missing
+              
                 if (!found || so == null)
                 {
                     if (PrefabRegistry.Instance == null)
@@ -211,7 +200,6 @@ public class LoadManager : MonoBehaviour
                 }
             }
 
-            // Apply transform and active state (both preset + spawned)
             Transform t = so.transform;
             t.position = new Vector3(objData.px, objData.py, objData.pz);
             t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
@@ -221,9 +209,7 @@ public class LoadManager : MonoBehaviour
         Debug.Log("[LoadManager] RestoreObjects complete.");
     }
 
-    // ------------------------------
-    // Restore experiment data
-    // ------------------------------
+
     private void RestoreExperiment(SceneSaveData save)
     {
         if (save.experimentData == null)
@@ -232,7 +218,6 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        // Restore notepad text
         LabNotepad labNotepad = FindObjectOfType<LabNotepad>(true);
         if (labNotepad != null && labNotepad.notepadInput != null)
         {

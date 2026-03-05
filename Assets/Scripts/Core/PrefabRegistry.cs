@@ -13,7 +13,7 @@ public class PrefabRegistry : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject); // optional: keep registry across scene loads
+        DontDestroyOnLoad(gameObject); 
 
         Debug.Log("[PrefabRegistry] Initialized with " + spawnablePrefabs.Count + " prefab(s).");
     }

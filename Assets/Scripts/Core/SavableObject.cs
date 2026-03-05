@@ -9,7 +9,7 @@ public class SavableObject : MonoBehaviour
     public GameObject prefab;
     public string prefabName;
 
-    // Preset = placed in the scene in editor (not spawned at runtime)
+   
     public bool isPresetObject = false;
 
 #if UNITY_EDITOR
@@ -32,8 +32,7 @@ public class SavableObject : MonoBehaviour
 
     private void Awake()
     {
-        // Runtime: spawned objects might not have an ID yet, so generate one.
-        // Preset objects should already have one from the editor.
+       
         if (!isPresetObject && string.IsNullOrEmpty(uniqueId))
             uniqueId = Guid.NewGuid().ToString();
 

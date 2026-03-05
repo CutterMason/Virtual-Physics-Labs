@@ -59,7 +59,7 @@ public class SaveManager : MonoBehaviour
     public async void TestSave()
     {
         string randomName = "TestSave_" + Random.Range(1000, 9999);
-        string jsonData = SerializeScene(); // <-- change this line
+        string jsonData = SerializeScene(); 
         await SaveLab(randomName, jsonData);
     }
 
@@ -74,7 +74,7 @@ public class SaveManager : MonoBehaviour
 
         foreach (var so in savables)
         {
-            // skip prefabs / assets not actually in the scene
+            
             if (!so.gameObject.scene.IsValid())
                 continue;
 
@@ -83,7 +83,7 @@ public class SaveManager : MonoBehaviour
             ObjectSaveData data = new ObjectSaveData();
             data.id = so.uniqueId;
 
-            // Use SavableObject.prefabName if set, else fallback to cleaned scene name
+            
             string nameKey = !string.IsNullOrEmpty(so.prefabName)
                 ? so.prefabName
                 : so.gameObject.name;
