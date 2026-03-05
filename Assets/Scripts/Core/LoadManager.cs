@@ -42,13 +42,13 @@ public class LoadManager : MonoBehaviour
 
         if (auth == null)
         {
-            Debug.LogError("[LoadManager] FirebaseAuth is null (Firebase not ready?).");
+            Debug.LogError("[LoadManager] FirebaseAuth is null.");
             return null;
         }
 
         if (auth.CurrentUser == null)
         {
-            Debug.LogError("Cannot load — no user logged in.");
+            Debug.LogError("Cannot load, no user logged in.");
             return null;
         }
 
@@ -79,8 +79,6 @@ public class LoadManager : MonoBehaviour
             Debug.Log("No saves found.");
             return;
         }
-
-     
         StartLoadFromJson(saves[0].jsonData);
     }
 

@@ -32,7 +32,7 @@ public class SaveManager : MonoBehaviour
     {
         if (auth.CurrentUser == null)
         {
-            Debug.LogError("Cannot save — no user logged in.");
+            Debug.LogError("Cannot save, no user logged in.");
             return;
         }
 
