@@ -69,7 +69,6 @@ public class FlyCameraCC : MonoBehaviour
 
     void Update()
     {
-        // OPTIONAL live update from settings
     moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
 
         HandleLook();
@@ -78,7 +77,7 @@ public class FlyCameraCC : MonoBehaviour
 
     void HandleLook()
     {
-        // Default state: cursor acts like a normal cursor
+
         if (!Input.GetMouseButton(1))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -86,7 +85,7 @@ public class FlyCameraCC : MonoBehaviour
             return;
         }
 
-        // RMB held: lock + hide for free-look
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 [Serializable]
 public class SceneSaveData
 {
-    public string sceneName;                     // Which lab scene was saved
-    public List<ObjectSaveData> objects;         // List of all saved game objects
-    public ExperimentData experimentData;        // Lab-specific values
+    public string sceneName;                    
+    public List<ObjectSaveData> objects;        
+    public ExperimentData experimentData;        
 
     public SceneSaveData()
     {
@@ -18,10 +18,10 @@ public class SceneSaveData
 [Serializable]
 public class ObjectSaveData
 {
-    public string id;        // Unique object ID
-    public float px, py, pz; // position
-    public float rx, ry, rz; // rotation
-    public bool active;      // active state (enabled/disabled)
+    public string id;        
+    public float px, py, pz;
+    public float rx, ry, rz; 
+    public bool active;      
     public string prefabName;
     public bool isPresetObject;
 }
