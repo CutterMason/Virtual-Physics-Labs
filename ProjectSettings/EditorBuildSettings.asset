@@ -86,6 +86,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lab_test.unity
     guid: 105f4d605e369e84b970b7c9cd95f71f
+  - enabled: 1
+    path: Assets/Scenes/PresetLabs/Lab_1_Measurement.unity
+    guid: 3d0feacfb25605d408a9965c7a3953e4
+  - enabled: 0
+    path: Assets/Scenes/PresetLabs/Lab_2_1st_Law.unity
+    guid: 5000e8479915d874292b6fc3cb07a88c
+  - enabled: 1
+    path: Assets/Scenes/PresetLabs/Lab_6_Friction.unity
+    guid: 77c7f07739076b54dbf79bda0c5a81e9
+  - enabled: 1
+    path: Assets/Scenes/PresetLabs/Lab_8_Terminal.unity
+    guid: 028270145dc8b434db7d0a619a7702e5
+  - enabled: 1
+    path: Assets/Scenes/PresetLabs/Lab_10_Torque.unity
+    guid: 32e46d86b99cb034b948bba1f90a7ebb
+  - enabled: 1
+    path: Assets/Scenes/PresetLabs/Lab_12_Spring.unity
+    guid: a4a7edad65fb5b24195a575cd870a3c7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

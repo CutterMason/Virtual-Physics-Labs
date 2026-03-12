@@ -334,7 +334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 195609971}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703222700}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Lab_10_Torque
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &195609971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,7 +695,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Lab_1_Measurement
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &323732087
@@ -943,7 +955,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 405350058}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703222700}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Lab_6_Friction
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &405350058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1594,7 +1618,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 665023021}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703222700}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Lab_12_Spring
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &665023021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3465,7 +3501,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1771201799}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703222700}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Lab_2_1st_Law
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1771201799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4491,7 +4539,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2069964069}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703222700}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Lab_8_Terminal
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2069964069
 MonoBehaviour:
   m_ObjectHideFlags: 0
