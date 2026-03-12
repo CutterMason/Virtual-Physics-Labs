@@ -24,6 +24,8 @@ public class PlayModeLockOnCamera : MonoBehaviour
     private bool flipView = false;
     private int currentIndex = -1;
 
+    public Transform CurrentTarget => target;
+
     void Start()
     {
         targetHorizontalAngle = horizontalAngle;
