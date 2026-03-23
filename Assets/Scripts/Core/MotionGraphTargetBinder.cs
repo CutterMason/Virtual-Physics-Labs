@@ -22,8 +22,6 @@ public class MotionGraphTargetBinder : MonoBehaviour
     {
         Transform target = GetTargetFromCamera();
 
-        Debug.Log("Binder target = " + (target ? target.name : "NULL"));
-
         if (target == null || target == currentTarget)
             return;
 

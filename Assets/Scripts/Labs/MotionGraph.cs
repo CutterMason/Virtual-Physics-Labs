@@ -63,6 +63,7 @@ public class MotionGraph : MonoBehaviour
     private Vector3 smoothedAcceleration = Vector3.zero;
 
     private Vector3 prevPositionForFallback = Vector3.zero;
+    private Vector3 initialRelativePosition = Vector3.zero;
     private bool prevPosInitialized = false;
 
     private float peakPosition = 0f;
@@ -144,7 +145,10 @@ public class MotionGraph : MonoBehaviour
         if (timer < updateInterval) return;
         timer = 0f;
 
-        Vector3 pos = GetCurrentPositionVector();
+        Vector3 pos = (graphType == GraphType.Position)
+            ? GetPositionDisplacementVector()
+            : GetCurrentPositionVector();
+
         Vector3 vel = physicsVelocity;
         Vector3 accel = smoothedAcceleration;
 
@@ -244,6 +248,7 @@ public class MotionGraph : MonoBehaviour
         smoothedAcceleration = Vector3.zero;
 
         prevPositionForFallback = Vector3.zero;
+        initialRelativePosition = Vector3.zero;
         prevPosInitialized = false;
 
         currentAutoAxis = AxisMode.Y;
@@ -261,13 +266,16 @@ public class MotionGraph : MonoBehaviour
     {
         if (targetTransform)
         {
-            prevPositionForFallback = GetCurrentPositionVector();
+            Vector3 currentPos = GetCurrentPositionVector();
+            prevPositionForFallback = currentPos;
+            initialRelativePosition = currentPos;
             prevPosInitialized = true;
         }
         else
         {
             prevPosInitialized = false;
             prevPositionForFallback = Vector3.zero;
+            initialRelativePosition = Vector3.zero;
         }
 
         if (targetRigidbody)
@@ -301,7 +309,7 @@ public class MotionGraph : MonoBehaviour
         switch (graphType)
         {
             case GraphType.Position:
-                source = GetAbsoluteVector(GetCurrentPositionVector());
+                source = GetAbsoluteVector(GetPositionDisplacementVector());
                 break;
 
             case GraphType.Velocity:
@@ -348,6 +356,11 @@ public class MotionGraph : MonoBehaviour
         return targetPos - refPos;
     }
 
+    private Vector3 GetPositionDisplacementVector()
+    {
+        return GetCurrentPositionVector() - initialRelativePosition;
+    }
+
     private Vector3 GetCurrentVelocityVector()
     {
         if (!targetRigidbody) return Vector3.zero;
@@ -377,6 +390,11 @@ public class MotionGraph : MonoBehaviour
             case AxisMode.Z: return v.z;
             default: return v.x;
         }
+    }
+
+    private Vector3 GetAbsoluteVector(Vector3 v)
+    {
+        return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
     }
 
     private string GetAxisLabel()
@@ -500,11 +518,6 @@ public class MotionGraph : MonoBehaviour
             case GraphType.Acceleration: peak = peakAcceleration; break;
         }
 
-        peakText.text = $"{graphType} Peak: {peak:F2}";
-    }
-
-    private Vector3 GetAbsoluteVector(Vector3 v)
-    {
-        return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+        peakText.text = $"{graphType} Peak ({GetAxisLabel()}): {peak:F2}";
     }
 }
