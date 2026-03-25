@@ -60,7 +60,6 @@ public class GameControls : MonoBehaviour
     {
         IsEditMode = true;
 
-        
         if (!IsPaused)
             PauseGame();
 

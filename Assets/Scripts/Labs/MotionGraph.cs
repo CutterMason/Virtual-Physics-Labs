@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -6,9 +5,13 @@ using TMPro;
 public class MotionGraph : MonoBehaviour
 {
     public enum GraphType { Position, Velocity, Acceleration }
+    public enum AxisMode { Auto, X, Y, Z }
 
     [Header("Graph Type")]
     public GraphType graphType = GraphType.Velocity;
+
+    [Header("Axis")]
+    public AxisMode axisMode = AxisMode.Auto;
 
     [Header("UI Elements")]
     public RectTransform graphPanel;
@@ -39,36 +42,38 @@ public class MotionGraph : MonoBehaviour
     public Transform referenceTransform;
 
     [Header("Movement & Accel Settings")]
-    public float movementEpsilon = 1e-6f;
     public float movementThreshold = 0.01f;
     public float maxReasonableAccel = 50f;
     public float accelSmoothFactor = 0.25f;
+    public float axisSwitchThreshold = 0.05f;
 
     [Header("Calibration")]
-    public float accelScale = 1f;   
+    public float accelScale = 1f;
 
     [Header("Velocity Scaling")]
-    public float velocityScale = 1f;   
+    public float velocityScale = 1f;
 
     private float[] values;
     private int index;
     private float timer;
 
-    private float physicsPrevVelZ = 0f;
-    private float physicsVelZ = 0f;
-    private float physicsAccelZ = 0f;
+    private Vector3 physicsPrevVelocity = Vector3.zero;
+    private Vector3 physicsVelocity = Vector3.zero;
+    private Vector3 physicsAcceleration = Vector3.zero;
+    private Vector3 smoothedAcceleration = Vector3.zero;
 
-    private float prevPosZ_ForFallback = 0f;
+    private Vector3 prevPositionForFallback = Vector3.zero;
+    private Vector3 initialRelativePosition = Vector3.zero;
     private bool prevPosInitialized = false;
 
     private float peakPosition = 0f;
     private float peakVelocity = 0f;
     private float peakAcceleration = 0f;
 
-    private float accelSmoothed = 0f;
-
     private bool graphFrozen = false;
     private float lastRecordedValue = 0f;
+
+    private AxisMode currentAutoAxis = AxisMode.Y;
 
     void Awake()
     {
@@ -81,85 +86,92 @@ public class MotionGraph : MonoBehaviour
         if (peakText)
             peakText.text = $"{graphType} Peak: 0.00";
 
-        if (xAxisLabel) xAxisLabel.text = "";
+        if (xAxisLabel)
+            xAxisLabel.text = "";
 
-        if (targetTransform)
-        {
-            prevPosZ_ForFallback = GetCurrentPositionZ();
-            prevPosInitialized = true;
-        }
-
-        if (targetRigidbody)
-        {
-            physicsPrevVelZ = GetCurrentVelocityZ();
-            physicsVelZ = physicsPrevVelZ;
-            physicsAccelZ = 0f;
-            accelSmoothed = 0f;
-        }
+        InitializeTrackingState();
+        RedrawGraph();
     }
 
     void FixedUpdate()
     {
+        if (!HasValidTarget())
+            return;
+
         if (targetRigidbody)
         {
-            float v = GetCurrentVelocityZ();
-            physicsAccelZ = (v - physicsPrevVelZ) / Mathf.Max(Time.fixedDeltaTime, 1e-9f);
+            Vector3 v = GetCurrentVelocityVector();
+            physicsAcceleration = (v - physicsPrevVelocity) / Mathf.Max(Time.fixedDeltaTime, 1e-9f);
 
-            physicsPrevVelZ = v;
-            physicsVelZ = v;
+            physicsPrevVelocity = v;
+            physicsVelocity = v;
         }
         else
         {
-            float posZ = GetCurrentPositionZ();
+            Vector3 pos = GetCurrentPositionVector();
 
             if (!prevPosInitialized)
             {
-                prevPosZ_ForFallback = posZ;
+                prevPositionForFallback = pos;
                 prevPosInitialized = true;
-                physicsVelZ = 0f;
-                physicsAccelZ = 0f;
+                physicsVelocity = Vector3.zero;
+                physicsAcceleration = Vector3.zero;
             }
             else
             {
-                float v = (posZ - prevPosZ_ForFallback) / Mathf.Max(Time.fixedDeltaTime, 1e-9f);
-                physicsAccelZ = (v - physicsVelZ) / Mathf.Max(Time.fixedDeltaTime, 1e-9f);
-                physicsVelZ = v;
-                prevPosZ_ForFallback = posZ;
+                Vector3 v = (pos - prevPositionForFallback) / Mathf.Max(Time.fixedDeltaTime, 1e-9f);
+                physicsAcceleration = (v - physicsVelocity) / Mathf.Max(Time.fixedDeltaTime, 1e-9f);
+                physicsVelocity = v;
+                prevPositionForFallback = pos;
             }
         }
 
-        float accelClamped = Mathf.Clamp(physicsAccelZ, -maxReasonableAccel, maxReasonableAccel);
-        accelSmoothed = Mathf.Lerp(accelSmoothed, accelClamped, accelSmoothFactor);
+        physicsAcceleration.x = Mathf.Clamp(physicsAcceleration.x, -maxReasonableAccel, maxReasonableAccel);
+        physicsAcceleration.y = Mathf.Clamp(physicsAcceleration.y, -maxReasonableAccel, maxReasonableAccel);
+        physicsAcceleration.z = Mathf.Clamp(physicsAcceleration.z, -maxReasonableAccel, maxReasonableAccel);
+
+        smoothedAcceleration = Vector3.Lerp(smoothedAcceleration, physicsAcceleration, accelSmoothFactor);
+
+        if (axisMode == AxisMode.Auto)
+            UpdateAutoAxis();
     }
 
     void Update()
     {
+        if (!HasValidTarget())
+            return;
+
         timer += Time.deltaTime;
         if (timer < updateInterval) return;
         timer = 0f;
 
-        float posZ = GetCurrentPositionZ();
-        float velZ = physicsVelZ;
-        float accelZ = accelSmoothed;
+        Vector3 pos = (graphType == GraphType.Position)
+            ? GetPositionDisplacementVector()
+            : GetCurrentPositionVector();
 
-        bool isMoving = Mathf.Abs(velZ) > movementThreshold;
+        Vector3 vel = physicsVelocity;
+        Vector3 accel = smoothedAcceleration;
+
+        float posValue = GetAxisValue(pos);
+        float velValue = GetAxisValue(vel);
+        float accelValue = GetAxisValue(accel);
+
+        bool isMoving = vel.magnitude > movementThreshold;
         if (!isMoving)
         {
             if (!graphFrozen)
             {
                 graphFrozen = true;
-                lastRecordedValue = (index == 0) ? values[(maxPoints - 1)] : values[index - 1];
+                lastRecordedValue = (index == 0) ? values[maxPoints - 1] : values[index - 1];
             }
 
             if (yAxisLabel)
             {
                 if (graphType == GraphType.Acceleration)
-                    yAxisLabel.text = $"{graphType}: {0.00f:F2}";
+                    yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {0.00f:F2}";
                 else
-                    yAxisLabel.text = $"{graphType}: {lastRecordedValue:F2}";
+                    yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {lastRecordedValue:F2}";
             }
-
-            //if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
 
             UpdatePeakDisplay();
             return;
@@ -173,17 +185,17 @@ public class MotionGraph : MonoBehaviour
         switch (graphType)
         {
             case GraphType.Position:
-                newValue = posZ;
+                newValue = posValue;
                 peakPosition = Mathf.Max(peakPosition, Mathf.Abs(newValue));
                 break;
 
             case GraphType.Velocity:
-                newValue = velZ * velocityScale; 
+                newValue = velValue * velocityScale;
                 peakVelocity = Mathf.Max(peakVelocity, Mathf.Abs(newValue));
                 break;
 
             case GraphType.Acceleration:
-                newValue = accelZ * accelScale;
+                newValue = accelValue * accelScale;
                 peakAcceleration = Mathf.Max(peakAcceleration, Mathf.Abs(newValue));
                 break;
         }
@@ -193,33 +205,202 @@ public class MotionGraph : MonoBehaviour
         AddValue(newValue);
         RedrawGraph();
 
-        if (yAxisLabel) yAxisLabel.text = $"{graphType}: {newValue:F2}";
-        //if (xAxisLabel) xAxisLabel.text = $"t={Time.time:F1}s";
+        if (yAxisLabel)
+            yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {newValue:F2}";
 
         UpdatePeakDisplay();
     }
 
-    float GetCurrentPositionZ()
+    public void SetTarget(Transform newTarget, Transform newReference = null)
     {
-        if (!targetTransform) return 0f;
+        targetTransform = newTarget;
+        referenceTransform = newReference;
 
-        float tz = targetTransform.position.z;
-        float rz = referenceTransform ? referenceTransform.position.z : 0f;
-        return tz - rz;
+        if (targetTransform != null)
+            targetRigidbody = targetTransform.GetComponent<Rigidbody>();
+        else
+            targetRigidbody = null;
+
+        ResetGraph();
+        InitializeTrackingState();
     }
 
-    float GetCurrentVelocityZ()
+    public void ResetGraph()
     {
-        if (!targetRigidbody) return 0f;
+        if (values == null || values.Length != maxPoints)
+            values = new float[maxPoints];
+        else
+            System.Array.Clear(values, 0, values.Length);
 
-        float refVel = 0f;
+        index = 0;
+        timer = 0f;
+
+        graphFrozen = false;
+        lastRecordedValue = 0f;
+
+        peakPosition = 0f;
+        peakVelocity = 0f;
+        peakAcceleration = 0f;
+
+        physicsPrevVelocity = Vector3.zero;
+        physicsVelocity = Vector3.zero;
+        physicsAcceleration = Vector3.zero;
+        smoothedAcceleration = Vector3.zero;
+
+        prevPositionForFallback = Vector3.zero;
+        initialRelativePosition = Vector3.zero;
+        prevPosInitialized = false;
+
+        currentAutoAxis = AxisMode.Y;
+
+        if (yAxisLabel)
+            yAxisLabel.text = $"{graphType}: 0.00";
+
+        if (peakText)
+            peakText.text = $"{graphType} Peak: 0.00";
+
+        RedrawGraph();
+    }
+
+    private void InitializeTrackingState()
+    {
+        if (targetTransform)
+        {
+            Vector3 currentPos = GetCurrentPositionVector();
+            prevPositionForFallback = currentPos;
+            initialRelativePosition = currentPos;
+            prevPosInitialized = true;
+        }
+        else
+        {
+            prevPosInitialized = false;
+            prevPositionForFallback = Vector3.zero;
+            initialRelativePosition = Vector3.zero;
+        }
+
+        if (targetRigidbody)
+        {
+            physicsPrevVelocity = GetCurrentVelocityVector();
+            physicsVelocity = physicsPrevVelocity;
+            physicsAcceleration = Vector3.zero;
+            smoothedAcceleration = Vector3.zero;
+        }
+        else
+        {
+            physicsPrevVelocity = Vector3.zero;
+            physicsVelocity = Vector3.zero;
+            physicsAcceleration = Vector3.zero;
+            smoothedAcceleration = Vector3.zero;
+        }
+
+        if (axisMode == AxisMode.Auto)
+            UpdateAutoAxis();
+    }
+
+    private bool HasValidTarget()
+    {
+        return targetTransform != null;
+    }
+
+    private void UpdateAutoAxis()
+    {
+        Vector3 source = Vector3.zero;
+
+        switch (graphType)
+        {
+            case GraphType.Position:
+                source = GetAbsoluteVector(GetPositionDisplacementVector());
+                break;
+
+            case GraphType.Velocity:
+                source = GetAbsoluteVector(physicsVelocity);
+                break;
+
+            case GraphType.Acceleration:
+                source = GetAbsoluteVector(smoothedAcceleration);
+                break;
+        }
+
+        float currentStrength = GetAxisValue(source, currentAutoAxis);
+
+        AxisMode bestAxis = currentAutoAxis;
+        float bestValue = currentStrength;
+
+        if (source.x > bestValue + axisSwitchThreshold)
+        {
+            bestAxis = AxisMode.X;
+            bestValue = source.x;
+        }
+
+        if (source.y > bestValue + axisSwitchThreshold)
+        {
+            bestAxis = AxisMode.Y;
+            bestValue = source.y;
+        }
+
+        if (source.z > bestValue + axisSwitchThreshold)
+        {
+            bestAxis = AxisMode.Z;
+            bestValue = source.z;
+        }
+
+        currentAutoAxis = bestAxis;
+    }
+
+    private Vector3 GetCurrentPositionVector()
+    {
+        if (!targetTransform) return Vector3.zero;
+
+        Vector3 targetPos = targetTransform.position;
+        Vector3 refPos = referenceTransform ? referenceTransform.position : Vector3.zero;
+        return targetPos - refPos;
+    }
+
+    private Vector3 GetPositionDisplacementVector()
+    {
+        return GetCurrentPositionVector() - initialRelativePosition;
+    }
+
+    private Vector3 GetCurrentVelocityVector()
+    {
+        if (!targetRigidbody) return Vector3.zero;
+
+        Vector3 refVel = Vector3.zero;
         if (referenceTransform)
         {
             Rigidbody rb = referenceTransform.GetComponent<Rigidbody>();
-            if (rb) refVel = rb.linearVelocity.z;
+            if (rb) refVel = rb.linearVelocity;
         }
 
-        return targetRigidbody.linearVelocity.z - refVel;
+        return targetRigidbody.linearVelocity - refVel;
+    }
+
+    private float GetAxisValue(Vector3 v)
+    {
+        AxisMode axis = axisMode == AxisMode.Auto ? currentAutoAxis : axisMode;
+        return GetAxisValue(v, axis);
+    }
+
+    private float GetAxisValue(Vector3 v, AxisMode axis)
+    {
+        switch (axis)
+        {
+            case AxisMode.X: return v.x;
+            case AxisMode.Y: return v.y;
+            case AxisMode.Z: return v.z;
+            default: return v.x;
+        }
+    }
+
+    private Vector3 GetAbsoluteVector(Vector3 v)
+    {
+        return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+    }
+
+    private string GetAxisLabel()
+    {
+        AxisMode axis = axisMode == AxisMode.Auto ? currentAutoAxis : axisMode;
+        return axis.ToString();
     }
 
     void AddValue(float v)
@@ -337,6 +518,6 @@ public class MotionGraph : MonoBehaviour
             case GraphType.Acceleration: peak = peakAcceleration; break;
         }
 
-        peakText.text = $"{graphType} Peak: {peak:F2}";
+        peakText.text = $"{graphType} Peak ({GetAxisLabel()}): {peak:F2}";
     }
 }
