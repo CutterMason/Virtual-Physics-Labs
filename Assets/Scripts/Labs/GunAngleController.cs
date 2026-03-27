@@ -23,7 +23,7 @@ public class GunAngleControl : MonoBehaviour
         float angle = angleSlider.value;
 
         // rotate ONLY on X axis
-        gunPivot.localRotation = Quaternion.Euler(angle, 0f, 0f);
+        gunPivot.localRotation = Quaternion.Euler(angle, -90f, 0f);
         AngleText.text = Mathf.Abs(angle).ToString("F1") + "°";
     }
 }

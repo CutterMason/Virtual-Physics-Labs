@@ -15,7 +15,7 @@ public class Camera_Zoom : MonoBehaviour
         cam = GetComponent<Camera>();
 
         // Set the starting zoom here
-        targetZoom = 3f; // smaller number = closer zoom
+        targetZoom = 1f; // smaller number = closer zoom
 
         if (cam.orthographic)
             cam.orthographicSize = targetZoom;

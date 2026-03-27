@@ -31,15 +31,15 @@ public class InelasticCollision : MonoBehaviour
         float mA = A.mass;
         float mB = B.mass;
 
-        float vA = A.linearVelocity.z;
-        float vB = B.linearVelocity.z;
+        float vA = A.linearVelocity.x;
+        float vB = B.linearVelocity.x;
 
         float finalV = (mA * vA + mB * vB) / (mA + mB);
 
         yield return new WaitForFixedUpdate();
 
-        A.linearVelocity = new Vector3(0, 0, finalV);
-        B.linearVelocity = new Vector3(0, 0, finalV);
+        A.linearVelocity = new Vector3(finalV, 0, 0);
+        B.linearVelocity = new Vector3(finalV, 0, 0);
 
         FixedJoint joint = A.gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = B;
