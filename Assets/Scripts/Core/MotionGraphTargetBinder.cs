@@ -7,6 +7,7 @@ public class MotionGraphTargetBinder : MonoBehaviour
     public MotionGraph velocityGraph;
     public MotionGraph accelerationGraph;
     public MotionGraph positionGraph;
+    public MotionGraph forceGraph;
 
     [Header("Optional")]
     public Transform referenceTransform;
@@ -47,5 +48,8 @@ public class MotionGraphTargetBinder : MonoBehaviour
 
         if (positionGraph != null)
             positionGraph.SetTarget(target, referenceTransform);
+
+        if (forceGraph != null)
+            forceGraph.SetTarget(target, referenceTransform);
     }
 }

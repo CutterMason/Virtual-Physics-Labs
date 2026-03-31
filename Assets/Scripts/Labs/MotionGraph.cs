@@ -4,7 +4,7 @@ using TMPro;
 
 public class MotionGraph : MonoBehaviour
 {
-    public enum GraphType { Position, Velocity, Acceleration }
+    public enum GraphType { Position, Velocity, Acceleration, Force }
     public enum AxisMode { Auto, X, Y, Z }
 
     [Header("Graph Type")]
@@ -69,6 +69,7 @@ public class MotionGraph : MonoBehaviour
     private float peakPosition = 0f;
     private float peakVelocity = 0f;
     private float peakAcceleration = 0f;
+    private float peakForce = 0f;
 
     private bool graphFrozen = false;
     private float lastRecordedValue = 0f;
@@ -84,7 +85,7 @@ public class MotionGraph : MonoBehaviour
         SetupContainer(negativeLineContainer);
 
         if (peakText)
-            peakText.text = $"{graphType} Peak: 0.00";
+            peakText.text = $"{graphType} Peak: 0.00 {GetUnits()}";
 
         if (xAxisLabel)
             xAxisLabel.text = "";
@@ -152,9 +153,14 @@ public class MotionGraph : MonoBehaviour
         Vector3 vel = physicsVelocity;
         Vector3 accel = smoothedAcceleration;
 
+        Vector3 force = Vector3.zero;
+        if (targetRigidbody != null)
+            force = smoothedAcceleration * targetRigidbody.mass;
+
         float posValue = GetAxisValue(pos);
         float velValue = GetAxisValue(vel);
         float accelValue = GetAxisValue(accel);
+        float forceValue = GetAxisValue(force);
 
         bool isMoving = vel.magnitude > movementThreshold;
         if (!isMoving)
@@ -167,10 +173,10 @@ public class MotionGraph : MonoBehaviour
 
             if (yAxisLabel)
             {
-                if (graphType == GraphType.Acceleration)
-                    yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {0.00f:F2}";
+                if (graphType == GraphType.Acceleration || graphType == GraphType.Force)
+                    yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {0.00f:F2} {GetUnits()}";
                 else
-                    yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {lastRecordedValue:F2}";
+                    yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {lastRecordedValue:F2} {GetUnits()}";
             }
 
             UpdatePeakDisplay();
@@ -198,6 +204,11 @@ public class MotionGraph : MonoBehaviour
                 newValue = accelValue * accelScale;
                 peakAcceleration = Mathf.Max(peakAcceleration, Mathf.Abs(newValue));
                 break;
+
+            case GraphType.Force:
+                newValue = forceValue;
+                peakForce = Mathf.Max(peakForce, Mathf.Abs(newValue));
+                break;
         }
 
         lastRecordedValue = newValue;
@@ -206,7 +217,7 @@ public class MotionGraph : MonoBehaviour
         RedrawGraph();
 
         if (yAxisLabel)
-            yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {newValue:F2}";
+            yAxisLabel.text = $"{graphType} ({GetAxisLabel()}): {newValue:F2} {GetUnits()}";
 
         UpdatePeakDisplay();
     }
@@ -241,6 +252,7 @@ public class MotionGraph : MonoBehaviour
         peakPosition = 0f;
         peakVelocity = 0f;
         peakAcceleration = 0f;
+        peakForce = 0f;
 
         physicsPrevVelocity = Vector3.zero;
         physicsVelocity = Vector3.zero;
@@ -254,10 +266,10 @@ public class MotionGraph : MonoBehaviour
         currentAutoAxis = AxisMode.Y;
 
         if (yAxisLabel)
-            yAxisLabel.text = $"{graphType}: 0.00";
+            yAxisLabel.text = $"{graphType}: 0.00 {GetUnits()}";
 
         if (peakText)
-            peakText.text = $"{graphType} Peak: 0.00";
+            peakText.text = $"{graphType} Peak: 0.00 {GetUnits()}";
 
         RedrawGraph();
     }
@@ -318,6 +330,10 @@ public class MotionGraph : MonoBehaviour
 
             case GraphType.Acceleration:
                 source = GetAbsoluteVector(smoothedAcceleration);
+                break;
+
+            case GraphType.Force:
+                source = targetRigidbody ? GetAbsoluteVector(smoothedAcceleration * targetRigidbody.mass) : Vector3.zero;
                 break;
         }
 
@@ -401,6 +417,18 @@ public class MotionGraph : MonoBehaviour
     {
         AxisMode axis = axisMode == AxisMode.Auto ? currentAutoAxis : axisMode;
         return axis.ToString();
+    }
+
+    private string GetUnits()
+    {
+        switch (graphType)
+        {
+            case GraphType.Position: return "m";
+            case GraphType.Velocity: return "m/s";
+            case GraphType.Acceleration: return "m/s²";
+            case GraphType.Force: return "N";
+            default: return "";
+        }
     }
 
     void AddValue(float v)
@@ -516,8 +544,9 @@ public class MotionGraph : MonoBehaviour
             case GraphType.Position: peak = peakPosition; break;
             case GraphType.Velocity: peak = peakVelocity; break;
             case GraphType.Acceleration: peak = peakAcceleration; break;
+            case GraphType.Force: peak = peakForce; break;
         }
 
-        peakText.text = $"{graphType} Peak ({GetAxisLabel()}): {peak:F2}";
+        peakText.text = $"{graphType} Peak ({GetAxisLabel()}): {peak:F2} {GetUnits()}";
     }
 }
