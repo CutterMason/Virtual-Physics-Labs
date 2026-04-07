@@ -5,8 +5,9 @@ using TMPro;
 [RequireComponent(typeof(Rigidbody))]
 public class SpringPhysicsRigidbody : MonoBehaviour
 {
-    [Range(250f,600f)]
+    
     public Transform targetPoint;
+    [Range(250f,600f)]
     public float springStrength = 250f;  //changing to 250 for bottom limit as we know 470 matches
     public float damping = 5f;
     public Slider springSlider;
