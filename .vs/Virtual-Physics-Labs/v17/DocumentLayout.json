@@ -1,64 +1,64 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\",
+  "WorkspaceRootPath": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\FirebaseInit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\GameControls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\NotesExporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\NotesExporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\NotesExporter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LoadManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GraphDropDownSelector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GraphDropDownSelector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\GraphDropDownSelector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\MotionGraph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\MotionGraph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Labs\\MotionGraph.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\GraphController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\GraphController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Labs\\GraphController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\CameraModeSwitcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SavableObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SavableObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SavableObject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\PrefabRegistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SaveManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -69,28 +69,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "FirebaseInit.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\FirebaseInit.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FirebaseInit.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\FirebaseInit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-28T20:13:14.939Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-28T20:13:14.939Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "NotesExporter.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\NotesExporter.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\NotesExporter.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\NotesExporter.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\NotesExporter.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\NotesExporter.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\NotesExporter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -101,9 +103,9 @@
               "DocumentIndex": 6,
               "Title": "Graphbinder.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs",
-              "RelativeDocumentMoniker": "..\\..\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs",
               "ToolTip": "C:\\Users\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs",
-              "RelativeToolTip": "..\\..\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\cutte\\OneDrive\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\Graphbinder.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-10T19:02:43.96Z"
             },
@@ -111,9 +113,9 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "GraphDropDownSelector.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GraphDropDownSelector.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GraphDropDownSelector.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\GraphDropDownSelector.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GraphDropDownSelector.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GraphDropDownSelector.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\GraphDropDownSelector.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAmwEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -123,9 +125,9 @@
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "MotionGraph.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\MotionGraph.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\MotionGraph.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Labs\\MotionGraph.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\MotionGraph.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\MotionGraph.cs",
               "RelativeToolTip": "Assets\\Scripts\\Labs\\MotionGraph.cs",
               "ViewState": "AgIAAD8BAAAAAAAAAAAAAFUBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -135,9 +137,9 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "GraphController.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\GraphController.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\GraphController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Labs\\GraphController.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\GraphController.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Labs\\GraphController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Labs\\GraphController.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAmwCoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -147,9 +149,9 @@
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "CameraModeSwitcher.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAmwCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -159,22 +161,21 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "PlayModeLockOnCamera.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
               "ViewState": "AgIAAKsAAAAAAAAAAAAAAN4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-10T18:08:28.184Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-10T18:08:28.184Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
               "Title": "SavableObject.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SavableObject.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SavableObject.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SavableObject.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SavableObject.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SavableObject.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\SavableObject.cs",
               "ViewState": "AgIAACcAAAAAAAAAAIBJwCIAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -184,9 +185,9 @@
               "$type": "Document",
               "DocumentIndex": 12,
               "Title": "PrefabRegistry.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\PrefabRegistry.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\PrefabRegistry.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -196,9 +197,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "LoadManager.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\LoadManager.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LoadManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\LoadManager.cs",
               "ViewState": "AgIAAKUAAAAAAAAAAAAAANQAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -208,9 +209,9 @@
               "$type": "Document",
               "DocumentIndex": 14,
               "Title": "SaveManager.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SaveManager.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\SaveManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -220,9 +221,9 @@
               "$type": "Document",
               "DocumentIndex": 13,
               "Title": "FlyCamera.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\FlyCamera.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\FlyCamera.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -232,9 +233,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "GameControls.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\GameControls.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\GameControls.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\GameControls.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAAAH0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -244,9 +245,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "LockOnCamera.cs",
-              "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
+              "DocumentMoniker": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\LockOnCamera.cs",
-              "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
+              "ToolTip": "C:\\Users\\hunte\\Documents\\GitHub\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\LockOnCamera.cs",
               "ViewState": "AgIAAJQAAAAAAAAAAAAAAKMBAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
