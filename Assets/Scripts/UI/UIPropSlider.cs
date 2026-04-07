@@ -7,7 +7,7 @@ public class PropertyPanel : MonoBehaviour
     [Header("Sliders")]
     public Slider massSlider;
     public Slider sizeSlider;
-    public Slider speedSlider;
+    //public Slider speedSlider;
 
     [Header("Buttons")]
     public Button applyButton;
@@ -22,7 +22,7 @@ public class PropertyPanel : MonoBehaviour
     private PropertyEditorManager manager;
     //previously had live effect on sliders but crashed application, now switch to an apply button
     private float temp_size;
-    private float temp_speed;
+    //private float temp_speed;
     private float temp_mass;
 
     //all methods public to allow Unity to call
@@ -39,15 +39,15 @@ public class PropertyPanel : MonoBehaviour
         // Load the object's current values into the UI
         sizeSlider.value = targetObject.size.x;   // assuming uniform scaling
         massSlider.value = targetObject.mass;
-        speedSlider.value = targetObject.speed;
+        //speedSlider.value = targetObject.speed;
 
         temp_mass = massSlider.value;
         temp_size = sizeSlider.value;
-        temp_speed = speedSlider.value;
+        //temp_speed = speedSlider.value;
 
         massSlider.onValueChanged.RemoveAllListeners();
         sizeSlider.onValueChanged.RemoveAllListeners();
-        speedSlider.onValueChanged.RemoveAllListeners();
+        //speedSlider.onValueChanged.RemoveAllListeners();
 
         // Update pending variables when sliders move
         massSlider.onValueChanged.AddListener(v =>
@@ -63,10 +63,10 @@ public class PropertyPanel : MonoBehaviour
             UpdateValueLabel(sizeValueText, v);
         });
         UpdateValueLabel(sizeValueText, sizeSlider.value);
-        speedSlider.onValueChanged.AddListener(v => temp_speed = v);
+        //speedSlider.onValueChanged.AddListener(v => temp_speed = v);
 
         // Activate/deactivate speed slider dynamically
-        speedSlider.gameObject.SetActive(true);
+        //speedSlider.gameObject.SetActive(true);
 
         applyButton.onClick.RemoveAllListeners();
         applyButton.onClick.AddListener(ApplyChanges);
@@ -89,16 +89,16 @@ public class PropertyPanel : MonoBehaviour
 
          targetObject.ApplyChanges(
             massSlider.value,
-            Vector3.one * sizeSlider.value,
-            speedSlider.value
+            Vector3.one * sizeSlider.value
+            //speedSlider.value
         );
     }
     private void OnSliderChanged()
     {
         targetObject.ApplyChanges(
             massSlider.value,
-            Vector3.one * sizeSlider.value,
-            speedSlider.value
+            Vector3.one * sizeSlider.value
+            //speedSlider.value
         );
     }
     //all the refrences will change part of the asset
@@ -106,20 +106,20 @@ public class PropertyPanel : MonoBehaviour
     public void Masschanged(float value)
     {
 
-        targetObject.ApplyChanges(value, targetObject.size, targetObject.speed);
+        targetObject.ApplyChanges(value, targetObject.size);
     }
 
     public void Sizechanged(float value)
     {
         Vector3 newsize = value * Vector3.one;
-        targetObject.ApplyChanges(targetObject.mass, newsize, targetObject.speed); //need to look how to pass vector in new assignment
+        targetObject.ApplyChanges(targetObject.mass, newsize); //need to look how to pass vector in new assignment
     }
-    
+/*    
     public void Speedchanged(float value)
     {
         targetObject.ApplyChanges(targetObject.mass, targetObject.size, value);
     }
-
+*/
     public void ResetToOriginal()
     {
         if (targetObject == null) return;
@@ -128,10 +128,10 @@ public class PropertyPanel : MonoBehaviour
         // Refresh UI after reset
         sizeSlider.value = targetObject.size.x;
         massSlider.value = targetObject.mass;
-        speedSlider.value = targetObject.speed;
+        //speedSlider.value = targetObject.speed;
         temp_mass = massSlider.value;
         temp_size = sizeSlider.value;
-        temp_speed = speedSlider.value;
+        //temp_speed = speedSlider.value;
     }
 
     public void ClosePanel()
