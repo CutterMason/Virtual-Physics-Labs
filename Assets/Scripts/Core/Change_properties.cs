@@ -6,13 +6,11 @@ public class PhysicsObject : MonoBehaviour
     private Rigidbody rb;
     private Vector3 originalScale;
     private float originalMass;
-    private float originalSpeed = 5f;
 
     [Header("Editable Properties")]
     [Range(0.05f, 1f)]
     public float mass = 1f;
 
-    public float speed = 5f;
     public Vector3 size = Vector3.one;
 
     private const float MIN_MASS = 0.05f;
@@ -29,14 +27,14 @@ public class PhysicsObject : MonoBehaviour
         mass = Mathf.Clamp(mass, MIN_MASS, MAX_MASS);
     }
 
-    public void ApplyChanges(float newMass, Vector3 newSize, float newSpeed)
+    public void ApplyChanges(float newMass, Vector3 newSize)
     {
         // Clamp mass to valid range ALWAYS
         newMass = Mathf.Clamp(newMass, MIN_MASS, MAX_MASS);
 
         // Save the clamped mass + speed
         mass = newMass;
-        speed = newSpeed;
+        //speed = newSpeed;
 
         // Only update size if user changed it
         if (newSize != size)
@@ -53,7 +51,6 @@ public class PhysicsObject : MonoBehaviour
     {
         size = originalScale;
         mass = originalMass;
-        speed = originalSpeed;
 
         transform.localScale = originalScale;
         rb.mass = originalMass;

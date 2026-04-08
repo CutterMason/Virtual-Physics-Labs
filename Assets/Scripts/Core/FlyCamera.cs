@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(CharacterController))]
 public class FlyCameraCC : MonoBehaviour
@@ -19,7 +20,7 @@ public class FlyCameraCC : MonoBehaviour
 
     [Header("UI")]
     public Slider speedSlider;
-    public Text speedText; 
+    public TMP_Text speedText; 
 
     private CharacterController cc;
     private float yaw;
@@ -34,27 +35,28 @@ public class FlyCameraCC : MonoBehaviour
         Vector3 euler = transform.eulerAngles;
         yaw = euler.y;
         pitch = euler.x;
-
-        
-        if (speedSlider != null)
-        {
-            speedSlider.minValue = 0.5f;
-            speedSlider.maxValue = 1.5f;
-            speedSlider.value = 1f;
-            speedSlider.onValueChanged.AddListener(UpdateSpeedMultiplier);
-        }
-
-        UpdateSpeedText();
     }
 
     void Start()
     {
-        moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
+        speedMultiplier = PlayerPrefs.GetFloat("CameraSpeed", 1f);
+        if (speedSlider != null)
+        {
+            speedSlider.minValue = 0.5f;
+            speedSlider.maxValue = 1.5f;
+            speedSlider.value = speedMultiplier;
+            speedSlider.onValueChanged.RemoveAllListeners();
+            speedSlider.onValueChanged.AddListener(UpdateSpeedMultiplier);
+        }
+        UpdateSpeedText();
     }
 
     void UpdateSpeedMultiplier(float value)
     {
         speedMultiplier = value;
+        PlayerPrefs.SetFloat("CameraSpeed", value);
+        PlayerPrefs.Save();
+
         UpdateSpeedText();
     }
 
@@ -69,8 +71,8 @@ public class FlyCameraCC : MonoBehaviour
 
     void Update()
     {
-    moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
-
+        // OPTIONAL live update from settings
+        //moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
         HandleLook();
         MoveWithCollisions();
     }
@@ -133,5 +135,11 @@ public class FlyCameraCC : MonoBehaviour
         }
 
         UpdateSpeedText();
+    }
+
+    void SaveSpeed(float value)
+    {
+        PlayerPrefs.SetFloat("Camera Speed", value);
+        PlayerPrefs.Save();
     }
 }
