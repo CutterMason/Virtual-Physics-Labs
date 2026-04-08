@@ -13,7 +13,7 @@ public class GameControls : MonoBehaviour
 
     [Header("Startup")]
     [SerializeField] private bool pauseOnLoad = true;
-    [SerializeField] private bool startInEditMode = true;
+    [SerializeField] private bool startInEditMode = false;
 
     private Rigidbody[] allBodies;
     private readonly Dictionary<Rigidbody, Vector3> storedVelocities = new();
@@ -176,5 +176,31 @@ public class GameControls : MonoBehaviour
 
         if (IsPaused)
             ResumeGame();
+    }
+
+    public void PressPlayForceTable(ForceTableLabController labController)
+    {
+        if (IsEditMode)
+            ExitEditMode();
+
+        if (!IsPaused)
+            PauseGame();
+
+        if (labController != null)
+            labController.BeginSimulation();
+    }
+
+    public void ResetForceTable(ForceTableLabController labController, ForceTableAdjustmentPanel panel = null)
+    {
+        if (!IsPaused)
+            PauseGame();
+
+        if (labController != null)
+            labController.ResetToDefaults();
+
+        EnterEditMode();
+
+        if (panel != null)
+            panel.SyncSlidersFromLab();
     }
 }

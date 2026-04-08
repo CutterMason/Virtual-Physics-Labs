@@ -7711,11 +7711,27 @@ MonoBehaviour:
   weight1Object: {fileID: 1304117554}
   weight2Object: {fileID: 1052370483}
   weight3Object: {fileID: 1544160572}
+  rope1CenterAnchor: {fileID: 1763152459}
+  rope1PulleyTopAnchor: {fileID: 1420249485}
+  rope1PulleyBottomAnchor: {fileID: 1358490959}
+  rope1WeightAnchor: {fileID: 1483816712}
+  rope2CenterAnchor: {fileID: 675089177}
+  rope2PulleyTopAnchor: {fileID: 1868628831}
+  rope2PulleyBottomAnchor: {fileID: 1839036956}
+  rope2WeightAnchor: {fileID: 1830726875}
+  rope3CenterAnchor: {fileID: 369266665}
+  rope3PulleyTopAnchor: {fileID: 12002715}
+  rope3PulleyBottomAnchor: {fileID: 457265171}
+  rope3WeightAnchor: {fileID: 969012464}
   tableRadius: 0.35
   pulleyYHeight: 0.45
   minSeparationDegrees: 15
   weightHangDistance: 0.45
-  weightsFollowInEditMode: 0
+  weightsFollowInEditMode: 1
+  centerAnchorOffset: {x: 0, y: 0, z: 0}
+  pulleyTopAnchorOffset: {x: 0, y: 0, z: 0}
+  pulleyBottomAnchorOffset: {x: 0, y: 0, z: 0}
+  weightAnchorOffset: {x: 0, y: 0, z: 0}
   angle1: 0
   angle2: 135
   angle3: 300
