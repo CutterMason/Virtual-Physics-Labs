@@ -89,9 +89,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PresetLabs/Lab_1_Measurement.unity
     guid: 3d0feacfb25605d408a9965c7a3953e4
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/PresetLabs/Lab_2_1st_Law.unity
-    guid: 5000e8479915d874292b6fc3cb07a88c
+    guid: 1f649df378c189e4d921d557c106a0df
   - enabled: 1
     path: Assets/Scenes/PresetLabs/Lab_6_Friction.unity
     guid: 77c7f07739076b54dbf79bda0c5a81e9
