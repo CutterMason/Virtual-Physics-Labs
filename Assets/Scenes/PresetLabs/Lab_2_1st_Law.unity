@@ -708,7 +708,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 26118773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed96a1256dd07fa418716c4dcd10e6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: d2714c31028a7eb40925f3b56076b680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   p1Slider: {fileID: 1233022813}
@@ -724,6 +724,10 @@ MonoBehaviour:
   weight2Value: {fileID: 32012316}
   weight3Value: {fileID: 2143756849}
   labController: {fileID: 452805065}
+  pulleyMin: 0
+  pulleyMax: 360
+  weightMin: 0
+  weightMax: 5
 --- !u!1001 &30755116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6193,17 +6197,17 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 452805062}
-        m_TargetAssemblyTypeName: GameControls, Assembly-CSharp
-        m_MethodName: ToggleEditMode
-        m_Mode: 1
+      - m_Target: {fileID: 452805066}
+        m_TargetAssemblyTypeName: ForceTableTopBarBridge, Assembly-CSharp
+        m_MethodName: SetEditMode
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_IsOn: 0
 --- !u!1001 &380439404
@@ -7597,6 +7601,7 @@ GameObject:
   - component: {fileID: 452805057}
   - component: {fileID: 452805064}
   - component: {fileID: 452805065}
+  - component: {fileID: 452805066}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -7701,10 +7706,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 452805056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc9b960597c7e64c9d39e1d3785c577, type: 3}
+  m_Script: {fileID: 11500000, guid: d39157c2e4e8245438df8627a0d6a636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tableCenter: {fileID: 2101454849}
+  centerRingVisual: {fileID: 2101454849}
   pulley1: {fileID: 917925585}
   pulley2: {fileID: 1178795803}
   pulley3: {fileID: 1147221467}
@@ -7716,28 +7722,48 @@ MonoBehaviour:
   rope1PulleyBottomAnchor: {fileID: 1358490959}
   rope1WeightAnchor: {fileID: 1483816712}
   rope2CenterAnchor: {fileID: 675089177}
-  rope2PulleyTopAnchor: {fileID: 1868628831}
+  rope2PulleyTopAnchor: {fileID: 767419607}
   rope2PulleyBottomAnchor: {fileID: 1839036956}
   rope2WeightAnchor: {fileID: 1830726875}
   rope3CenterAnchor: {fileID: 369266665}
-  rope3PulleyTopAnchor: {fileID: 12002715}
+  rope3PulleyTopAnchor: {fileID: 1036394705}
   rope3PulleyBottomAnchor: {fileID: 457265171}
   rope3WeightAnchor: {fileID: 969012464}
-  tableRadius: 0.35
+  tableRadius: 0.28
   pulleyYHeight: 0.45
+  weightHangDistance: 0.35
   minSeparationDegrees: 15
-  weightHangDistance: 0.45
-  weightsFollowInEditMode: 1
-  centerAnchorOffset: {x: 0, y: 0, z: 0}
-  pulleyTopAnchorOffset: {x: 0, y: 0, z: 0}
-  pulleyBottomAnchorOffset: {x: 0, y: 0, z: 0}
-  weightAnchorOffset: {x: 0, y: 0, z: 0}
-  angle1: 0
-  angle2: 135
+  equilibriumTolerance: 0.1
+  fullMotionNetForce: 3
+  ringShiftDistance: 0.03
+  weightTravelDistance: 0.08
+  simulationDuration: 0.8
+  angle1: 60
+  angle2: 180
   angle3: 300
-  weight1: 0.25
-  weight2: 0.25
-  weight3: 0.25
+  weight1: 1
+  weight2: 1
+  weight3: 1
+  isInEquilibrium: 0
+  netForce: {x: 0, y: 0}
+  netForceMagnitude: 0
+  netForceAngleDegrees: 0
+  pulleyRotationOffset: {x: 0, y: 180, z: 0}
+--- !u!114 &452805066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452805056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95d52d1137f3644494b316545915efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameControls: {fileID: 452805062}
+  labController: {fileID: 452805065}
+  adjustmentPanel: {fileID: 26118777}
 --- !u!1 &457265170
 GameObject:
   m_ObjectHideFlags: 0
@@ -27273,10 +27299,14 @@ PrefabInstance:
     - target: {fileID: 96121608605818032, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 452805062}
+      objectReference: {fileID: 452805066}
     - target: {fileID: 96121608605818032, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PressPlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 96121608605818032, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ForceTableTopBarBridge, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 180216573051057833, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_Size
@@ -27453,10 +27483,14 @@ PrefabInstance:
     - target: {fileID: 2937771223241546974, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 452805062}
+      objectReference: {fileID: 452805066}
     - target: {fileID: 2937771223241546974, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartScene
+      value: ResetLab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2937771223241546974, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ForceTableTopBarBridge, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2980250115730146368, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_AnchorMax.x
