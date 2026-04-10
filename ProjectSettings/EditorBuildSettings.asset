@@ -102,11 +102,14 @@ EditorBuildSettings:
     path: Assets/Scenes/PresetLabs/Lab_10_Torque.unity
     guid: 32e46d86b99cb034b948bba1f90a7ebb
   - enabled: 1
-    path: Assets/Scenes/PresetLabs/Lab_12_Spring.unity
+    path: Assets/Scenes/PresetLabs/Lab_12_Spring_Part1.unity
     guid: a4a7edad65fb5b24195a575cd870a3c7
   - enabled: 1
     path: Assets/Scenes/MenuUI/ControlsUI.unity
     guid: 309b01106133e684bb60f24d313873cb
+  - enabled: 1
+    path: Assets/Scenes/PresetLabs/Lab_12_Spring_Part2.unity
+    guid: 47f089ae628918545b1f82cb8ba965a6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
