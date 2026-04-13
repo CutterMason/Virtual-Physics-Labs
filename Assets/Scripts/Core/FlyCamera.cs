@@ -20,18 +20,34 @@ public class FlyCameraCC : MonoBehaviour
 
     [Header("UI")]
     public Slider speedSlider;
-    public TMP_Text speedText; 
+    public TMP_Text speedText;
+
+    [Header("Top View")]
+    public Transform turntableCenter;
+    public float topViewHeight = 3f;
+    public KeyCode topViewToggleKey = KeyCode.V;
+    public float topViewMoveSpeed = 8f;
+    public bool lookStraightDown = true;
+
+    [Header("Optional")]
+    public MonoBehaviour lockOnCameraScript; // assign LockOnCamera here if needed
 
     private CharacterController cc;
     private float yaw;
     private float pitch;
     private Vector3 currentVelocity;
-
     private float speedMultiplier = 1f;
+
+    private bool isTopView = false;
+
+    private Vector3 savedPosition;
+    private Quaternion savedRotation;
+    private bool savedLockOnEnabled;
 
     void Awake()
     {
         cc = GetComponent<CharacterController>();
+
         Vector3 euler = transform.eulerAngles;
         yaw = euler.y;
         pitch = euler.x;
@@ -40,6 +56,7 @@ public class FlyCameraCC : MonoBehaviour
     void Start()
     {
         speedMultiplier = PlayerPrefs.GetFloat("CameraSpeed", 1f);
+
         if (speedSlider != null)
         {
             speedSlider.minValue = 0.5f;
@@ -48,7 +65,94 @@ public class FlyCameraCC : MonoBehaviour
             speedSlider.onValueChanged.RemoveAllListeners();
             speedSlider.onValueChanged.AddListener(UpdateSpeedMultiplier);
         }
+
         UpdateSpeedText();
+    }
+
+    void Update()
+    {
+        HandleTopViewToggle();
+
+        if (isTopView)
+        {
+            HandleTopViewMovement();
+            return;
+        }
+
+        HandleLook();
+        MoveWithCollisions();
+    }
+
+    void HandleTopViewToggle()
+    {
+        if (!Input.GetKeyDown(topViewToggleKey))
+            return;
+
+        if (!isTopView)
+            EnterTopView();
+        else
+            ExitTopView();
+    }
+
+    void EnterTopView()
+    {
+        if (turntableCenter == null)
+        {
+            Debug.LogWarning("FlyCameraCC: No turntableCenter assigned.");
+            return;
+        }
+
+        isTopView = true;
+
+        savedPosition = transform.position;
+        savedRotation = transform.rotation;
+
+        currentVelocity = Vector3.zero;
+
+        if (lockOnCameraScript != null)
+        {
+            savedLockOnEnabled = lockOnCameraScript.enabled;
+            lockOnCameraScript.enabled = false;
+        }
+
+        transform.position = turntableCenter.position + Vector3.up * topViewHeight;
+
+        if (lookStraightDown)
+        {
+            transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        }
+        else
+        {
+            transform.LookAt(turntableCenter);
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    void ExitTopView()
+    {
+        isTopView = false;
+
+        transform.position = savedPosition;
+        transform.rotation = savedRotation;
+
+        Vector3 euler = transform.eulerAngles;
+        yaw = euler.y;
+        pitch = euler.x;
+
+        if (lockOnCameraScript != null)
+        {
+            lockOnCameraScript.enabled = savedLockOnEnabled;
+        }
+    }
+
+    void HandleTopViewMovement()
+    {
+        if (turntableCenter == null) return;
+
+        transform.position = turntableCenter.position + Vector3.up * topViewHeight;
+        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
     void UpdateSpeedMultiplier(float value)
@@ -56,7 +160,6 @@ public class FlyCameraCC : MonoBehaviour
         speedMultiplier = value;
         PlayerPrefs.SetFloat("CameraSpeed", value);
         PlayerPrefs.Save();
-
         UpdateSpeedText();
     }
 
@@ -69,24 +172,14 @@ public class FlyCameraCC : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // OPTIONAL live update from settings
-        //moveSpeed = PlayerPrefs.GetFloat("CameraSpeed", moveSpeed);
-        HandleLook();
-        MoveWithCollisions();
-    }
-
     void HandleLook()
     {
-
         if (!Input.GetMouseButton(1))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             return;
         }
-
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -103,14 +196,12 @@ public class FlyCameraCC : MonoBehaviour
 
     void MoveWithCollisions()
     {
-     
         float dt = Time.unscaledDeltaTime;
 
         float speed = moveSpeed * speedMultiplier * (Input.GetKey(KeyCode.LeftShift) ? fastMultiplier : 1f);
 
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-
 
         Vector3 input = (transform.right * x + transform.forward * z);
 
@@ -135,11 +226,5 @@ public class FlyCameraCC : MonoBehaviour
         }
 
         UpdateSpeedText();
-    }
-
-    void SaveSpeed(float value)
-    {
-        PlayerPrefs.SetFloat("Camera Speed", value);
-        PlayerPrefs.Save();
     }
 }

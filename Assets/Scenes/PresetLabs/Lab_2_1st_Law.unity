@@ -16662,6 +16662,12 @@ MonoBehaviour:
   antiStickPush: 0.2
   speedSlider: {fileID: 0}
   speedText: {fileID: 0}
+  turntableCenter: {fileID: 2101454849}
+  topViewHeight: 1.5
+  topViewToggleKey: 118
+  topViewMoveSpeed: 8
+  lookStraightDown: 1
+  lockOnCameraScript: {fileID: 963194234}
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
