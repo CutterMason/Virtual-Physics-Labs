@@ -211,7 +211,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lab_5_Projectile_Motion
+          m_StringArgument: Lab_5_New
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &172812388
@@ -1495,7 +1495,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lab_7_Energy
+          m_StringArgument: Lab_7_New
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &593209009
@@ -1628,7 +1628,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lab_12_Spring
+          m_StringArgument: Lab_12_Spring_Part1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &665023021
@@ -1805,7 +1805,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: lab4
+          m_StringArgument: Lab_4_New
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &727029353
@@ -2349,7 +2349,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lab_9_Momentum
+          m_StringArgument: Lab_9_New
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &924117666
@@ -2967,7 +2967,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lab_3_2nd_law
+          m_StringArgument: Lab_3_New
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1351191919
@@ -4277,7 +4277,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Lab_11_Pendulum_Motion
+          m_StringArgument: Lab_11_New
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2050355266
