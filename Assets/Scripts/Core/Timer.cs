@@ -52,7 +52,6 @@ public class TimerController : MonoBehaviour
     {
         timerPanel.SetActive(true);             //if inactive brings active
     }
-
     public void CloseTimer()
     {
         isRunning = false;
