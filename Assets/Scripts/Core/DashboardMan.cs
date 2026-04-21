@@ -11,9 +11,9 @@ public class DashboardManager : MonoBehaviour
     }
 
     [Header("Dashboard Settings")]
-    public RectTransform dashboardPanel;  // The panel to slide in/out
-    public AssetButton[] assetButtons;    // Asset buttons
-    public Transform spawnPoint;          // Optional spawn location
+    public RectTransform dashboardPanel;
+    public AssetButton[] assetButtons; 
+    public Transform spawnPoint;        
 
     [Header("Animation Settings")]
     public float slideSpeed = 10f;        // Speed of slide
@@ -26,7 +26,7 @@ public class DashboardManager : MonoBehaviour
     {
         // Save positions
         visiblePos = dashboardPanel.anchoredPosition;
-        hiddenPos = visiblePos + new Vector2(dashboardPanel.rect.width, 0); // off-screen to the right
+        hiddenPos = visiblePos + new Vector2(dashboardPanel.rect.width, 0);
         dashboardPanel.anchoredPosition = hiddenPos; // start hidden
 
         foreach (var ab in assetButtons)
@@ -41,12 +41,10 @@ public class DashboardManager : MonoBehaviour
 
     private void Update()
     {
-        // Slide
         Vector2 targetPos = isOpen ? visiblePos : hiddenPos;
         dashboardPanel.anchoredPosition = Vector2.Lerp(dashboardPanel.anchoredPosition, targetPos, Time.deltaTime * slideSpeed);
     }
 
-    // Called by the toggle button
     public void ToggleDashboard()
     {
         isOpen = !isOpen;
@@ -72,8 +70,8 @@ public class DashboardManager : MonoBehaviour
         SavableObject so = obj.GetComponent<SavableObject>();
         if (so != null)
         {
-            so.prefab = prefab;          // Assign original prefab
-            so.prefabName = prefab.name; // Ensure correct lookup name
+            so.prefab = prefab;         
+            so.prefabName = prefab.name;
         }
         else
         {
@@ -81,3 +79,4 @@ public class DashboardManager : MonoBehaviour
         }
     }
 }
+

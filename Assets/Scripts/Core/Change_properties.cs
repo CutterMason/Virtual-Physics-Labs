@@ -9,7 +9,7 @@ public class PhysicsObject : MonoBehaviour
 
     [Header("Editable Properties")]
     [Range(0.05f, 1f)]
-    public float mass = 1f;
+    public float mass;
 
     public Vector3 size = Vector3.one;
 
@@ -19,32 +19,25 @@ public class PhysicsObject : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
         originalScale = transform.localScale;
         originalMass = rb.mass;
 
-        // Ensure Inspector matches actual
         size = originalScale;
-        mass = Mathf.Clamp(mass, MIN_MASS, MAX_MASS);
+        mass = Mathf.Clamp(originalMass, MIN_MASS, MAX_MASS);
+
+        rb.mass = mass;
     }
 
     public void ApplyChanges(float newMass, Vector3 newSize)
     {
-        // Clamp mass to valid range ALWAYS
         newMass = Mathf.Clamp(newMass, MIN_MASS, MAX_MASS);
 
-        // Save the clamped mass + speed
         mass = newMass;
-        //speed = newSpeed;
+        size = newSize;
 
-        // Only update size if user changed it
-        if (newSize != size)
-        {
-            size = newSize;
-            transform.localScale = size;
-        }
-
-        if (rb != null)
-            rb.mass = mass;
+        transform.localScale = size;
+        rb.mass = mass;
     }
 
     public void ResetToOriginal()
