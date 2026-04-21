@@ -2,24 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameControls : MonoBehaviour
 {
     public static bool IsPaused { get; private set; } = false;
     public static bool IsEditMode { get; private set; } = false;
 
-    
     public static System.Action<bool> OnEditModeChanged;
 
     [Header("Startup")]
     [SerializeField] private bool pauseOnLoad = true;
     [SerializeField] private bool startInEditMode = false;
 
+    [Header("State UI")]
+    [SerializeField] private GameObject statePanel;
+    [SerializeField] private TMP_Text stateText;
+    [SerializeField] private Image panelImage; // optional (for color feedback)
+
     private Rigidbody[] allBodies;
     private readonly Dictionary<Rigidbody, Vector3> storedVelocities = new();
     private readonly Dictionary<Rigidbody, Vector3> storedAngularVelocities = new();
 
-    
     public static bool CanSpawn => IsEditMode;
     public static bool CanSave => IsEditMode;
     public static bool CanDelete => IsEditMode;
@@ -37,25 +42,50 @@ public class GameControls : MonoBehaviour
 
     private void Start()
     {
-        
         if (pauseOnLoad && !IsPaused)
             PauseGame();
 
         if (startInEditMode) EnterEditMode();
         else ExitEditMode();
+
+        UpdateStateUI();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
         if (pauseOnLoad && !IsPaused)
             PauseGame();
 
         if (startInEditMode) EnterEditMode();
         else ExitEditMode();
+
+        UpdateStateUI();
     }
 
-    
+    private void UpdateStateUI()
+    {
+        if (statePanel != null)
+            statePanel.SetActive(true);
+
+        if (stateText == null) return;
+
+        if (IsEditMode)
+        {
+            stateText.text = "EDIT MODE";
+            if (panelImage != null) panelImage.color = Color.cyan;
+        }
+        else if (IsPaused)
+        {
+            stateText.text = "Paused";
+            if (panelImage != null) panelImage.color = Color.yellow;
+        }
+        else
+        {
+            stateText.text = "Running...";
+            if (panelImage != null) panelImage.color = Color.green;
+        }
+    }
+
     public void EnterEditMode()
     {
         IsEditMode = true;
@@ -70,6 +100,7 @@ public class GameControls : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
 
         OnEditModeChanged?.Invoke(true);
+        UpdateStateUI();
     }
 
     public void ExitEditMode()
@@ -83,6 +114,7 @@ public class GameControls : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
 
         OnEditModeChanged?.Invoke(false);
+        UpdateStateUI();
     }
 
     public void ToggleEditMode()
@@ -97,13 +129,14 @@ public class GameControls : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
 
         Time.timeScale = 0f;
         Physics.autoSimulation = false;
 
-        allBodies = FindObjectsOfType<Rigidbody>(includeInactive: true);
+        allBodies = FindObjectsOfType<Rigidbody>(true);
 
         storedVelocities.Clear();
         storedAngularVelocities.Clear();
@@ -119,6 +152,8 @@ public class GameControls : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             rb.Sleep();
         }
+
+        UpdateStateUI();
     }
 
     public void ResumeGame()
@@ -143,6 +178,8 @@ public class GameControls : MonoBehaviour
 
         Physics.autoSimulation = true;
         Time.timeScale = 1f;
+
+        UpdateStateUI();
     }
 
     public void TogglePause()
@@ -163,10 +200,11 @@ public class GameControls : MonoBehaviour
         storedAngularVelocities.Clear();
         allBodies = null;
 
+        UpdateStateUI();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-   
     public void PressPlay()
     {
         if (IsEditMode)
@@ -188,6 +226,8 @@ public class GameControls : MonoBehaviour
 
         if (labController != null)
             labController.BeginSimulation();
+
+        UpdateStateUI();
     }
 
     public void ResetForceTable(ForceTableLabController labController, ForceTableAdjustmentPanel panel = null)

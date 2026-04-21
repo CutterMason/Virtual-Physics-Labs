@@ -3759,6 +3759,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1194688177}
+  - {fileID: 625051404}
   m_Father: {fileID: 1150865142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3819,7 +3820,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenuUI
+          m_StringArgument: SettingsUI
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &510208760
@@ -5115,11 +5116,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1150865142}
+  m_Father: {fileID: 510208758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -721.99994, y: 225}
+  m_AnchoredPosition: {x: 125.00006, y: -168.99994}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625051405
@@ -6735,7 +6736,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 830855451}
-  - {fileID: 625051404}
   - {fileID: 510208758}
   - {fileID: 2055039667}
   - {fileID: 9357175}
