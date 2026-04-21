@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PropertyPanelV2 : MonoBehaviour
 {
@@ -12,15 +13,16 @@ public class PropertyPanelV2 : MonoBehaviour
     public Button applyButton;
     public Button resetButton;
     public Button closeButton;
+    public Button deleteButton;
 
     [Header("Value Labels")]
     public TMP_Text massValueText;
     public TMP_Text sizeValueText;
+    public TMP_Text propText;
 
     [Header("Panel Position")]
     public RectTransform panelRect;
     public float panelOffset = 150f;
-
     private Camera cam;
     private PhysicsObject targetObject;
     private PropertyManagerV2 manager;
@@ -70,6 +72,8 @@ public class PropertyPanelV2 : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+        if(propText != null)
+            propText.text = $"Selected: {obj.name}";
 
         PositionPanelNearObject(obj.transform);
 
@@ -136,6 +140,18 @@ public class PropertyPanelV2 : MonoBehaviour
 
     public void ClosePanel()
     {
+        if (propText != null)
+            propText.text = "";
         manager.CloseCurrentPanel();
+    }
+    public void DeleteObject()
+    {
+        if (targetObject == null)
+        {
+            Debug.LogWarning("No object selected to delete.");
+            return;
+        }
+        Destroy(targetObject.gameObject);
+        targetObject = null;
     }
 }

@@ -9,6 +9,15 @@ public class ForceSliderUI : MonoBehaviour, IPointerUpHandler, IPointerDownHandl
 
     private bool isDragging = false;
 
+    public Outline outline;
+
+
+    void Start()
+    {
+        if (outline != null)
+            outline.enabled = false; // start off
+    }
+
     void Update()
     {
         if (!isDragging)
@@ -16,6 +25,7 @@ public class ForceSliderUI : MonoBehaviour, IPointerUpHandler, IPointerDownHandl
             slider.value = Mathf.Lerp(slider.value, 0f, Time.deltaTime * returnSpeed);
         }
     }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
@@ -26,4 +36,15 @@ public class ForceSliderUI : MonoBehaviour, IPointerUpHandler, IPointerDownHandl
         isDragging = true;
     }
 
+    public void Highlight()
+    {
+        if (outline != null)
+            outline.enabled = true;
+    }
+
+    public void Unhighlight()
+    {
+        if (outline != null)
+            outline.enabled = false;
+    }
 }
