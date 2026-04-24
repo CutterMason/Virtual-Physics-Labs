@@ -172,6 +172,8 @@ public class LoginAuth : MonoBehaviour
 
                     if (SessionManager.Instance != null)
                     {
+                        SessionManager.Instance.UserId = user.UserId;
+                        SessionManager.Instance.UserEmail = user.Email;
                         SessionManager.Instance.UserRole = storedRole;
                     }
 

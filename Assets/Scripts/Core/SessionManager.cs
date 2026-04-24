@@ -4,7 +4,9 @@ public class SessionManager : MonoBehaviour
 {
     public static SessionManager Instance { get; private set; }
 
-    public string UserRole { get; set; } = "Student";   
+    public string UserId { get; set; }
+    public string UserEmail { get; set; }
+    public string UserRole { get; set; } = "Student";
 
     private void Awake()
     {
@@ -15,6 +17,6 @@ public class SessionManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);  
+        DontDestroyOnLoad(gameObject);
     }
 }

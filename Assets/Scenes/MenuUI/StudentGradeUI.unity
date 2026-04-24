@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 177884965}
   - component: {fileID: 177884964}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Assignment_label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 466573178}
   - component: {fileID: 466573177}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: grades_label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,8 +767,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1988632421}
   m_HandleRect: {fileID: 1988632420}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1144,7 +1144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -862, y: 359}
+  m_AnchoredPosition: {x: -788, y: 417}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863542021
@@ -1548,7 +1548,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 400
+  m_Spacing: 520
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -1853,6 +1853,7 @@ GameObject:
   - component: {fileID: 1475357010}
   - component: {fileID: 1475357012}
   - component: {fileID: 1475357011}
+  - component: {fileID: 1475357013}
   m_Layer: 5
   m_Name: StudentGradesPanel
   m_TagString: Untagged
@@ -1922,6 +1923,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475357009}
   m_CullTransparentMesh: 1
+--- !u!114 &1475357013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475357009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf44d1e2597db164dab9aae0ab90999c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradeContentParent: {fileID: 1349657383}
+  gradeRowTemplate: {fileID: 1199579188}
+--- !u!1 &1545747379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1545747381}
+  - component: {fileID: 1545747380}
+  m_Layer: 0
+  m_Name: SessionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1545747380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545747379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e92f9b4e4511054d8d012f4610766cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1545747381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545747379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 907.48773, y: 588.79443, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562971354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2502,3 +2561,4 @@ SceneRoots:
   - {fileID: 66247762}
   - {fileID: 384194425}
   - {fileID: 1281190453}
+  - {fileID: 1545747381}
