@@ -5043,7 +5043,7 @@ GameObject:
   - component: {fileID: 232455843}
   - component: {fileID: 232455842}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FolderButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7633,6 +7633,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseOnLoad: 1
   startInEditMode: 0
+  statePanel: {fileID: 0}
+  stateText: {fileID: 0}
+  panelImage: {fileID: 0}
 --- !u!4 &452805063
 Transform:
   m_ObjectHideFlags: 0
@@ -16653,6 +16656,12 @@ MonoBehaviour:
   antiStickPush: 0.2
   speedSlider: {fileID: 0}
   speedText: {fileID: 0}
+  turntableCenter: {fileID: 0}
+  topViewHeight: 3
+  topViewToggleKey: 118
+  topViewMoveSpeed: 8
+  lookStraightDown: 1
+  lockOnCameraScript: {fileID: 0}
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24967,7 +24976,7 @@ GameObject:
   - component: {fileID: 1432024806}
   - component: {fileID: 1432024805}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ExportButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
