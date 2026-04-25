@@ -2,126 +2,197 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BeamWeightController : MonoBehaviour
+public class SeesawSystem : MonoBehaviour
 {
-    [Header("Beam Reference")]
-    public BoxCollider beamCollider;
+    [Header("Beam")]
+    public Transform beamTransform;
+
+    [Range(-0.5f, 0.5f)]
+    public float beamPosition = 0f;
+
+    public float beamMin = -0.5f;
+    public float beamMax = 0.5f;
 
     [Header("Weights")]
     public Transform weight1;
     public Transform weight2;
 
-    [Header("Sliders (0–1 full range)")]
-    public Slider slider1;
-    public Slider slider2;
+    [Range(-0.5f, 0.5f)]
+    public float weight1Position = -0.25f;
 
-    [Header("Text Labels")]
-    public TMP_Text text1;
-    public TMP_Text text2;
+    [Range(-0.5f, 0.5f)]
+    public float weight2Position = 0.25f;
 
-    [Header("Default Setup (logical space 0–1)")]
-    [Range(0f, 0.5f)]
-    public float normalizedDistanceFromEnd = 0.1f;
+    [Header("Weight Mass")]
+    public float weight1Mass = 1f;
+    public float weight2Mass = 1f;
 
-    [Header("Movement Bounds (logical space 0–1)")]
-    public float weight1Min = 0f;
-    public float weight1Max = 1f;
+    [Header("Physics Options")]
+    public bool useGravity = false;
+    public float gravity = 9.81f;
 
-    public float weight2Min = 0f;
-    public float weight2Max = 1f;
+    [Header("Beam Influence (movement imbalance)")]
+    public float beamBiasFactor = 2f;
 
-    private float minX;
-    private float maxX;
+    [Header("Sliders")]
+    public Slider beamSlider;
+    public Slider weight1Slider;
+    public Slider weight2Slider;
 
-    private bool simulationStarted = false;
+    [Header("UI Text")]
+    public TMP_Text beamText;
+    public TMP_Text weight1Text;
+    public TMP_Text weight2Text;
+
+    public TMP_Text torqueText;
+    public TMP_Text balanceStateText;
+
+    [Header("Visual Feedback")]
+    public Renderer beamRenderer;
+    public Color balancedColor = Color.white;
+    public Color heavyColor = Color.red;
+
+    [Header("Fake Physics")]
+    public float maxTiltAngle = 40f;
+    public float tiltSmoothSpeed = 6f;
+
+    private float currentTilt = 0f;
+    private Vector3 beamStartWorldPos;
 
     void Start()
     {
-        // ---------------------------------------------------
-        // Get real beam size from BoxCollider
-        // ---------------------------------------------------
-        float beamWorldLength =
-            beamCollider.size.x * beamCollider.transform.lossyScale.x;
+        beamStartWorldPos = beamTransform.position;
 
-        minX = -beamWorldLength / 2f;
-        maxX = beamWorldLength / 2f;
+        if (beamSlider != null)
+        {
+            beamSlider.minValue = beamMin;
+            beamSlider.maxValue = beamMax;
+            beamSlider.value = beamPosition;
+            beamSlider.onValueChanged.AddListener(v => beamPosition = v);
+        }
 
-        // ---------------------------------------------------
-        // Slider setup (full 0–1 range)
-        // ---------------------------------------------------
-        slider1.minValue = 0f;
-        slider1.maxValue = 1f;
+        if (weight1Slider != null)
+        {
+            weight1Slider.minValue = 0f;
+            weight1Slider.maxValue = 1f;
+            weight1Slider.value = Mathf.InverseLerp(-0.5f, 0.5f, weight1Position);
+            weight1Slider.onValueChanged.AddListener(v => weight1Position = Mathf.Lerp(-0.5f, 0.5f, v));
+        }
 
-        slider2.minValue = 0f;
-        slider2.maxValue = 1f;
+        if (weight2Slider != null)
+        {
+            weight2Slider.minValue = 0f;
+            weight2Slider.maxValue = 1f;
+            weight2Slider.value = Mathf.InverseLerp(-0.5f, 0.5f, weight2Position);
+            weight2Slider.onValueChanged.AddListener(v => weight2Position = Mathf.Lerp(-0.5f, 0.5f, v));
+        }
 
-        slider1.onValueChanged.AddListener(UpdateWeight1);
-        slider2.onValueChanged.AddListener(UpdateWeight2);
-
-        // ---------------------------------------------------
-        // Default symmetric placement
-        // ---------------------------------------------------
-        float leftValue = normalizedDistanceFromEnd;
-        float rightValue = 1f - normalizedDistanceFromEnd;
-
-        slider1.value = leftValue;
-        slider2.value = rightValue;
-
-        UpdateWeight1(leftValue);
-        UpdateWeight2(rightValue);
+        ApplyAll();
     }
 
-    // -------------------------------------------------------
-    // PUBLIC CALL FROM YOUR MAIN START BUTTON
-    // -------------------------------------------------------
-    public void StartSimulation()
+    void Update()
     {
-        simulationStarted = true;
-
-        // Lock sliders so they no longer affect weights
-        slider1.interactable = false;
-        slider2.interactable = false;
+        ApplyAll();
     }
 
-    // -------------------------------------------------------
-    // SLIDER INPUT HANDLING (DISABLED AFTER START)
-    // -------------------------------------------------------
-
-    void UpdateWeight1(float sliderValue)
+    // -----------------------------
+    // MAIN UPDATE
+    // -----------------------------
+    void ApplyAll()
     {
-        if (simulationStarted) return;
+        ApplyBeam();
 
-        float value = Mathf.Lerp(weight1Min, weight1Max, sliderValue);
+        ApplyWeight(weight1, weight1Position, weight1Text, "Weight 1");
+        ApplyWeight(weight2, weight2Position, weight2Text, "Weight 2");
 
-        ApplyWeight(weight1, text1, value, "Weight 1");
+        ApplyFakePhysics();
     }
 
-    void UpdateWeight2(float sliderValue)
+    // -----------------------------
+    // BEAM POSITION (world preserved)
+    // -----------------------------
+    void ApplyBeam()
     {
-        if (simulationStarted) return;
+        float clamped = Mathf.Clamp(beamPosition, beamMin, beamMax);
 
-        float value = Mathf.Lerp(weight2Min, weight2Max, sliderValue);
+        Vector3 offset = new Vector3(-clamped, 0f, 0f);
+        beamTransform.position = beamStartWorldPos + offset;
 
-        ApplyWeight(weight2, text2, value, "Weight 2");
+        if (beamText != null)
+            beamText.text = $"Beam: {clamped:F2} m";
     }
 
-    // -------------------------------------------------------
-    // CORE POSITIONING + DISPLAY
-    // -------------------------------------------------------
-
-    void ApplyWeight(Transform weight, TMP_Text text, float value, string label)
+    // -----------------------------
+    // WEIGHT POSITION (local space)
+    // -----------------------------
+    void ApplyWeight(Transform weight, float value, TMP_Text text, string label)
     {
-        // Flip for camera orientation (0 = right, 1 = left)
-        float flipped = 1f - value;
-
-        float xPos = Mathf.Lerp(minX, maxX, flipped);
+        float flipped = -value;
 
         weight.localPosition = new Vector3(
-            xPos,
+            flipped,
             weight.localPosition.y,
             weight.localPosition.z
         );
 
-        text.text = $"{label}: {value:F2} m";
+        if (text != null)
+            text.text = $"{label}: {value:F2} m";
+    }
+
+    // -----------------------------
+    // FAKE PHYSICS (TORQUE SYSTEM)
+    // -----------------------------
+    void ApplyFakePhysics()
+    {
+        // Distance × Mass (core physics model)
+        float torque =
+            (weight1Position * weight1Mass) +
+            (weight2Position * weight2Mass);
+
+        // Beam movement also affects balance
+        torque += beamPosition * beamBiasFactor;
+
+        // Optional gravity scaling
+        if (useGravity)
+            torque *= gravity;
+
+        // normalize
+        float normalized = Mathf.Clamp(torque, -0.5f, 0.5f) / 0.5f;
+
+        // exaggerated response for visibility
+        float exaggerated = Mathf.Sign(normalized) * normalized * normalized;
+
+        float targetTilt = -exaggerated * maxTiltAngle;
+
+        currentTilt = Mathf.Lerp(currentTilt, targetTilt, Time.deltaTime * tiltSmoothSpeed);
+
+        // subtle wobble when unbalanced
+        currentTilt += Mathf.Sin(Time.time * 6f) * 0.3f * Mathf.Abs(normalized);
+
+        beamTransform.rotation = Quaternion.Euler(0f, 0f, currentTilt);
+
+        // -----------------------------
+        // VISUAL FEEDBACK
+        // -----------------------------
+        float imbalance = Mathf.Abs(normalized);
+
+        if (beamRenderer != null)
+        {
+            beamRenderer.material.color =
+                Color.Lerp(balancedColor, heavyColor, imbalance);
+        }
+
+        if (torqueText != null)
+            torqueText.text = $"Torque: {torque:F2}";
+
+        if (balanceStateText != null)
+        {
+            if (Mathf.Abs(torque) < 0.01f)
+                balanceStateText.text = "Balanced";
+            else if (torque > 0)
+                balanceStateText.text = "Right Side Heavier";
+            else
+                balanceStateText.text = "Left Side Heavier";
+        }
     }
 }

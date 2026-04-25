@@ -7632,6 +7632,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -24059,6 +24060,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -26027,73 +26029,117 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 478485318289804474, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: invertValues
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478485318289804474, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: targetRigidbody
+      value: 
+      objectReference: {fileID: 1058733154}
+    - target: {fileID: 478485318289804474, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 1058733156}
+    - target: {fileID: 478485318289804474, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: referenceTransform
+      value: 
+      objectReference: {fileID: 785890990}
+    - target: {fileID: 825802603457498858, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327243560880395368, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: defaultFileName
+      value: VP1L_Lab7_Notes
+      objectReference: {fileID: 0}
     - target: {fileID: 2061516776290288989, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_Name
       value: New_Dash_Canvas_Full
       objectReference: {fileID: 0}
     - target: {fileID: 2061516776290288989, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2967837225945985972, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2967837225945985972, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 2967837225945985972, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.52124995
       objectReference: {fileID: 0}
-    - target: {fileID: 3132209384930904819, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
-      propertyPath: m_Value
+    - target: {fileID: 3678893929989950960, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: invertValues
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678893929989950960, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: targetRigidbody
+      value: 
+      objectReference: {fileID: 1058733154}
+    - target: {fileID: 3678893929989950960, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 1058733156}
+    - target: {fileID: 3678893929989950960, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: referenceTransform
+      value: 
+      objectReference: {fileID: 785890990}
+    - target: {fileID: 3681335717157135263, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: invertValues
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681335717157135263, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: targetRigidbody
+      value: 
+      objectReference: {fileID: 1058733154}
+    - target: {fileID: 3681335717157135263, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 1058733156}
+    - target: {fileID: 3681335717157135263, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: referenceTransform
+      value: 
+      objectReference: {fileID: 785890990}
+    - target: {fileID: 3681691874357822988, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: m_text
+      value: 'Lab: Energy Tutorial'
       objectReference: {fileID: 0}
     - target: {fileID: 4071264138956623893, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4071264138956623893, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
-    - target: {fileID: 6599052708364044769, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
-      propertyPath: m_Size
-      value: 0.47874996
-      objectReference: {fileID: 0}
-    - target: {fileID: 6599052708364044769, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
-      propertyPath: m_Value
+    - target: {fileID: 6734473704407304311, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6734473704407304311, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6734473704407304311, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 6804675525260134388, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6804675525260134388, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6804675525260134388, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 6804675525260134388, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 7500258689636931193, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_Pivot.x
@@ -26177,31 +26223,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7668518737421942867, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7668518737421942867, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8772892090886722003, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8772892090886722003, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8772892090886722003, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 8772892090886722003, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084688617381528764, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
-      propertyPath: m_text
-      value: 'Lab: Energy'
+      value: -17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26358,7 +26400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2736958689571718785, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2783961188357883123, guid: f4aaac6b9a904844dba752ba656391de, type: 3}
       propertyPath: m_AnchorMax.y
@@ -31359,6 +31401,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}

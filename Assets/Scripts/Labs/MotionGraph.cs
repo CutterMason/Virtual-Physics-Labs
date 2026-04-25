@@ -30,6 +30,9 @@ public class MotionGraph : MonoBehaviour
     public int gridLinesY = 6;
     public float lineWidth = 2f;
 
+    [Header("Value Options")]
+    [SerializeField] private bool invertValues = false;
+
     [Header("Colors")]
     public Color positiveColor = Color.green;
     public Color negativeColor = Color.red;
@@ -211,6 +214,10 @@ public class MotionGraph : MonoBehaviour
                 break;
         }
 
+        // ✅ INVERSION
+        if (invertValues)
+            newValue *= -1f;
+
         lastRecordedValue = newValue;
 
         AddValue(newValue);
@@ -323,15 +330,12 @@ public class MotionGraph : MonoBehaviour
             case GraphType.Position:
                 source = GetAbsoluteVector(GetPositionDisplacementVector());
                 break;
-
             case GraphType.Velocity:
                 source = GetAbsoluteVector(physicsVelocity);
                 break;
-
             case GraphType.Acceleration:
                 source = GetAbsoluteVector(smoothedAcceleration);
                 break;
-
             case GraphType.Force:
                 source = targetRigidbody ? GetAbsoluteVector(smoothedAcceleration * targetRigidbody.mass) : Vector3.zero;
                 break;
@@ -342,23 +346,9 @@ public class MotionGraph : MonoBehaviour
         AxisMode bestAxis = currentAutoAxis;
         float bestValue = currentStrength;
 
-        if (source.x > bestValue + axisSwitchThreshold)
-        {
-            bestAxis = AxisMode.X;
-            bestValue = source.x;
-        }
-
-        if (source.y > bestValue + axisSwitchThreshold)
-        {
-            bestAxis = AxisMode.Y;
-            bestValue = source.y;
-        }
-
-        if (source.z > bestValue + axisSwitchThreshold)
-        {
-            bestAxis = AxisMode.Z;
-            bestValue = source.z;
-        }
+        if (source.x > bestValue + axisSwitchThreshold) { bestAxis = AxisMode.X; bestValue = source.x; }
+        if (source.y > bestValue + axisSwitchThreshold) { bestAxis = AxisMode.Y; bestValue = source.y; }
+        if (source.z > bestValue + axisSwitchThreshold) { bestAxis = AxisMode.Z; bestValue = source.z; }
 
         currentAutoAxis = bestAxis;
     }
@@ -366,7 +356,6 @@ public class MotionGraph : MonoBehaviour
     private Vector3 GetCurrentPositionVector()
     {
         if (!targetTransform) return Vector3.zero;
-
         Vector3 targetPos = targetTransform.position;
         Vector3 refPos = referenceTransform ? referenceTransform.position : Vector3.zero;
         return targetPos - refPos;
@@ -425,7 +414,7 @@ public class MotionGraph : MonoBehaviour
         {
             case GraphType.Position: return "m";
             case GraphType.Velocity: return "m/s";
-            case GraphType.Acceleration: return "m/s�";
+            case GraphType.Acceleration: return "m/s²";
             case GraphType.Force: return "N";
             default: return "";
         }

@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lab: Constant Acceleration'
+  m_text: 'Lab: Energy'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8217,8 +8217,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 410371534730330349}
   m_HandleRect: {fileID: 2967837225945985972}
   m_Direction: 2
-  m_Value: -0.00000029273448
-  m_Size: 0.47874993
+  m_Value: 0.9999999
+  m_Size: 0.47875
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17578,7 +17578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012111664, y: 417.00003}
+  m_AnchoredPosition: {x: 0.00012111664, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 800}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &150752244550280968
