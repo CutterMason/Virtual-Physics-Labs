@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Collections.Generic;
 
 public class MeasureLine : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class MeasureLine : MonoBehaviour
     public TextMeshProUGUI distanceText;
     bool isMeasuringEnabled = false;
 
-    private Vector3[] points = new Vector3[2];
-    private int pointCount = 0;
+    private List<Vector3> points = new List<Vector3>();
+    private float totalDistance = 0f;
 
     void Start()
     {
@@ -25,12 +26,28 @@ public class MeasureLine : MonoBehaviour
         if (!isMeasuringEnabled)
             return;
 
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            return;
+        if (EventSystem.current != null)
+        {
+            if (Input.touchCount > 0)
+            {
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                    return;
+            }
+            else
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+            }
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
             TryGetPoint();
+        }
+
+        if (points.Count > 0)
+        {
+            PreviewLine();
         }
     }
 
@@ -40,8 +57,7 @@ public class MeasureLine : MonoBehaviour
 
         if (!isMeasuringEnabled)
         {
-            pointCount = 0;
-            lineRenderer.positionCount = 0;
+            ResetMeasurement();
         }
     }
 
@@ -52,32 +68,90 @@ public class MeasureLine : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            points[pointCount] = hit.point;
-            pointCount++;
+            points.Add(hit.point);
 
-            if (pointCount == 2)
+            if (points.Count > 1)
             {
-                DrawLine();
-                DisplayDistance();
-                pointCount = 0;
+                totalDistance += Vector3.Distance(
+                    points[points.Count - 2],
+                    points[points.Count - 1]
+                );
             }
+
+            DrawLine();
+            UpdateDistanceText();
         }
     }
 
     void DrawLine()
     {
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, points[0]);
-        lineRenderer.SetPosition(1, points[1]);
+        lineRenderer.positionCount = points.Count;
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            lineRenderer.SetPosition(i, points[i]);
+        }
     }
 
-    void DisplayDistance()
+    void PreviewLine()
     {
-        float distance = Vector3.Distance(points[0], points[1]);
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            lineRenderer.positionCount = points.Count + 1;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                lineRenderer.SetPosition(i, points[i]);
+            }
+
+            lineRenderer.SetPosition(points.Count, hit.point);
+        }
+    }
+
+    void UpdateDistancePreview()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            float previewDistance = totalDistance;
+
+            if (points.Count > 0)
+            {
+                previewDistance += Vector3.Distance(
+                    points[points.Count - 1],
+                    hit.point
+                );
+            }
+
+            if (distanceText != null)
+            {
+                distanceText.text = "Distance: " + previewDistance.ToString("F3") + " meters";
+            }
+        }
+    }
+
+    void UpdateDistanceText()
+    {
+        if (distanceText != null)
+        {
+            distanceText.text = "Distance: " + totalDistance.ToString("F3") + " meters";
+        }
+    }
+
+    void ResetMeasurement()
+    {
+        points.Clear();
+        totalDistance = 0f;
+        lineRenderer.positionCount = 0;
 
         if (distanceText != null)
         {
-            distanceText.text = "Distance: " + distance.ToString("F6") + " meters";
+            distanceText.text = "Distance: 0 meters";
         }
     }
 }
