@@ -19,7 +19,7 @@ public class GameControls : MonoBehaviour
     [Header("State UI")]
     [SerializeField] private GameObject statePanel;
     [SerializeField] private TMP_Text stateText;
-    [SerializeField] private Image panelImage; // optional (for color feedback)
+    [SerializeField] private Image panelImage;
 
     private Rigidbody[] allBodies;
     private readonly Dictionary<Rigidbody, Vector3> storedVelocities = new();
@@ -30,34 +30,39 @@ public class GameControls : MonoBehaviour
     public static bool CanDelete => IsEditMode;
     public static bool CanMoveObjects => IsEditMode;
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     private void Start()
     {
-        if (pauseOnLoad && !IsPaused)
-            PauseGame();
-
-        if (startInEditMode) EnterEditMode();
-        else ExitEditMode();
-
-        UpdateStateUI();
+        InitializeSceneState();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void InitializeSceneState()
     {
-        if (pauseOnLoad && !IsPaused)
-            PauseGame();
+        // Reset static state when this lab scene starts.
+        IsPaused = false;
+        IsEditMode = false;
 
-        if (startInEditMode) EnterEditMode();
-        else ExitEditMode();
+        Time.timeScale = 1f;
+        Physics.autoSimulation = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        storedVelocities.Clear();
+        storedAngularVelocities.Clear();
+        allBodies = null;
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        if (pauseOnLoad)
+            PauseGame();
+        else
+            ResumeGame();
+
+        if (startInEditMode)
+            EnterEditMode();
+        else
+            ExitEditMode();
 
         UpdateStateUI();
     }
@@ -119,8 +124,28 @@ public class GameControls : MonoBehaviour
 
     public void ToggleEditMode()
     {
-        if (IsEditMode) ExitEditMode();
-        else EnterEditMode();
+        if (IsEditMode)
+            ExitEditMode();
+        else
+            EnterEditMode();
+    }
+
+    public void SetEditMode(bool isOn)
+    {
+        if (isOn)
+        {
+            EnterEditMode();
+        }
+        else
+        {
+            ExitEditMode();
+
+            // Stay paused when leaving edit mode.
+            if (!IsPaused)
+                PauseGame();
+
+            UpdateStateUI();
+        }
     }
 
     public void PauseGame()
@@ -184,8 +209,10 @@ public class GameControls : MonoBehaviour
 
     public void TogglePause()
     {
-        if (IsPaused) ResumeGame();
-        else PauseGame();
+        if (IsPaused)
+            ResumeGame();
+        else
+            PauseGame();
     }
 
     public void RestartScene()
@@ -200,8 +227,22 @@ public class GameControls : MonoBehaviour
         storedAngularVelocities.Clear();
         allBodies = null;
 
-        UpdateStateUI();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        // If this lab came from a saved/published JSON, restart from that JSON.
+        if (LoadManager.Instance != null && LoadManager.Instance.HasLoadedSave())
+        {
+            Debug.Log("[GameControls] Restarting saved/published lab from JSON.");
+            LoadManager.Instance.RestartLoadedSave();
+            return;
+        }
+
+        // Otherwise restart the normal preset scene.
+        Debug.Log("[GameControls] Restarting normal preset scene.");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -242,23 +283,5 @@ public class GameControls : MonoBehaviour
 
         if (panel != null)
             panel.SyncSlidersFromLab();
-    }
-
-    public void SetEditMode(bool isOn)
-    {
-        if (isOn)
-        {
-            EnterEditMode();
-        }
-        else
-        {
-            ExitEditMode();
-
-            // Stay paused when leaving edit mode
-            if (!IsPaused)
-                PauseGame();
-
-            UpdateStateUI();
-        }
     }
 }

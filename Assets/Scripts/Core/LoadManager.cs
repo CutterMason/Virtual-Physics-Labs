@@ -14,6 +14,9 @@ public class LoadManager : MonoBehaviour
 
     private SceneSaveData pendingSave;
 
+    private string currentLoadedJson;
+    private bool wasLoadedFromSave;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -39,7 +42,6 @@ public class LoadManager : MonoBehaviour
     {
         EnsureFirebase();
 
-
         if (auth == null)
         {
             Debug.LogError("[LoadManager] FirebaseAuth is null.");
@@ -48,7 +50,7 @@ public class LoadManager : MonoBehaviour
 
         if (auth.CurrentUser == null)
         {
-            Debug.LogError("Cannot load, no user logged in.");
+            Debug.LogError("[LoadManager] Cannot load, no user logged in.");
             return null;
         }
 
@@ -67,35 +69,21 @@ public class LoadManager : MonoBehaviour
             list.Add(doc.ConvertTo<LabSave>());
         }
 
-        Debug.Log("Loaded " + list.Count + " saves.");
+        Debug.Log("[LoadManager] Loaded " + list.Count + " saves.");
         return list;
     }
 
     public async void TestLoad()
     {
         var saves = await LoadAllSaves();
+
         if (saves == null || saves.Count == 0)
         {
-            Debug.Log("No saves found.");
+            Debug.Log("[LoadManager] No saves found.");
             return;
         }
+
         StartLoadFromJson(saves[0].jsonData);
-    }
-
-    public void StartLoadFromJson(string jsonData)
-    {
-        pendingSave = JsonUtility.FromJson<SceneSaveData>(jsonData);
-
-        if (pendingSave == null || string.IsNullOrEmpty(pendingSave.sceneName))
-        {
-            Debug.LogError("[LoadManager] Invalid save JSON or missing sceneName.");
-            return;
-        }
-
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        SceneManager.LoadScene(pendingSave.sceneName);
     }
 
     public void StartLoadFromSave(LabSave save)
@@ -109,6 +97,36 @@ public class LoadManager : MonoBehaviour
         StartLoadFromJson(save.jsonData);
     }
 
+    public void StartLoadFromJson(string jsonData)
+    {
+        if (string.IsNullOrEmpty(jsonData))
+        {
+            Debug.LogError("[LoadManager] Cannot load. jsonData is empty.");
+            return;
+        }
+
+        currentLoadedJson = jsonData;
+        wasLoadedFromSave = true;
+
+        pendingSave = JsonUtility.FromJson<SceneSaveData>(jsonData);
+
+        if (pendingSave == null || string.IsNullOrEmpty(pendingSave.sceneName))
+        {
+            Debug.LogError("[LoadManager] Invalid save JSON or missing sceneName.");
+            return;
+        }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        Time.timeScale = 1f;
+        Physics.autoSimulation = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        SceneManager.LoadScene(pendingSave.sceneName);
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -119,15 +137,19 @@ public class LoadManager : MonoBehaviour
             return;
         }
 
-        
         RestoreObjects(pendingSave);
         RestoreExperiment(pendingSave);
 
+        // Important:
+        // Do NOT force GameControls state here.
+        // Let GameControls.Start() initialize the scene normally.
+        // The loader should only restore saved lab data.
+
         Debug.Log("[LoadManager] Scene loaded and state restored via sceneLoaded.");
+
         pendingSave = null;
     }
 
-   
     private void RestoreObjects(SceneSaveData save)
     {
         if (save.objects == null)
@@ -158,7 +180,6 @@ public class LoadManager : MonoBehaviour
 
             if (objData.isPresetObject)
             {
-                
                 if (!found || so == null)
                 {
                     Debug.LogError($"[LoadManager] Preset object missing in scene! ID={objData.id}, nameKey={objData.prefabName}");
@@ -167,16 +188,16 @@ public class LoadManager : MonoBehaviour
             }
             else
             {
-              
                 if (!found || so == null)
                 {
                     if (PrefabRegistry.Instance == null)
                     {
-                        Debug.LogError("[LoadManager] PrefabRegistry.Instance is null (make sure it exists and persists).");
+                        Debug.LogError("[LoadManager] PrefabRegistry.Instance is null. Make sure it exists and persists.");
                         continue;
                     }
 
                     GameObject prefab = PrefabRegistry.Instance.GetPrefab(objData.prefabName);
+
                     if (prefab == null)
                     {
                         Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
@@ -194,19 +215,22 @@ public class LoadManager : MonoBehaviour
                     }
 
                     so.uniqueId = objData.id;
+
                     Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
                 }
             }
 
             Transform t = so.transform;
+
             t.position = new Vector3(objData.px, objData.py, objData.pz);
             t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
+
+            // This keeps your original save/load behavior.
             so.gameObject.SetActive(objData.active);
         }
 
         Debug.Log("[LoadManager] RestoreObjects complete.");
     }
-
 
     private void RestoreExperiment(SceneSaveData save)
     {
@@ -217,15 +241,50 @@ public class LoadManager : MonoBehaviour
         }
 
         LabNotepad labNotepad = FindObjectOfType<LabNotepad>(true);
+
         if (labNotepad != null && labNotepad.notepadInput != null)
         {
             string text = save.experimentData.notepadText ?? "";
             labNotepad.notepadInput.text = text;
+
             Debug.Log($"[LoadManager] Restored notepad text ({text.Length} chars).");
         }
         else
         {
             Debug.LogWarning("[LoadManager] Could not find LabNotepad to restore notes.");
         }
+    }
+
+    public bool HasLoadedSave()
+    {
+        return wasLoadedFromSave && !string.IsNullOrEmpty(currentLoadedJson);
+    }
+
+    public void RestartLoadedSave()
+    {
+        if (!HasLoadedSave())
+        {
+            Debug.LogWarning("[LoadManager] No loaded save JSON found. Restarting current scene normally.");
+
+            Time.timeScale = 1f;
+            Physics.autoSimulation = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
+        }
+
+        Debug.Log("[LoadManager] Restarting from saved/published JSON.");
+
+        StartLoadFromJson(currentLoadedJson);
+    }
+
+    public void ClearLoadedSaveState()
+    {
+        currentLoadedJson = null;
+        wasLoadedFromSave = false;
+
+        Debug.Log("[LoadManager] Cleared loaded save state.");
     }
 }
