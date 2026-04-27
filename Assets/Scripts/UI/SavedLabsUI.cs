@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class SavedLabsUI : MonoBehaviour
 {
     public LoadManager loadManager;
-    public Transform buttonGroup;      // Parent that contains Lab1, Lab2, ...
-    public GameObject buttonTemplate;  // One button used to clone
+    public Transform buttonGroup;
+    public GameObject buttonTemplate;
 
     private List<GameObject> spawnedButtons = new List<GameObject>();
 
@@ -18,29 +18,54 @@ public class SavedLabsUI : MonoBehaviour
 
     public async void RefreshList()
     {
-        // Get saves from Firebase
+        if (loadManager == null)
+            loadManager = LoadManager.Instance;
+
+        if (loadManager == null)
+        {
+            Debug.LogError("[SavedLabsUI] No LoadManager found.");
+            return;
+        }
+
         var saves = await loadManager.LoadAllSaves();
         if (saves == null) return;
 
-        // Hide old buttons
-        foreach (var b in spawnedButtons) Destroy(b);
+        foreach (var b in spawnedButtons)
+            Destroy(b);
+
         spawnedButtons.Clear();
 
-        // Create a button for each save
+        buttonTemplate.SetActive(false);
+
         foreach (var save in saves)
         {
             GameObject btn = Instantiate(buttonTemplate, buttonGroup);
             btn.SetActive(true);
 
-            // Set button label
-            btn.GetComponentInChildren<TMP_Text>().text = save.saveName;
+            TMP_Text text = btn.GetComponentInChildren<TMP_Text>(true);
+            if (text != null)
+                text.text = save.saveName;
 
-            // Add click listener
-            btn.GetComponent<Button>().onClick.AddListener(() =>
+            Button button = btn.GetComponent<Button>();
+
+            if (button != null)
             {
-                Debug.Log("Loading save: " + save.saveName);
-                loadManager.StartLoadFromSave(save);
-            });
+                LabSave capturedSave = save;
+
+                button.onClick.AddListener(() =>
+                {
+                    Debug.Log("[SavedLabsUI] Loading save: " + capturedSave.saveName);
+
+                    if (LoadManager.Instance != null)
+                    {
+                        LoadManager.Instance.StartLoadFromSave(capturedSave);
+                    }
+                    else
+                    {
+                        Debug.LogError("[SavedLabsUI] LoadManager.Instance is null.");
+                    }
+                });
+            }
 
             spawnedButtons.Add(btn);
         }
