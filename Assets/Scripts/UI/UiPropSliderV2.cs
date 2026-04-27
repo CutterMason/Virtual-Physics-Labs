@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+
 
 public class PropertyPanelV2 : MonoBehaviour
 {
@@ -78,7 +78,10 @@ public class PropertyPanelV2 : MonoBehaviour
         PositionPanelNearObject(obj.transform);
 
         massSlider.value = targetObject.mass;
-        sizeSlider.value = targetObject.size.x;
+        //sizeSlider.value = targetObject.size.x;
+        Vector3 original = targetObject.GetOriginalScale();
+        float multiplier = targetObject.transform.localScale.x / original.x;
+        sizeSlider.value = multiplier;
 
         temp_mass = massSlider.value;
         temp_size = sizeSlider.value;
@@ -114,12 +117,13 @@ public class PropertyPanelV2 : MonoBehaviour
         if (label != null)
             label.text = $"{value:0.00} {unit}";
     }
-
+    
     public void ApplyChanges()
     {
         if (targetObject == null) return;
-
-        targetObject.ApplyChanges(temp_mass, Vector3.one * temp_size);
+        Vector3 baseScale = targetObject.GetOriginalScale();
+        targetObject.ApplyChanges(temp_mass, baseScale * temp_size);
+        //targetObject.ApplyChanges(temp_mass, Vector3.one * temp_size);
     }
 
     public void ResetToOriginal()
@@ -129,7 +133,10 @@ public class PropertyPanelV2 : MonoBehaviour
         targetObject.ResetToOriginal();
 
         massSlider.value = targetObject.mass;
-        sizeSlider.value = targetObject.size.x;
+        //sizeSlider.value = targetObject.size.x;
+        Vector3 original = targetObject.GetOriginalScale();
+        float multiplier = targetObject.transform.localScale.x / original.x;
+        sizeSlider.value = multiplier;
 
         temp_mass = massSlider.value;
         temp_size = sizeSlider.value;

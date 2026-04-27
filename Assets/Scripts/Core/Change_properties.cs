@@ -11,7 +11,8 @@ public class PhysicsObject : MonoBehaviour
     [Range(0.05f, 1f)]
     public float mass;
 
-    public Vector3 size = Vector3.one;
+    [HideInInspector]
+    public Vector3 size;
 
     private const float MIN_MASS = 0.05f;
     private const float MAX_MASS = 1f;
@@ -38,6 +39,7 @@ public class PhysicsObject : MonoBehaviour
 
         transform.localScale = size;
         rb.mass = mass;
+        Debug.Log($"Applying Size: {newSize}");
     }
 
     public void ResetToOriginal()
@@ -47,5 +49,9 @@ public class PhysicsObject : MonoBehaviour
 
         transform.localScale = originalScale;
         rb.mass = originalMass;
+    }
+    public Vector3 GetOriginalScale()
+    {
+        return originalScale;
     }
 }

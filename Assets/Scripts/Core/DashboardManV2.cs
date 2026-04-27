@@ -92,7 +92,7 @@ public class DashboardManagerV2 : MonoBehaviour
         if (spawnPoint != null)
             spawnPos = spawnPoint.position;
         else if (Camera.main != null)
-            spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 5f;
+            spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 1f;
         else
             spawnPos = Vector3.zero;
 
