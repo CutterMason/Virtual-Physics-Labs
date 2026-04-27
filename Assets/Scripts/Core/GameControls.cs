@@ -243,4 +243,22 @@ public class GameControls : MonoBehaviour
         if (panel != null)
             panel.SyncSlidersFromLab();
     }
+
+    public void SetEditMode(bool isOn)
+    {
+        if (isOn)
+        {
+            EnterEditMode();
+        }
+        else
+        {
+            ExitEditMode();
+
+            // Stay paused when leaving edit mode
+            if (!IsPaused)
+                PauseGame();
+
+            UpdateStateUI();
+        }
+    }
 }
