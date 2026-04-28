@@ -225,6 +225,9 @@ public class TeacherGradesManager : MonoBehaviour
 
     private void CreateEmptyGradeRows()
     {
+        string[] names = {"Measurement & Error",
+        "Newton's 1st Law", "Newton's 2nd Law", "Constant Acceleration", "Projectile Motion","Friction",
+        "Energy", "Terminal Velocity", "Momentum", "Torque", "Pendulum Motion", "Mass on a Spring"};
         ClearGradeRows();
         gradeInputs.Clear();
 
@@ -238,7 +241,7 @@ public class TeacherGradesManager : MonoBehaviour
 
             if (labNameText != null)
             {
-                labNameText.text = "Lab " + i + ":";
+                labNameText.text = "Lab " + i + ": " + names[i-1];
             }
 
             if (gradeInput != null)

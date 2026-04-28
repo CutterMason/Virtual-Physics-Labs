@@ -129,8 +129,13 @@ public class StudentGradesManager : MonoBehaviour
         }
     }
 
+
+
     private void CreateGradeRow(int labNumber, string gradeValue)
     {
+        string[] names = {"Measurement & Error",
+        "Newton's 1st Law", "Newton's 2nd Law", "Constant Acceleration", "Projectile Motion","Friction",
+        "Energy", "Terminal Velocity", "Momentum", "Torque", "Pendulum Motion", "Mass on a Spring"};
         GameObject newRow = Instantiate(gradeRowTemplate, gradeContentParent);
         newRow.SetActive(true);
 
@@ -146,7 +151,7 @@ public class StudentGradesManager : MonoBehaviour
 
         if (labNameText != null)
         {
-            labNameText.text = "Lab " + labNumber;
+            labNameText.text = "Lab " + labNumber + ": " + names[labNumber-1];
         }
 
         string displayValue = string.IsNullOrEmpty(gradeValue) ? "" : gradeValue;
