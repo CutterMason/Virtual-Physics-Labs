@@ -101,10 +101,21 @@ public class DashboardManagerV2 : MonoBehaviour
         asset.spawnedObjects.Add(obj);
 
         SavableObject so = obj.GetComponent<SavableObject>();
+
+        if (so == null)
+        {
+            so = obj.GetComponentInChildren<SavableObject>();
+        }
+
         if (so != null)
         {
+            so.GenerateNewId();
+
             so.prefab = asset.prefab;
             so.prefabName = asset.prefab.name;
+            so.isPresetObject = false;
+
+            Debug.Log($"Spawned savable object: {so.prefabName}, ID: {so.uniqueId}");
         }
         else
         {

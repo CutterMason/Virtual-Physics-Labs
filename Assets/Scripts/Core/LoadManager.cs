@@ -60,6 +60,7 @@ public class LoadManager : MonoBehaviour
             .Collection("users")
             .Document(uid)
             .Collection("labSaves")
+            .OrderByDescending("timestamp")
             .GetSnapshotAsync();
 
         List<LabSave> list = new List<LabSave>();
@@ -82,6 +83,8 @@ public class LoadManager : MonoBehaviour
             Debug.Log("[LoadManager] No saves found.");
             return;
         }
+
+        Debug.Log("[LoadManager] Test loading newest save: " + saves[0].saveName);
 
         StartLoadFromJson(saves[0].jsonData);
     }
@@ -187,38 +190,59 @@ public class LoadManager : MonoBehaviour
                 }
             }
             else
+{
+    if (!found || so == null)
+    {
+        PrefabRegistry registry = PrefabRegistry.Instance;
+
+        if (registry == null)
+        {
+            registry = FindObjectOfType<PrefabRegistry>(true);
+
+            if (registry != null)
             {
-                if (!found || so == null)
-                {
-                    if (PrefabRegistry.Instance == null)
-                    {
-                        Debug.LogError("[LoadManager] PrefabRegistry.Instance is null. Make sure it exists and persists.");
-                        continue;
-                    }
-
-                    GameObject prefab = PrefabRegistry.Instance.GetPrefab(objData.prefabName);
-
-                    if (prefab == null)
-                    {
-                        Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
-                        continue;
-                    }
-
-                    GameObject spawned = Instantiate(prefab);
-                    so = spawned.GetComponent<SavableObject>();
-
-                    if (so == null)
-                    {
-                        Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
-                        Destroy(spawned);
-                        continue;
-                    }
-
-                    so.uniqueId = objData.id;
-
-                    Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
-                }
+                PrefabRegistry.Instance = registry;
+                Debug.LogWarning("[LoadManager] PrefabRegistry.Instance was null, but a registry was found in the scene.");
             }
+        }
+
+        if (registry == null)
+        {
+            Debug.LogError("[LoadManager] PrefabRegistry.Instance is null. Make sure a PrefabRegistry object exists in this lab scene.");
+            continue;
+        }
+
+        GameObject prefab = registry.GetPrefab(objData.prefabName);
+
+        if (prefab == null)
+        {
+            Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
+            continue;
+        }
+
+        GameObject spawned = Instantiate(prefab);
+        so = spawned.GetComponent<SavableObject>();
+
+        if (so == null)
+        {
+            so = spawned.GetComponentInChildren<SavableObject>();
+        }
+
+        if (so == null)
+        {
+            Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
+            Destroy(spawned);
+            continue;
+        }
+
+        so.uniqueId = objData.id;
+        so.prefab = prefab;
+        so.prefabName = prefab.name;
+        so.isPresetObject = false;
+
+        Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
+    }
+}
 
             Transform t = so.transform;
 

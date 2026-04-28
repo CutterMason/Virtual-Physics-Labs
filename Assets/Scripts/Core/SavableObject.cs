@@ -9,7 +9,6 @@ public class SavableObject : MonoBehaviour
     public GameObject prefab;
     public string prefabName;
 
-   
     public bool isPresetObject = false;
 
 #if UNITY_EDITOR
@@ -32,12 +31,31 @@ public class SavableObject : MonoBehaviour
 
     private void Awake()
     {
-       
         if (!isPresetObject && string.IsNullOrEmpty(uniqueId))
-            uniqueId = Guid.NewGuid().ToString();
+        {
+            GenerateNewId();
+        }
 
         if (prefab != null && string.IsNullOrEmpty(prefabName))
+        {
             prefabName = prefab.name;
+        }
+    }
+
+    private string GetCleanPrefabName()
+    {
+        string name = !string.IsNullOrEmpty(prefabName)
+            ? prefabName
+            : (prefab != null ? prefab.name : gameObject.name);
+
+        name = name.Replace("(Clone)", "").Trim();
+
+        return name;
+    }
+
+    public void GenerateNewId()
+    {
+        uniqueId = Guid.NewGuid().ToString();
     }
 
     public ObjectSaveData CaptureState()
@@ -45,9 +63,7 @@ public class SavableObject : MonoBehaviour
         return new ObjectSaveData
         {
             id = uniqueId,
-            prefabName = !string.IsNullOrEmpty(prefabName)
-                ? prefabName
-                : (prefab != null ? prefab.name : gameObject.name),
+            prefabName = GetCleanPrefabName(),
 
             px = transform.position.x,
             py = transform.position.y,
