@@ -6947,6 +6947,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -22153,6 +22154,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -28701,6 +28703,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -32771,7 +32774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 416.9999
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 2654041716601522831, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: dashboardPanel
@@ -32847,6 +32850,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6804675525260134388, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6850321944407257404, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7500258689636931193, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}

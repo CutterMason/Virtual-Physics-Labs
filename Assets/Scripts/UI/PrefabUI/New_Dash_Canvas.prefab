@@ -110,6 +110,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -4423,7 +4424,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3001716378406912912}
   m_HandleRect: {fileID: 4540174471938672384}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8598,7 +8599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 417}
+  m_AnchoredPosition: {x: -0.000061035156, y: 417.00006}
   m_SizeDelta: {x: 0, y: 800}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5720610962293994267
@@ -13731,8 +13732,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8498393992487759016}
   m_HandleRect: {fileID: 6261866491489701776}
   m_Direction: 2
-  m_Value: -0.00000007318365
-  m_Size: 0.47875005
+  m_Value: -0.00000029273448
+  m_Size: 0.47874993
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14152,6 +14153,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
@@ -15413,6 +15415,7 @@ MonoBehaviour:
   gridLinesX: 6
   gridLinesY: 6
   lineWidth: 2
+  invertValues: 0
   positiveColor: {r: 0, g: 1, b: 0, a: 1}
   negativeColor: {r: 1, g: 0, b: 0, a: 1}
   gridColor: {r: 1, g: 1, b: 1, a: 0.15}
