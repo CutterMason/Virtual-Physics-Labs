@@ -9,9 +9,9 @@ public class SaveUIManager : MonoBehaviour
 
     public void OpenSavePanel()
     {
-        if (!GameControls.CanSave)
+        if (!GameControls.IsPaused)
         {
-            Debug.LogWarning("Save is only available in Edit Mode.");
+            Debug.LogWarning("Save is only available while paused.");
             return;
         }
 
@@ -26,7 +26,13 @@ public class SaveUIManager : MonoBehaviour
 
     public async void ConfirmSave()
     {
-        string saveName = saveNameInput.text;
+        if (!GameControls.IsPaused)
+        {
+            Debug.LogWarning("Cannot save unless the lab is paused.");
+            return;
+        }
+
+        string saveName = saveNameInput.text.Trim();
         if (string.IsNullOrEmpty(saveName)) return;
 
         string jsonData = saveManager.SerializeScene();

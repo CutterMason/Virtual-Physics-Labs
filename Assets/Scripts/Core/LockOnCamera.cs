@@ -37,8 +37,10 @@ public class LockOnCamera : MonoBehaviour
     private Rigidbody targetRb;
     private bool targetRbWasKinematic;
     private bool targetRbHadGravity;
+    public bool IsLockedOn => isLocked && target != null;
+    public Transform CurrentTarget => target;
 
-    
+
     private static readonly HashSet<Rigidbody> editedBodies = new HashSet<Rigidbody>();
 
     void OnEnable()
@@ -54,9 +56,18 @@ public class LockOnCamera : MonoBehaviour
     void HandleEditModeChanged(bool isEdit)
     {
         if (!isEdit)
-            ForceUnlock(); 
+        {
+            // Leaving edit mode:
+            // keep the camera target for graphs,
+            // but release physics so the object can move normally.
+            RestoreTargetRigidbody();
+        }
         else
+        {
+            // Entering edit mode:
+            // refresh selectable objects.
             FindAllScaledObjects();
+        }
     }
 
     void Start()
@@ -69,11 +80,9 @@ public class LockOnCamera : MonoBehaviour
 
     void Update()
     {
+        // Only allow selecting/moving/rotating/resetting while in edit mode.
         if (!EditModeActive)
-        {
-            ForceUnlock();
             return;
-        }
 
         HandleMouseSelection();
         HandleUnlock();
@@ -88,9 +97,6 @@ public class LockOnCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!EditModeActive)
-            return;
-
         if (!isLocked || target == null)
             return;
 
@@ -113,7 +119,6 @@ public class LockOnCamera : MonoBehaviour
 
         Vector3 desiredPosition = target.position + offset;
 
-        
         if (GameControls.IsPaused)
         {
             transform.position = desiredPosition;

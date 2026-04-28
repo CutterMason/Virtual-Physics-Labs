@@ -30,7 +30,7 @@ public class FlyCameraCC : MonoBehaviour
     public bool lookStraightDown = true;
 
     [Header("Optional")]
-    public MonoBehaviour lockOnCameraScript; // assign LockOnCamera here if needed
+    public LockOnCamera lockOnCameraScript;
 
     private CharacterController cc;
     private float yaw;
@@ -78,6 +78,11 @@ public class FlyCameraCC : MonoBehaviour
             HandleTopViewMovement();
             return;
         }
+
+        // If lock-on camera is actively following something,
+        // do not let free-fly camera movement fight it.
+        if (lockOnCameraScript != null && lockOnCameraScript.IsLockedOn)
+            return;
 
         HandleLook();
         MoveWithCollisions();

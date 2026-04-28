@@ -213,13 +213,22 @@ public class PlayModeLockOnCamera : MonoBehaviour
         }
     }
 
-    public bool IsLockedOn()
+    public void LockOntoTarget(Transform newTarget)
     {
-        return isLocked && target != null;
+        if (newTarget == null)
+            return;
+
+        target = newTarget;
+        isLocked = true;
+        flipView = false;
+
+        if (scaledObjects.Count == 0)
+            FindAllScaledObjects();
+
+        currentIndex = scaledObjects.IndexOf(target);
+
+        SetLockOnPanels(true);
     }
 
-    public Transform GetCurrentTarget()
-    {
-        return target;
-    }
+    public bool IsLockedOn => isLocked && target != null;
 }
