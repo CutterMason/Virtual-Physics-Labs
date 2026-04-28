@@ -25,10 +25,25 @@ public class CameraModeSwitcher : MonoBehaviour
     {
         bool isEditMode = GameControls.IsEditMode;
 
+        Transform targetToCarryOver = null;
+
+        // If we are leaving edit mode, grab the current edit-mode target first.
+        if (!isEditMode && editModeLockOn != null)
+        {
+            targetToCarryOver = editModeLockOn.CurrentTarget;
+        }
+
         if (editModeLockOn != null)
             editModeLockOn.enabled = isEditMode;
 
         if (playModeLockOn != null)
+        {
             playModeLockOn.enabled = !isEditMode;
+
+            if (!isEditMode && targetToCarryOver != null)
+            {
+                playModeLockOn.LockOntoTarget(targetToCarryOver);
+            }
+        }
     }
 }
