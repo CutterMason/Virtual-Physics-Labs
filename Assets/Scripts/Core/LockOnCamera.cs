@@ -298,11 +298,29 @@ public class LockOnCamera : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        Vector3 move = new Vector3(h, 0f, v) * moveSpeed * dt;
+        if (Mathf.Abs(h) < 0.001f && Mathf.Abs(v) < 0.001f)
+            return;
+
+        // Camera-relative movement:
+        // W moves the object away from the camera / toward where you are looking.
+        // S moves it back toward the camera.
+        Vector3 camForward = transform.forward;
+        Vector3 camRight = transform.right;
+
+        // Flatten movement so W/A/S/D does not move vertically
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        Vector3 move = (camRight * h + camForward * v) * moveSpeed * dt;
+
         if (move.sqrMagnitude < 0.000001f)
             return;
 
-        if (GameControls.IsPaused) Physics.SyncTransforms();
+        if (GameControls.IsPaused)
+            Physics.SyncTransforms();
 
         Vector3 nextPos = target.position + move;
 
@@ -316,7 +334,8 @@ public class LockOnCamera : MonoBehaviour
             if (targetRb != null)
                 editedBodies.Add(targetRb);
 
-            if (GameControls.IsPaused) Physics.SyncTransforms();
+            if (GameControls.IsPaused)
+                Physics.SyncTransforms();
         }
     }
 
