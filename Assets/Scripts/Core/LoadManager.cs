@@ -155,6 +155,13 @@ public class LoadManager : MonoBehaviour
 
     private void RestoreObjects(SceneSaveData save)
     {
+        PrefabRegistry registryCheck = FindObjectOfType<PrefabRegistry>(true);
+
+        Debug.Log("[LoadManager] Registry in scene? " +
+                  (registryCheck != null ? registryCheck.name : "NO REGISTRY FOUND"));
+
+        Debug.Log("[LoadManager] Static registry? " +
+                  (PrefabRegistry.Instance != null ? PrefabRegistry.Instance.name : "NULL"));
         if (save.objects == null)
         {
             Debug.LogWarning("[LoadManager] Save has no objects list.");
