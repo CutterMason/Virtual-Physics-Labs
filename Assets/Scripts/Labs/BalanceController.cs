@@ -83,9 +83,6 @@ public class SeesawSystem : MonoBehaviour
     private Vector3 beamStartWorldPos;
     private float currentTilt = 0f;
 
-    // -----------------------------
-    // STATE CHECK
-    // -----------------------------
     bool IsPlaying => !GameControls.IsPaused && !GameControls.IsEditMode;
 
     void Start()
@@ -97,25 +94,32 @@ public class SeesawSystem : MonoBehaviour
         {
             beamSlider.minValue = beamMin;
             beamSlider.maxValue = beamMax;
-            beamSlider.value = beamPosition;
-            beamSlider.onValueChanged.AddListener(v => beamPosition = v);
+
+            beamPosition = Mathf.Clamp(beamPosition, beamMin, beamMax);
+            beamSlider.SetValueWithoutNotify(beamPosition);
+
+            beamSlider.onValueChanged.RemoveAllListeners();
+            beamSlider.onValueChanged.AddListener(v =>
+            {
+                beamPosition = Mathf.Clamp(v, beamMin, beamMax);
+            });
         }
 
-        // Position sliders
+        // Weight sliders
         if (weight1Slider != null)
         {
-            weight1Slider.minValue = 0f;
-            weight1Slider.maxValue = 1f;
+            weight1Slider.onValueChanged.RemoveAllListeners();
             weight1Slider.value = Mathf.InverseLerp(weight1MinPosition, weight1MaxPosition, weight1Position);
+
             weight1Slider.onValueChanged.AddListener(v =>
                 weight1Position = Mathf.Lerp(weight1MinPosition, weight1MaxPosition, v));
         }
 
         if (weight2Slider != null)
         {
-            weight2Slider.minValue = 0f;
-            weight2Slider.maxValue = 1f;
+            weight2Slider.onValueChanged.RemoveAllListeners();
             weight2Slider.value = Mathf.InverseLerp(weight2MinPosition, weight2MaxPosition, weight2Position);
+
             weight2Slider.onValueChanged.AddListener(v =>
                 weight2Position = Mathf.Lerp(weight2MinPosition, weight2MaxPosition, v));
         }
@@ -123,17 +127,17 @@ public class SeesawSystem : MonoBehaviour
         // Mass sliders
         if (weight1MassSlider != null)
         {
-            weight1MassSlider.minValue = minMass;
-            weight1MassSlider.maxValue = maxMass;
+            weight1MassSlider.onValueChanged.RemoveAllListeners();
             weight1MassSlider.value = weight1Mass;
+
             weight1MassSlider.onValueChanged.AddListener(v => weight1Mass = v);
         }
 
         if (weight2MassSlider != null)
         {
-            weight2MassSlider.minValue = minMass;
-            weight2MassSlider.maxValue = maxMass;
+            weight2MassSlider.onValueChanged.RemoveAllListeners();
             weight2MassSlider.value = weight2Mass;
+
             weight2MassSlider.onValueChanged.AddListener(v => weight2Mass = v);
         }
 
@@ -146,9 +150,6 @@ public class SeesawSystem : MonoBehaviour
         UpdateSliderLockState();
     }
 
-    // -----------------------------
-    // SLIDER LOCK + GREY OUT
-    // -----------------------------
     void UpdateSliderLockState()
     {
         bool locked = IsPlaying;
@@ -177,9 +178,6 @@ public class SeesawSystem : MonoBehaviour
         if (handle != null) handle.color = targetColor;
     }
 
-    // -----------------------------
-    // MAIN LOOP
-    // -----------------------------
     void ApplyAll()
     {
         ApplyBeam();
@@ -206,11 +204,16 @@ public class SeesawSystem : MonoBehaviour
 
     void ApplyBeam()
     {
-        float clamped = Mathf.Clamp(beamPosition, beamMin, beamMax);
+        beamPosition = Mathf.Clamp(beamPosition, beamMin, beamMax);
+
+        float clamped = beamPosition;
+
         beamTransform.position = beamStartWorldPos + new Vector3(-clamped, 0f, 0f);
 
+        float beamDisplayValue = clamped + 0.5f;
+
         if (beamText != null)
-            beamText.text = $"Beam: {clamped:F2} m";
+            beamText.text = $"Beam: {beamDisplayValue:F2} m";
     }
 
     void ApplyWeight(Transform weight, float value, TMP_Text text, string label)
@@ -223,8 +226,10 @@ public class SeesawSystem : MonoBehaviour
             weight.localPosition.z
         );
 
+        float displayValue = value + 0.5f;
+
         if (text != null)
-            text.text = $"{label}: {value:F2} m";
+            text.text = $"{label}: {displayValue:F2} m";
     }
 
     void ApplyFakePhysics()
@@ -238,7 +243,18 @@ public class SeesawSystem : MonoBehaviour
         if (useGravity)
             torque *= gravity;
 
-        float normalized = Mathf.Clamp(torque, -0.5f, 0.5f) / 0.5f;
+        // ✅ NEW: Proper normalization based on max possible torque
+        float maxTorque =
+            Mathf.Abs(weight1MaxPosition * maxMass) +
+            Mathf.Abs(weight2MaxPosition * maxMass) +
+            Mathf.Abs(beamMax * beamBiasFactor);
+
+        if (useGravity)
+            maxTorque *= gravity;
+
+        if (maxTorque <= 0.0001f) maxTorque = 0.0001f;
+
+        float normalized = Mathf.Clamp(torque / maxTorque, -1f, 1f);
 
         float exaggerated = Mathf.Sign(normalized) * normalized * normalized;
 
