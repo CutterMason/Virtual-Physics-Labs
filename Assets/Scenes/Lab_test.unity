@@ -10233,7 +10233,7 @@ MonoBehaviour:
     maxCount: 5
     spawnedObjects: []
   - button: {fileID: 1159688895}
-    prefab: {fileID: 6381476250197673111, guid: 09aa88daa68406846baeb605eaee9156, type: 3}
+    prefab: {fileID: 2385653830936848504, guid: 53309bde20c02134eb49049adf11d497, type: 3}
     maxCount: 5
     spawnedObjects: []
   spawnPoint: {fileID: 0}
@@ -19704,7 +19704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 416.9998
+      value: 417.00015
       objectReference: {fileID: 0}
     - target: {fileID: 2609645170335342740, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
