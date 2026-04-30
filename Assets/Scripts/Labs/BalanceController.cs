@@ -80,6 +80,9 @@ public class SeesawSystem : MonoBehaviour
     public float minTiltSpeed = 10f;
     public bool invertTiltDirection = false;
 
+    [Header("Response Tuning")]
+    public float sensitivity = 3f; // 🔥 Increase for more dramatic motion
+
     private Vector3 beamStartWorldPos;
     private float currentTilt = 0f;
 
@@ -129,7 +132,6 @@ public class SeesawSystem : MonoBehaviour
         {
             weight1MassSlider.onValueChanged.RemoveAllListeners();
             weight1MassSlider.value = weight1Mass;
-
             weight1MassSlider.onValueChanged.AddListener(v => weight1Mass = v);
         }
 
@@ -137,7 +139,6 @@ public class SeesawSystem : MonoBehaviour
         {
             weight2MassSlider.onValueChanged.RemoveAllListeners();
             weight2MassSlider.value = weight2Mass;
-
             weight2MassSlider.onValueChanged.AddListener(v => weight2Mass = v);
         }
 
@@ -243,7 +244,6 @@ public class SeesawSystem : MonoBehaviour
         if (useGravity)
             torque *= gravity;
 
-        // ✅ NEW: Proper normalization based on max possible torque
         float maxTorque =
             Mathf.Abs(weight1MaxPosition * maxMass) +
             Mathf.Abs(weight2MaxPosition * maxMass) +
@@ -254,13 +254,12 @@ public class SeesawSystem : MonoBehaviour
 
         if (maxTorque <= 0.0001f) maxTorque = 0.0001f;
 
-        float normalized = Mathf.Clamp(torque / maxTorque, -1f, 1f);
-
-        float exaggerated = Mathf.Sign(normalized) * normalized * normalized;
+        // 🔥 Sensitivity applied here
+        float normalized = (torque / maxTorque) * sensitivity;
+        normalized = Mathf.Clamp(normalized, -1f, 1f);
 
         float direction = invertTiltDirection ? -1f : 1f;
-
-        float targetTilt = -exaggerated * maxTiltAngle * direction;
+        float targetTilt = -normalized * maxTiltAngle * direction;
 
         float dynamicSpeed = tiltSpeed * Mathf.Abs(normalized);
         dynamicSpeed = Mathf.Max(dynamicSpeed, minTiltSpeed);

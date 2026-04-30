@@ -8596,7 +8596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.0014
+      value: 417.00006
       objectReference: {fileID: 0}
     - target: {fileID: 2967837225945985972, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.x
@@ -10271,7 +10271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5b7f0a54495d7ad4b987c3fbc1803611, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97c72b6371e9bee49806ca69761325bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25135,11 +25135,25 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db90a77efe2e41f438b4f71f4dbca71e, type: 3}
---- !u!1 &1392462392 stripped
+--- !u!1 &1392462392
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9af1e0e7ec9491a4a8e3042f4889212c, type: 3}
-  m_PrefabInstance: {fileID: 622497812}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392462399}
+  - component: {fileID: 1392462398}
+  - component: {fileID: 1392462396}
+  - component: {fileID: 1392462397}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!65 &1392462396
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25204,6 +25218,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1392462399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392462392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1393283126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 418879394666582295, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
@@ -38249,6 +38278,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1392462399}
   - {fileID: 1865320400}
   - {fileID: 74599076}
   - {fileID: 963194228}
@@ -38534,7 +38564,6 @@ SceneRoots:
   - {fileID: 1413091277}
   - {fileID: 47489952}
   - {fileID: 671452863}
-  - {fileID: 1392577288}
   - {fileID: 442080307}
   - {fileID: 601961292}
   - {fileID: 758831287}
@@ -38587,3 +38616,4 @@ SceneRoots:
   - {fileID: 1671570170}
   - {fileID: 238266338}
   - {fileID: 1912033152}
+  - {fileID: 1393629860}

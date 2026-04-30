@@ -7509,6 +7509,7 @@ MonoBehaviour:
   tiltSpeed: 60
   minTiltSpeed: 10
   invertTiltDirection: 1
+  sensitivity: 3
 --- !u!1001 &463217134
 PrefabInstance:
   m_ObjectHideFlags: 0
