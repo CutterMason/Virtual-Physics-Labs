@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8259132484128693787}
   - component: {fileID: 4820532377924323072}
   - component: {fileID: 5676026775496507906}
+  - component: {fileID: 4537990477903913005}
   m_Layer: 0
   m_Name: Wooden_Block_Scaled
   m_TagString: Untagged
@@ -153,3 +154,19 @@ MonoBehaviour:
   forceMultiplier: 2
   forceText: {fileID: 0}
   selectedColor: {r: 0.98742133, g: 0, b: 0, a: 1}
+--- !u!114 &4537990477903913005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2385653830936848504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255a879ec91094944949f44d19e51e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 0f71eb48-ca9a-43f4-a0ee-4367b4619af5
+  prefab: {fileID: 0}
+  prefabName: 
+  isPresetObject: 0
