@@ -19704,7 +19704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.0002
+      value: 416.9998
       objectReference: {fileID: 0}
     - target: {fileID: 2609645170335342740, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -28479,12 +28479,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnablePrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8974681799627462765, guid: 70d8e766e10b25d42847fbb683af3da5, type: 3}
+  - {fileID: 4321129895960539006, guid: 41c77fd6fdaec5d4cacb8823f20feb4c, type: 3}
+  - {fileID: 9168812831409391997, guid: f18e2cfd6a570be46a9a6dd17e5a2b97, type: 3}
+  - {fileID: 5006272910547824129, guid: 65695c1195e120e479d12de11abcdfc6, type: 3}
+  - {fileID: 1712761947864335420, guid: 61ef98f7f4383904694129e80aeaaf35, type: 3}
+  - {fileID: 5461915499250948371, guid: 45c64d30586f3f14dbb8bdb7c0edfdaa, type: 3}
+  - {fileID: 6277986378371633503, guid: e42b4751bba985a4083706ad9aad2eb1, type: 3}
+  - {fileID: 7351477854772498952, guid: 17192abab62e9704c9209b35d932e951, type: 3}
+  - {fileID: 5963986049685001539, guid: d9e2133633d93a449bf1886c75f8ba23, type: 3}
+  - {fileID: 6381476250197673111, guid: 09aa88daa68406846baeb605eaee9156, type: 3}
 --- !u!4 &1325924747
 Transform:
   m_ObjectHideFlags: 0
