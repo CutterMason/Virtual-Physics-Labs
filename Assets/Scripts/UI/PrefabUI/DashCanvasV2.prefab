@@ -470,39 +470,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1800978222630653684, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1800978222630653684, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995723376727738622, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+      propertyPath: m_Name
+      value: Cube Button
       objectReference: {fileID: 0}
     - target: {fileID: 1995723376727738622, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2459475779286800769, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2459475779286800769, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2459475779286800769, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2459475779286800769, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2459475779286800769, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 2459475779286800769, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 2507941164488522047, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_Sprite
@@ -519,6 +523,10 @@ PrefabInstance:
     - target: {fileID: 2507941164488522047, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633791545788508240, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+      propertyPath: m_Name
+      value: Fulcrum Button
       objectReference: {fileID: 0}
     - target: {fileID: 2633791545788508240, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_IsActive
@@ -587,6 +595,20 @@ PrefabInstance:
     - target: {fileID: 3764631926518502372, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283222977214566714, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+      propertyPath: m_text
+      value: 'Fulcrum
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283222977214566714, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283222977214566714, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4305818875279928073, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_text
@@ -868,6 +890,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 585d2432f0fbd46a2bc67d9f69cb0e7a, type: 3}
+    - target: {fileID: 7733337628361146772, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
+      propertyPath: m_text
+      value: Cube
+      objectReference: {fileID: 0}
     - target: {fileID: 7813827258604969498, guid: c0b7b60bf53f7c146a2dc9f891287678, type: 3}
       propertyPath: m_Sprite
       value: 

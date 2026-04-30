@@ -31,7 +31,32 @@ public class PropertyManagerV2 : MonoBehaviour
             Debug.LogError("No PropertyPanel Prefab assigned!");
         }
     }
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1) && 
+            (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        {
+            // Ignore UI clicks
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
 
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject clickedObj = hit.collider.gameObject;
+
+                var physicsObj = clickedObj.GetComponentInParent<PhysicsObject>();
+                if (physicsObj != null)
+                {
+                    selectedObject = physicsObj.gameObject;
+                    OpenPropertyPanel(selectedObject);
+                }
+            }
+        }
+    }
+/*
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -70,7 +95,7 @@ public class PropertyManagerV2 : MonoBehaviour
             lastClickTime = Time.time;
     }
 }
-
+*/
 
     private void OpenPropertyPanel(GameObject obj)
     {

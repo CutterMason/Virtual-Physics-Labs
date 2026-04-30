@@ -14,7 +14,7 @@ public class PropertyPanelV2 : MonoBehaviour
     public Button resetButton;
     public Button closeButton;
     public Button deleteButton;
-
+    public Toggle staticObject;
     [Header("Value Labels")]
     public TMP_Text massValueText;
     public TMP_Text sizeValueText;
@@ -26,6 +26,7 @@ public class PropertyPanelV2 : MonoBehaviour
     private Camera cam;
     private PhysicsObject targetObject;
     private PropertyManagerV2 manager;
+    private Rigidbody targetRb;
 
     private float temp_mass;
     private float temp_size;
@@ -65,6 +66,7 @@ public class PropertyPanelV2 : MonoBehaviour
     {
         manager = mgr;
         targetObject = obj.GetComponent<PhysicsObject>();
+        targetRb = obj.GetComponent<Rigidbody>();
        
         if (targetObject == null)
         {
@@ -76,6 +78,13 @@ public class PropertyPanelV2 : MonoBehaviour
             propText.text = $"Selected: {obj.name}";
 
         PositionPanelNearObject(obj.transform);
+        if (staticObject != null && targetRb != null)
+        {
+            staticObject.isOn = targetRb.isKinematic;
+
+            staticObject.onValueChanged.RemoveAllListeners();
+            staticObject.onValueChanged.AddListener(SetStaticState);
+        }
 
         massSlider.value = targetObject.mass;
         //sizeSlider.value = targetObject.size.x;
@@ -160,5 +169,38 @@ public class PropertyPanelV2 : MonoBehaviour
         }
         Destroy(targetObject.gameObject);
         targetObject = null;
+    }
+
+    public void SetStaticState(bool isStatic)
+    {
+        if (targetRb == null) return;
+
+        targetRb.isKinematic = isStatic;
+        targetRb.useGravity = !isStatic;
+
+        if (isStatic)
+        {
+            targetRb.linearVelocity = Vector3.zero;
+            targetRb.angularVelocity = Vector3.zero;
+        }
+    }
+    private void HandleEditModeChanged(bool isEditMode)
+    {
+        if (targetRb == null || staticObject == null) return;
+
+        // When leaving edit mode (entering play)
+        if (!isEditMode)
+        {
+            SetStaticState(staticObject.isOn);
+        }
+    }
+    private void OnEnable()
+    {
+        GameControls.OnEditModeChanged += HandleEditModeChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameControls.OnEditModeChanged -= HandleEditModeChanged;
     }
 }

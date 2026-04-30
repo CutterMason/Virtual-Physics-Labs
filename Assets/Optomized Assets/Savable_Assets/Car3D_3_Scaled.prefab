@@ -1676,7 +1676,7 @@ GameObject:
   - component: {fileID: 2750108713376713629}
   - component: {fileID: 4643983227743052828}
   m_Layer: 0
-  m_Name: Car3D_3_S
+  m_Name: Car3D_3_Scaled
   m_TagString: Savable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
