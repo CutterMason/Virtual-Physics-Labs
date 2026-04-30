@@ -27,6 +27,8 @@ public class VerticalSpringOscillator : MonoBehaviour
 
     private float finalL;
 
+    private bool wasPaused = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,6 +49,21 @@ public class VerticalSpringOscillator : MonoBehaviour
 
     void FixedUpdate()
     {
+        // ✅ PAUSE HANDLING (clean + safe)
+        if (GameControls.IsPaused)
+        {
+            rb.linearVelocity = Vector3.zero;
+            wasPaused = true;
+            return;
+        }
+
+        // prevent weird jump when resuming
+        if (wasPaused)
+        {
+            rb.linearVelocity = Vector3.zero;
+            wasPaused = false;
+        }
+
         float m = rb.mass;
         float g = 9.81f;
         float dt = Time.fixedDeltaTime;
@@ -68,7 +85,7 @@ public class VerticalSpringOscillator : MonoBehaviour
         rb.linearVelocity += new Vector3(0, acceleration * dt, 0);
         rb.MovePosition(rb.position + rb.linearVelocity * dt);
 
-        // STOP DETECTION
+        // STOP DETECTION (ignores pause)
         float speed = Mathf.Abs(rb.linearVelocity.y);
 
         if (!hasSettled)
