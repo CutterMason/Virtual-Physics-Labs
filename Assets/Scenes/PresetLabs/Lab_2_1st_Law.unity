@@ -24326,20 +24326,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 76338243423887855, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 76338243423887855, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 76338243423887855, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 452805062}
+      objectReference: {fileID: 452805066}
     - target: {fileID: 76338243423887855, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleEditMode
+      value: SetEditMode
       objectReference: {fileID: 0}
     - target: {fileID: 76338243423887855, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameControls, Assembly-CSharp
+      value: ForceTableTopBarBridge, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 633003004112973299, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: slides.Array.size
@@ -24399,7 +24403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.0005
+      value: 417.00006
       objectReference: {fileID: 0}
     - target: {fileID: 2967837225945985972, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchorMax.x
