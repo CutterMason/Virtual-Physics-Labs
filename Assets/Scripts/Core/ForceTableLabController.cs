@@ -152,10 +152,6 @@ public class ForceTableLabController : MonoBehaviour
 
     private void Update()
     {
-        ForceWeightKinematic(weight1Rb);
-        ForceWeightKinematic(weight2Rb);
-        ForceWeightKinematic(weight3Rb);
-
         switch (state)
         {
             case SimState.Editing:
@@ -440,8 +436,14 @@ public class ForceTableLabController : MonoBehaviour
         if (rb == null)
             return;
 
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        // Unity does not allow setting velocity on a Rigidbody
+        // that is already kinematic.
+        if (!rb.isKinematic)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
         rb.useGravity = false;
         rb.isKinematic = true;
     }

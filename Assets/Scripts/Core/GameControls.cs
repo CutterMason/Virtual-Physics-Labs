@@ -170,6 +170,14 @@ public class GameControls : MonoBehaviour
         {
             if (!rb) continue;
 
+            // Kinematic bodies are controlled manually by scripts/transforms,
+            // so don't read/write physics velocity on them.
+            if (rb.isKinematic)
+            {
+                rb.Sleep();
+                continue;
+            }
+
             storedVelocities[rb] = rb.linearVelocity;
             storedAngularVelocities[rb] = rb.angularVelocity;
 
@@ -190,6 +198,13 @@ public class GameControls : MonoBehaviour
             foreach (var rb in allBodies)
             {
                 if (!rb) continue;
+
+                // Do not restore velocity to kinematic bodies.
+                if (rb.isKinematic)
+                {
+                    rb.WakeUp();
+                    continue;
+                }
 
                 if (storedVelocities.TryGetValue(rb, out var v))
                     rb.linearVelocity = v;
