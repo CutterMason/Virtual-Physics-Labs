@@ -16,8 +16,26 @@ public class PublishUIManager : MonoBehaviour
             publishPanel.SetActive(false);
     }
 
-    public void OpenPublishPanel()
+    public async void OpenPublishPanel()
     {
+        if (PublishedLabManager.Instance == null)
+        {
+            Debug.LogError("[PublishUIManager] PublishedLabManager.Instance is null.");
+            return;
+        }
+
+        bool canPublish = await PublishedLabManager.Instance.CanCurrentUserPublish();
+
+        if (!canPublish)
+        {
+            Debug.LogWarning("[PublishUIManager] Current user is not allowed to publish labs.");
+
+            if (publishPanel != null)
+                publishPanel.SetActive(false);
+
+            return;
+        }
+
         if (savePanel != null)
             savePanel.SetActive(false);
 

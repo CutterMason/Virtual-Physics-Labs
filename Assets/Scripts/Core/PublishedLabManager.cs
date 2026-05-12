@@ -180,4 +180,22 @@ public class PublishedLabManager : MonoBehaviour
         Debug.LogWarning("[PublishedLabManager] User document has no role field.");
         return false;
     }
+
+    public async Task<bool> CanCurrentUserPublish()
+    {
+        EnsureFirebase();
+
+        if (auth.CurrentUser == null)
+        {
+            Debug.LogWarning("[PublishedLabManager] No user logged in. Cannot publish.");
+            return false;
+        }
+
+        if (!requireInstructorRole)
+        {
+            return true;
+        }
+
+        return await CurrentUserIsInstructor();
+    }
 }

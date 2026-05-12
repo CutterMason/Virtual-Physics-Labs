@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\SaveUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\FlyCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Core\\LockOnCamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PrefabRegistry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,11 +74,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CameraModeSwitcher.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
@@ -86,12 +86,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\CameraModeSwitcher.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T02:00:58.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-28T02:00:58.884Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PlayModeLockOnCamera.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
@@ -99,12 +98,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\PlayModeLockOnCamera.cs",
               "ViewState": "AgIAALoAAAAAAAAAAAAAAOkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T02:00:48.749Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-28T02:00:48.749Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "FlyCamera.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\FlyCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\FlyCamera.cs",
@@ -112,18 +110,17 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\FlyCamera.cs",
               "ViewState": "AgIAAMMAAAAAAAAAAAAAANoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-28T01:50:34.534Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-28T01:50:34.534Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "LockOnCamera.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\LockOnCamera.cs",
               "ToolTip": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\LockOnCamera.cs",
               "RelativeToolTip": "Assets\\Scripts\\Core\\LockOnCamera.cs",
-              "ViewState": "AgIAAIMBAAAAAAAAAAAAALMBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAAADYBAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-28T01:50:18.754Z",
               "EditorCaption": ""
@@ -138,8 +135,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\DashboardMan.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T23:59:35.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T23:59:35.187Z"
             },
             {
               "$type": "Document",
@@ -151,8 +147,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\SaveManager.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAAAGcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T23:30:18.211Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T23:30:18.211Z"
             },
             {
               "$type": "Document",
@@ -164,8 +159,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\PrefabRegistry.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T23:16:29.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T23:16:29.085Z"
             },
             {
               "$type": "Document",
@@ -177,8 +171,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\SavableObject.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAAAADUAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T23:10:21.158Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T23:10:21.158Z"
             },
             {
               "$type": "Document",
@@ -190,8 +183,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\DashboardManV2.cs",
               "ViewState": "AgIAAD8AAAAAAAAAAAAAAHoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T23:06:16.439Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T23:06:16.439Z"
             },
             {
               "$type": "Document",
@@ -203,12 +195,11 @@
               "RelativeToolTip": "Assets\\Scripts\\UI\\SavedLabsUI.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAowB4AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T03:07:14.629Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T03:07:14.629Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "SaveUIManager.cs",
               "DocumentMoniker": "C:\\Users\\cutte\\Virtual Physics Labs\\Virtual-Physics-Labs\\Assets\\Scripts\\Core\\SaveUIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Core\\SaveUIManager.cs",
@@ -253,8 +244,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Core\\LoadManager.cs",
               "ViewState": "AgIAAHIAAAAAAAAAAAAAAKMAAABdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-27T02:28:44.127Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-27T02:28:44.127Z"
             },
             {
               "$type": "Document",
