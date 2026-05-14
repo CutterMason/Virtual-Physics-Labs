@@ -7504,12 +7504,14 @@ MonoBehaviour:
   heavyColor: {r: 1, g: 0, b: 0, a: 1}
   useGravity: 1
   gravity: 9.81
-  beamBiasFactor: 2
+  beamBiasFactor: 0.1
   maxTiltAngle: 6
   tiltSpeed: 60
   minTiltSpeed: 10
   invertTiltDirection: 1
-  sensitivity: 3
+  sensitivity: 5
+  balanceDeadzone: 0.02
+  damping: 2
 --- !u!1001 &463217134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16317,7 +16319,7 @@ MonoBehaviour:
   player: {fileID: 0}
   smoothSpeed: 5
   sideViewZ: 4
-  topDownHeight: 10
+  topDownHeight: 3
   orthoSize: 5
   sideViewYRotation: 180
   sideViewXOffset: 0
