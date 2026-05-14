@@ -16418,6 +16418,10 @@ PrefabInstance:
       propertyPath: 'slides.Array.data[7]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 825802603457498858, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1327243560880395368, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: defaultFileName
       value: VP1L_Lab11_Notes
