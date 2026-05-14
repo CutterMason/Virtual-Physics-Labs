@@ -268,6 +268,8 @@ public class GameControls : MonoBehaviour
 
         LockOnCamera.ApplyEditedPhysics();
 
+        ApplyStaticObjects();
+
         if (IsPaused)
             ResumeGame();
     }
@@ -298,5 +300,19 @@ public class GameControls : MonoBehaviour
 
         if (panel != null)
             panel.SyncSlidersFromLab();
+    }
+
+    private void ApplyStaticObjects()
+    {
+        PhysicsObject[] objects = FindObjectsByType<PhysicsObject>(FindObjectsSortMode.None);
+
+        foreach (PhysicsObject obj in objects)
+        {
+            if (obj == null) continue;
+
+            obj.ApplyStaticState();
+        }
+
+        Debug.Log($"[GameControls] Applied static state to {objects.Length} PhysicsObjects.");
     }
 }
