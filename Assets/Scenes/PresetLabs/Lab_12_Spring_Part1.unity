@@ -14684,7 +14684,7 @@ MonoBehaviour:
   player: {fileID: 0}
   smoothSpeed: 5
   sideViewZ: 4
-  topDownHeight: 10
+  topDownHeight: 2
   orthoSize: 5
   sideViewYRotation: 180
   sideViewXOffset: 0
