@@ -34,8 +34,11 @@ public class LoadManager : MonoBehaviour
 
     private void EnsureFirebase()
     {
-        if (db == null) db = FirebaseFirestore.DefaultInstance;
-        if (auth == null) auth = FirebaseAuth.DefaultInstance;
+        if (db == null)
+            db = FirebaseFirestore.DefaultInstance;
+
+        if (auth == null)
+            auth = FirebaseAuth.DefaultInstance;
     }
 
     public async Task<List<LabSave>> LoadAllSaves()
@@ -143,11 +146,6 @@ public class LoadManager : MonoBehaviour
         RestoreObjects(pendingSave);
         RestoreExperiment(pendingSave);
 
-        // Important:
-        // Do NOT force GameControls state here.
-        // Let GameControls.Start() initialize the scene normally.
-        // The loader should only restore saved lab data.
-
         Debug.Log("[LoadManager] Scene loaded and state restored via sceneLoaded.");
 
         pendingSave = null;
@@ -162,6 +160,7 @@ public class LoadManager : MonoBehaviour
 
         Debug.Log("[LoadManager] Static registry? " +
                   (PrefabRegistry.Instance != null ? PrefabRegistry.Instance.name : "NULL"));
+
         if (save.objects == null)
         {
             Debug.LogWarning("[LoadManager] Save has no objects list.");
@@ -174,7 +173,9 @@ public class LoadManager : MonoBehaviour
         foreach (var so in existing)
         {
             if (!string.IsNullOrEmpty(so.uniqueId))
+            {
                 lookup[so.uniqueId] = so;
+            }
         }
 
         Debug.Log($"[LoadManager] Existing SavableObjects in scene: {existing.Length}");
@@ -183,7 +184,9 @@ public class LoadManager : MonoBehaviour
         foreach (var objData in save.objects)
         {
             if (objData == null || string.IsNullOrEmpty(objData.id))
+            {
                 continue;
+            }
 
             SavableObject so = null;
             bool found = lookup.TryGetValue(objData.id, out so);
@@ -197,66 +200,75 @@ public class LoadManager : MonoBehaviour
                 }
             }
             else
-{
-    if (!found || so == null)
-    {
-        PrefabRegistry registry = PrefabRegistry.Instance;
-
-        if (registry == null)
-        {
-            registry = FindObjectOfType<PrefabRegistry>(true);
-
-            if (registry != null)
             {
-                PrefabRegistry.Instance = registry;
-                Debug.LogWarning("[LoadManager] PrefabRegistry.Instance was null, but a registry was found in the scene.");
+                if (!found || so == null)
+                {
+                    PrefabRegistry registry = PrefabRegistry.Instance;
+
+                    if (registry == null)
+                    {
+                        registry = FindObjectOfType<PrefabRegistry>(true);
+
+                        if (registry != null)
+                        {
+                            PrefabRegistry.Instance = registry;
+                            Debug.LogWarning("[LoadManager] PrefabRegistry.Instance was null, but a registry was found in the scene.");
+                        }
+                    }
+
+                    if (registry == null)
+                    {
+                        Debug.LogError("[LoadManager] PrefabRegistry.Instance is null. Make sure a PrefabRegistry object exists in this lab scene.");
+                        continue;
+                    }
+
+                    GameObject prefab = registry.GetPrefab(objData.prefabName);
+
+                    if (prefab == null)
+                    {
+                        Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
+                        continue;
+                    }
+
+                    GameObject spawned = Instantiate(prefab);
+
+                    // IMPORTANT:
+                    // Preserve the saved object/prefab key name.
+                    // This keeps names like Sensor_Scaled2 instead of Sensor(Clone).
+                    spawned.name = objData.prefabName;
+
+                    so = spawned.GetComponent<SavableObject>();
+
+                    if (so == null)
+                    {
+                        so = spawned.GetComponentInChildren<SavableObject>();
+                    }
+
+                    if (so == null)
+                    {
+                        Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
+                        Destroy(spawned);
+                        continue;
+                    }
+
+                    so.uniqueId = objData.id;
+                    so.prefab = prefab;
+
+                    // IMPORTANT:
+                    // Keep the saved name/key instead of replacing it with prefab.name.
+                    so.prefabName = objData.prefabName;
+
+                    so.isPresetObject = false;
+
+                    Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
+                }
             }
-        }
-
-        if (registry == null)
-        {
-            Debug.LogError("[LoadManager] PrefabRegistry.Instance is null. Make sure a PrefabRegistry object exists in this lab scene.");
-            continue;
-        }
-
-        GameObject prefab = registry.GetPrefab(objData.prefabName);
-
-        if (prefab == null)
-        {
-            Debug.LogError("[LoadManager] Could not spawn object, missing prefab: " + objData.prefabName);
-            continue;
-        }
-
-        GameObject spawned = Instantiate(prefab);
-        so = spawned.GetComponent<SavableObject>();
-
-        if (so == null)
-        {
-            so = spawned.GetComponentInChildren<SavableObject>();
-        }
-
-        if (so == null)
-        {
-            Debug.LogError("[LoadManager] Spawned prefab has no SavableObject: " + objData.prefabName);
-            Destroy(spawned);
-            continue;
-        }
-
-        so.uniqueId = objData.id;
-        so.prefab = prefab;
-        so.prefabName = prefab.name;
-        so.isPresetObject = false;
-
-        Debug.Log($"[LoadManager] Spawned new object {objData.prefabName} with ID {objData.id}");
-    }
-}
 
             Transform t = so.transform;
 
             t.position = new Vector3(objData.px, objData.py, objData.pz);
             t.eulerAngles = new Vector3(objData.rx, objData.ry, objData.rz);
 
-            // This keeps your original save/load behavior.
             so.gameObject.SetActive(objData.active);
         }
 

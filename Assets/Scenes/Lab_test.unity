@@ -7966,6 +7966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 0.05
   size: {x: 0, y: 0, z: 0}
+  isStaticObject: 0
 --- !u!54 &309938743
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17546,8 +17547,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -17560,6 +17565,10 @@ PrefabInstance:
     - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PropertyPanelV2, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7525282855580608129, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
       propertyPath: m_Pivot.x
@@ -19731,7 +19740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 416.99997
+      value: 417.00015
       objectReference: {fileID: 0}
     - target: {fileID: 2609645170335342740, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -31923,6 +31932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 0.05
   size: {x: 0, y: 0, z: 0}
+  isStaticObject: 0
 --- !u!114 &1494670238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39359,6 +39369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 0.05
   size: {x: 0, y: 0, z: 0}
+  isStaticObject: 0
 --- !u!54 &1788629250
 Rigidbody:
   m_ObjectHideFlags: 0
