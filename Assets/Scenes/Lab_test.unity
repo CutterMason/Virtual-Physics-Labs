@@ -17542,9 +17542,25 @@ PrefabInstance:
       value: PropV2Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 452805070}
+      objectReference: {fileID: 814593062}
+    - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetStaticState
+      objectReference: {fileID: 0}
+    - target: {fileID: 545712594560938419, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PropertyPanelV2, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7525282855580608129, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -17640,6 +17656,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 1158062154097943112, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
   m_PrefabInstance: {fileID: 814593059}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &814593062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9098878406013746514, guid: cb4238bb1b01a2f4880e423e027706b9, type: 3}
+  m_PrefabInstance: {fileID: 814593059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814593060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b65c4a507854cd4bbf63085fa3e5abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &816751617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19704,7 +19731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347368991240766600, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 417.00015
+      value: 416.99997
       objectReference: {fileID: 0}
     - target: {fileID: 2609645170335342740, guid: 83bf3bcc7cc66c14d8f4c5a753a05900, type: 3}
       propertyPath: m_AnchoredPosition.y

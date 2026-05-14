@@ -78,12 +78,15 @@ public class PropertyPanelV2 : MonoBehaviour
             propText.text = $"Selected: {obj.name}";
 
         PositionPanelNearObject(obj.transform);
-        if (staticObject != null && targetRb != null)
+        if (staticObject != null && targetObject != null)
         {
-            staticObject.isOn = targetRb.isKinematic;
-
             staticObject.onValueChanged.RemoveAllListeners();
+
+            staticObject.SetIsOnWithoutNotify(targetObject.isStaticObject);
+
             staticObject.onValueChanged.AddListener(SetStaticState);
+
+            targetObject.ApplyStaticState();
         }
 
         massSlider.value = targetObject.mass;
@@ -173,17 +176,11 @@ public class PropertyPanelV2 : MonoBehaviour
 
     public void SetStaticState(bool isStatic)
     {
-        if (targetRb == null) return;
+        if (targetObject == null) return;
 
-        targetRb.isKinematic = isStatic;
-        targetRb.useGravity = !isStatic;
-
-        if (isStatic)
-        {
-            targetRb.linearVelocity = Vector3.zero;
-            targetRb.angularVelocity = Vector3.zero;
-        }
+        targetObject.SetStaticState(isStatic);
     }
+
     private void HandleEditModeChanged(bool isEditMode)
     {
         if (targetRb == null || staticObject == null) return;
